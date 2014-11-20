@@ -16,9 +16,10 @@ struct vector_tester : public gt::Test
 {
     static const int MAX_ELEMENTS = 13;
 
-    vector_tester() : element(42) {}
+    vector_tester() : element1(42), element2(1337) {}
 
-    const int element;
+    const int element1;
+    const int element2;
 
     // tested class:
     pk::vector<int, MAX_ELEMENTS> vec;
@@ -34,7 +35,7 @@ TEST_F(vector_tester, tests_emptyness_of_empty_vector)
 TEST_F(vector_tester, tests_emptyness_of_nonempty_vector)
 {
     // when
-    vec.push_back(element);
+    vec.push_back(element1);
 
     // then
     EXPECT_FALSE(vec.empty());
@@ -50,20 +51,42 @@ TEST_F(vector_tester, tests_size_of_empty_vector)
 TEST_F(vector_tester, tests_size_of_nonempty_vector)
 {
     // when
-    vec.push_back(element);
+    vec.push_back(element1);
 
     // then
     EXPECT_EQ(1, vec.size());
+
+    // when
+    vec.push_back(element2);
+
+    // then
+    EXPECT_EQ(2, vec.size());
 }
 
 
 TEST_F(vector_tester, tests_push_back)
 {
     // when
-    vec.push_back(element);
+    vec.push_back(element1);
 
     // then
-    EXPECT_EQ(element, vec[0]);
+    EXPECT_EQ(element1, vec[0]);
+}
+
+
+TEST_F(vector_tester, tests_back)
+{
+    // when
+    vec.push_back(element1);
+
+    // then
+    EXPECT_EQ(element1, vec.back());
+
+    // when
+    vec.push_back(element2);
+
+    // then
+    EXPECT_EQ(element2, vec.back());
 }
 
 

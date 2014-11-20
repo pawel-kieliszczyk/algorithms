@@ -17,6 +17,9 @@ public:
     T& operator[](const int i) { return data[i]; }
     const T& operator[](const int i) const { return data[i]; }
 
+    T& back() { return data[sz-1]; }
+    const T& back() const { return data[sz-1]; }
+
     bool empty() { return (sz == 0); }
     int size() const { return sz; }
 
