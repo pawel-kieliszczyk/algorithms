@@ -16,6 +16,7 @@ public:
     void pop() { --sz; }
 
     bool empty() const { return (sz == 0); }
+    int size() const { return sz; }
 
 private:
     T data[MAX_SIZE];
