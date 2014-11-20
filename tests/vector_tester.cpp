@@ -68,9 +68,11 @@ TEST_F(vector_tester, tests_push_back)
 {
     // when
     vec.push_back(element1);
+    vec.push_back(element2);
 
     // then
     EXPECT_EQ(element1, vec[0]);
+    EXPECT_EQ(element2, vec[1]);
 }
 
 
