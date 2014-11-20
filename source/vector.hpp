@@ -17,6 +17,9 @@ public:
     T& operator[](const int i) { return data[i]; }
     const T& operator[](const int i) const { return data[i]; }
 
+    T& front() { return data[0]; }
+    const T& front() const { return data[0]; }
+
     T& back() { return data[sz-1]; }
     const T& back() const { return data[sz-1]; }
 

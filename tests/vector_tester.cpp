@@ -90,5 +90,21 @@ TEST_F(vector_tester, tests_back)
 }
 
 
+TEST_F(vector_tester, tests_front)
+{
+    // when
+    vec.push_back(element1);
+
+    // then
+    EXPECT_EQ(element1, vec.front());
+
+    // when
+    vec.push_back(element2);
+
+    // then
+    EXPECT_EQ(element1, vec.front());
+}
+
+
 } // namespace testing
 } // namespace pk
