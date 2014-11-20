@@ -1,2 +1,8 @@
+*.o
+
+libgtest.a
+
+run_tests
+
 .DS_Store
 .sconsign.dblite
