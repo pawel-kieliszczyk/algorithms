@@ -13,6 +13,7 @@ public:
     vector() : sz(0) {}
 
     void push_back(const T& elem) { data[sz++] = elem; }
+    void pop_back() { --sz; }
 
     T& operator[](const int i) { return data[i]; }
     const T& operator[](const int i) const { return data[i]; }

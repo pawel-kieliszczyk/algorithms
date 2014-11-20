@@ -76,6 +76,21 @@ TEST_F(vector_tester, tests_push_back)
 }
 
 
+TEST_F(vector_tester, tests_pop_back)
+{
+    // given
+    vec.push_back(element1);
+    vec.push_back(element2);
+
+    // when
+    vec.pop_back();
+
+    // then
+    ASSERT_EQ(1, vec.size());
+    EXPECT_EQ(element1, vec[0]);
+}
+
+
 TEST_F(vector_tester, tests_back)
 {
     // when
