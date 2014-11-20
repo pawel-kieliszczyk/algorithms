@@ -87,6 +87,19 @@ TEST_F(stack_tester, tests_top)
 }
 
 
+TEST_F(stack_tester, tests_pop)
+{
+    // given
+    s.push(element1);
+    s.push(element2);
+
+    // when
+    s.pop();
+
+    // then
+    ASSERT_EQ(element1, s.top());
+}
+
 
 } // namespace testing
 } // namespace pk
