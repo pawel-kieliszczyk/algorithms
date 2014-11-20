@@ -32,6 +32,17 @@ TEST_F(vector_tester, tests_emptyness_of_empty_vector)
 }
 
 
+TEST_F(vector_tester, tests_emptyness_after_push_and_pop_back)
+{
+    // when
+    vec.push_back(element1);
+    vec.pop_back();
+
+    // then
+    EXPECT_TRUE(vec.empty());
+}
+
+
 TEST_F(vector_tester, tests_emptyness_of_nonempty_vector)
 {
     // when
@@ -50,17 +61,17 @@ TEST_F(vector_tester, tests_size_of_empty_vector)
 
 TEST_F(vector_tester, tests_size_of_nonempty_vector)
 {
-    // when
+    // when and then
     vec.push_back(element1);
-
-    // then
     EXPECT_EQ(1, vec.size());
 
-    // when
+    // when and then
     vec.push_back(element2);
-
-    // then
     EXPECT_EQ(2, vec.size());
+
+    // when and then
+    vec.pop_back();
+    EXPECT_EQ(1, vec.size());
 }
 
 
@@ -93,32 +104,24 @@ TEST_F(vector_tester, tests_pop_back)
 
 TEST_F(vector_tester, tests_back)
 {
-    // when
+    // when and then
     vec.push_back(element1);
-
-    // then
     EXPECT_EQ(element1, vec.back());
 
-    // when
+    // when and then
     vec.push_back(element2);
-
-    // then
     EXPECT_EQ(element2, vec.back());
 }
 
 
 TEST_F(vector_tester, tests_front)
 {
-    // when
+    // when and then
     vec.push_back(element1);
-
-    // then
     EXPECT_EQ(element1, vec.front());
 
-    // when
+    // when and then
     vec.push_back(element2);
-
-    // then
     EXPECT_EQ(element1, vec.front());
 }
 
