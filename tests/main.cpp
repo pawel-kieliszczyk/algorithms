@@ -4,12 +4,6 @@
 #include <gtest/gtest.h>
 
 
-TEST(FirstTest, test)
-{
-    ASSERT_TRUE(true);
-}
-
-
 int main(int argc, char* argv[])
 {
     try

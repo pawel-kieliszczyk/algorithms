@@ -15,6 +15,8 @@ env.StaticLibrary('bin/libraries/gtest', source_files)
 
 
 
+env.Append(CPPPATH = ["source"])
+
 env.Append(LIBPATH = ["bin/libraries"])
 
 
@@ -25,9 +27,9 @@ VariantDir('bin/tests', 'tests', duplicate=0)
 env.Append(LIBS = ["gtest"])
 
 
-source_files += []
+source_files = ["bin/tests/main.cpp"]
 
-source_files += ["bin/tests/main.cpp"]
+source_files += ["bin/tests/vector_tester.cpp"]
 
 
 env.Program('run_tests', source_files)
