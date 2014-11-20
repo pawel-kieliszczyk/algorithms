@@ -123,5 +123,43 @@ TEST_F(vector_tester, tests_front)
 }
 
 
+TEST_F(vector_tester, tests_begin)
+{
+    // when
+    vec.push_back(element1);
+
+    // then
+    EXPECT_EQ(element1, *vec.begin());
+}
+
+
+TEST_F(vector_tester, tests_end)
+{
+    // when
+    vec.push_back(element1);
+
+    // then
+    EXPECT_EQ(element1, *(vec.end() - 1));
+}
+
+
+TEST_F(vector_tester, tests_begin_and_end)
+{
+    // when
+    vec.push_back(element1);
+    vec.push_back(element2);
+
+    // then
+    int* it = vec.begin();
+    EXPECT_EQ(element1, *it);
+
+    ++it;
+    EXPECT_EQ(element2, *it);
+
+    ++it;
+    EXPECT_EQ(vec.end(), it);
+}
+
+
 } // namespace testing
 } // namespace pk

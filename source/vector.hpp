@@ -24,6 +24,9 @@ public:
     T& back() { return data[sz-1]; }
     const T& back() const { return data[sz-1]; }
 
+    T* begin() { return data; }
+    T* end() { return (data + sz); }
+
     bool empty() { return (sz == 0); }
     int size() const { return sz; }
 
