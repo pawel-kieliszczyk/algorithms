@@ -25,7 +25,10 @@ public:
     const T& back() const { return data[sz-1]; }
 
     T* begin() { return data; }
+    const T* cbegin() const { return data; }
+
     T* end() { return (data + sz); }
+    const T* cend() const { return (data + sz); }
 
     bool empty() { return (sz == 0); }
     int size() const { return sz; }

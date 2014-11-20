@@ -161,5 +161,22 @@ TEST_F(vector_tester, tests_begin_and_end)
 }
 
 
+TEST_F(vector_tester, tests_cbegin_and_cend)
+{
+    // given
+    vec.push_back(element1);
+
+    // when
+    const pk::vector<int, MAX_ELEMENTS>& constVec = vec;
+
+    // then
+    const int* it = constVec.cbegin();
+    EXPECT_EQ(element1, *it);
+
+    ++it;
+    EXPECT_EQ(constVec.cend(), it);
+}
+
+
 } // namespace testing
 } // namespace pk
