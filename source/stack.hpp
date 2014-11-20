@@ -12,8 +12,11 @@ class stack
 public:
     stack() : sz(0) {}
 
-    void push(const T& elem) { ++sz; }
+    void push(const T& elem) { data[sz++] = elem; }
     void pop() { --sz; }
+
+    T& top() { return data[sz-1]; }
+    const T& top() const { return data[sz-1]; }
 
     bool empty() const { return (sz == 0); }
     int size() const { return sz; }

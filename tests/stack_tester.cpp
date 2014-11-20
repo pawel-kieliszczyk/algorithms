@@ -75,6 +75,18 @@ TEST_F(stack_tester, tests_size_of_nonempty_stack)
 }
 
 
+TEST_F(stack_tester, tests_top)
+{
+    // when and then
+    s.push(element1);
+    EXPECT_EQ(element1, s.top());
+
+    // then
+    s.push(element2);
+    EXPECT_EQ(element2, s.top());
+}
+
+
 
 } // namespace testing
 } // namespace pk
