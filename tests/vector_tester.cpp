@@ -24,6 +24,7 @@ struct vector_tester : public gt::Test
 TEST_F(vector_tester, tests_empty_vector)
 {
     EXPECT_TRUE(vec.empty());
+    EXPECT_EQ(0, vec.size());
 }
 
 

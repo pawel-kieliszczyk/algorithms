@@ -11,6 +11,7 @@ class vector
 {
 public:
     bool empty() { return true; }
+    int size() const { return 0; }
 };
 
 
