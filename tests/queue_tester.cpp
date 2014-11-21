@@ -32,5 +32,26 @@ TEST_F(queue_tester, tests_emptyness_of_empty_queue)
 }
 
 
+TEST_F(queue_tester, tests_emptyness_of_nonempty_queue)
+{
+    // when
+    q.push(element1);
+
+    // then
+    EXPECT_FALSE(q.empty());
+}
+
+
+TEST_F(queue_tester, tests_emptyness_after_push_and_pop)
+{
+    // when
+    q.push(element1);
+    q.pop();
+
+    // then
+    EXPECT_TRUE(q.empty());
+}
+
+
 } // namespace testing
 } // namespace pk

@@ -10,7 +10,17 @@ template<class T, int MAX_NUM_OF_PUSHES>
 class queue
 {
 public:
-    bool empty() const { return true; }
+    queue() : begin(0), end(0) {}
+
+    void push(const T& elem) { end++; }
+    void pop() { ++begin; }
+
+    bool empty() const { return (begin == end); }
+
+private:
+    T data[MAX_NUM_OF_PUSHES];
+    int begin;
+    int end;
 };
 
 
