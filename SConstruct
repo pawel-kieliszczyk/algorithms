@@ -29,6 +29,7 @@ env.Append(LIBS = ["gtest"])
 
 source_files = ["bin/tests/main.cpp"]
 
+source_files += ["bin/tests/queue_tester.cpp"]
 source_files += ["bin/tests/stack_tester.cpp"]
 source_files += ["bin/tests/vector_tester.cpp"]
 
