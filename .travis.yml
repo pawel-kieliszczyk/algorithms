@@ -12,6 +12,10 @@ branches:
   only:
     - master
     - develop
+    - /^feature\/.*$/
+    - /^release\/.*$/
+    - /^hotfix\/.*$/
+    - /^support\/.*$/
 
 script:
   - scons
