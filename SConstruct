@@ -1,4 +1,4 @@
-env = Environment(CXX = 'clang++')
+env = Environment()
 env.Append(CXXFLAGS = ["-Wall", "-Werror", "-pthread"])
 
 

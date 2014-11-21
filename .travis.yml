@@ -1,0 +1,25 @@
+language: cpp
+
+os:
+  - linux
+  - osx
+
+compiler:
+  - gcc
+  - clang
+
+branches:
+  only:
+    - master
+    - develop
+
+script:
+  - scons
+  - ./run_tests
+
+notifications:
+  recipeints:
+    - pawel.kieliszczyk@gmail.com
+  email:
+    on_success: change
+    on_failure: always
