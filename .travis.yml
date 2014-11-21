@@ -19,6 +19,7 @@ branches:
 
 script:
   - scons
+  - ./run_tests
 
 notifications:
   email:
