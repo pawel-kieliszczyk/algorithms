@@ -53,5 +53,27 @@ TEST_F(queue_tester, tests_emptyness_after_push_and_pop)
 }
 
 
+TEST_F(queue_tester, tests_size_of_empty_queue)
+{
+    EXPECT_EQ(0, q.size());
+}
+
+
+TEST_F(queue_tester, tests_size_of_nonempty_queue)
+{
+    // when and then
+    q.push(element1);
+    EXPECT_EQ(1, q.size());
+
+    // when and then
+    q.push(element2);
+    EXPECT_EQ(2, q.size());
+
+    // when and then
+    q.pop();
+    EXPECT_EQ(1, q.size());
+}
+
+
 } // namespace testing
 } // namespace pk

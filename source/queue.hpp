@@ -16,6 +16,7 @@ public:
     void pop() { ++begin; }
 
     bool empty() const { return (begin == end); }
+    int size() const { return (end - begin); }
 
 private:
     T data[MAX_NUM_OF_PUSHES];
