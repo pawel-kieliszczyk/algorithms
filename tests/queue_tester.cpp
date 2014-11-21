@@ -75,5 +75,17 @@ TEST_F(queue_tester, tests_size_of_nonempty_queue)
 }
 
 
+TEST_F(queue_tester, tests_front)
+{
+    // when and then
+    q.push(element1);
+    EXPECT_EQ(element1, q.front());
+
+    // then
+    q.push(element2);
+    EXPECT_EQ(element1, q.front());
+}
+
+
 } // namespace testing
 } // namespace pk

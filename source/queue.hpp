@@ -12,8 +12,11 @@ class queue
 public:
     queue() : begin(0), end(0) {}
 
-    void push(const T& elem) { end++; }
+    void push(const T& elem) { data[end++] = elem; }
     void pop() { ++begin; }
+
+    T& front() { return data[begin]; }
+    const T& front() const { return data[begin]; }
 
     bool empty() const { return (begin == end); }
     int size() const { return (end - begin); }
