@@ -16,6 +16,10 @@ branches:
 script:
   - scons
   - ./run_tests
+  - /^feature\/.*$/
+  - /^release\/.*$/
+  - /^hotfix\/.*$/
+  - /^support\/.*$/
 
 notifications:
   email:
