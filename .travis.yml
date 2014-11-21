@@ -19,7 +19,7 @@ branches:
 
 script:
   - scons
-  - ./run_tests —-gtest_shuffle
+  - ./run_tests --gtest_shuffle
 
 notifications:
   email:
