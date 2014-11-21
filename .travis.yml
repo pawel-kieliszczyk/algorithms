@@ -22,8 +22,7 @@ script:
   - ./run_tests —-gtest_shuffle
 
 notifications:
-  recipients:
-    - pawel.kieliszczyk@gmail.com
   email:
+    recipients: pawel.kieliszczyk@gmail.com
     on_success: change
     on_failure: always
