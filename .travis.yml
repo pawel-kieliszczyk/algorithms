@@ -12,14 +12,14 @@ branches:
   only:
     - master
     - develop
+    - /^feature\/.*$/
+    - /^release\/.*$/
+    - /^hotfix\/.*$/
+    - /^support\/.*$/
 
 script:
   - scons
   - ./run_tests
-  - /^feature\/.*$/
-  - /^release\/.*$/
-  - /^hotfix\/.*$/
-  - /^support\/.*$/
 
 notifications:
   email:
