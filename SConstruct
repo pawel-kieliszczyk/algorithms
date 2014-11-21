@@ -24,7 +24,7 @@ env.Append(LIBPATH = ["bin/libraries"])
 VariantDir('bin/tests', 'tests', duplicate=0)
 
 
-env.Append(LIBS = ["gtest"])
+env.Append(LIBS = ["gtest", "pthread"])
 
 
 source_files = ["bin/tests/main.cpp"]
