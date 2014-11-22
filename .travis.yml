@@ -17,9 +17,16 @@ branches:
     - /^hotfix\/.*$/
     - /^support\/.*$/
 
+before_install:
+  - sudo pip install cpp-coveralls
+
 script:
-  - scons
-  - ./run_tests
+  - if [ "$CXX" == "g++" ]; then scons compiler=`which $CXX` enable_gcov=True ; fi
+  - if [ "$CXX" == "clang++" ]; then scons compiler=`which $CXX` ; fi
+  - ./run_tests --gtest_shuffle
+
+after_success:
+  - if [ "$CXX" == "g++" ]; then coveralls --exclude libraries --exclude tests --gcov-options '\-lp' ; fi
 
 notifications:
   email:
