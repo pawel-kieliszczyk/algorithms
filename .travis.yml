@@ -18,8 +18,8 @@ branches:
     - /^support\/.*$/
 
 script:
-  - if [ "$CXX" == "g++" ]; scons compiler=`which $CXX` enable_gcov=True ; fi
-  - if [ "$CXX" == "clang++" ]; scons compiler=`which $CXX` ; fi
+  - if [ "$CXX" == "g++" ]; then scons compiler=`which $CXX` enable_gcov=True ; fi
+  - if [ "$CXX" == "clang++" ]; then scons compiler=`which $CXX` ; fi
   - ./run_tests --gtest_shuffle
 
 notifications:
