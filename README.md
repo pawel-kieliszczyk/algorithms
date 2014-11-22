@@ -16,7 +16,7 @@ C++ library of algorithms and data structures focused on high performance. Might
 
 ##Performance
 
-####vector
+###vector
 
 Fixed but custom maximum capacity. No memory reallocations once constructed.
 
@@ -34,7 +34,7 @@ Fixed but custom maximum capacity. No memory reallocations once constructed.
 | empty           | O(1)            |
 | size            | O(1)            |
 
-####stack
+###stack
 
 Fixed but custom maximum capacity. No memory reallocations once constructed.
 
@@ -46,7 +46,7 @@ Fixed but custom maximum capacity. No memory reallocations once constructed.
 | empty           | O(1)            |
 | size            | O(1)            |
 
-####queue
+###queue
 
 Fixed but custom maximum capacity. No memory reallocations once constructed.
 
@@ -58,7 +58,7 @@ Fixed but custom maximum capacity. No memory reallocations once constructed.
 | empty           | O(1)            |
 | size            | O(1)            |
 
-####graph
+###graph
 
 Fixed but custom maximum amount of vertices and maximum vertex degree. No memory reallocations once constructed.
 
