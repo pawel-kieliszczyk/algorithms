@@ -20,31 +20,31 @@ C++ library of algorithms and data structures focused on high performance. Might
 
 Fixed but custom maximum capacity. No memory reallocations once constructed.
 
- | member function | time complexity |
- |-----------------|-----------------|
- | push_back       | O(1)            |
- | pop_back        | O(1)            |
- | operator[]      | O(1)            |
- | front           | O(1)            |
- | back            | O(1)            |
- | begin           | O(1)            |
- | cbegin          | O(1)            |
- | end             | O(1)            |
- | cend            | O(1)            |
- | empty           | O(1)            |
- | size            | O(1)            |
+| Member Function | Time Complexity |
+|-----------------|-----------------|
+| push_back       | O(1)            |
+| pop_back        | O(1)            |
+| operator[]      | O(1)            |
+| front           | O(1)            |
+| back            | O(1)            |
+| begin           | O(1)            |
+| cbegin          | O(1)            |
+| end             | O(1)            |
+| cend            | O(1)            |
+| empty           | O(1)            |
+| size            | O(1)            |
 
 ####stack
 
 Fixed but custom maximum capacity. No memory reallocations once constructed.
 
- | member function | time complexity |
- |-----------------|-----------------|
- | push            | O(1)            |
- | pop             | O(1)            |
- | top             | O(1)            |
- | empty           | O(1)            |
- | size            | O(1)            |
+| Member Function | Time Complexity |
+| ----------------| ----------------|
+| push            | O(1)            |
+| pop             | O(1)            |
+| top             | O(1)            |
+| empty           | O(1)            |
+| size            | O(1)            |
 
 ####queue
 
