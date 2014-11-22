@@ -1,3 +1,6 @@
+#include <functional>
+
+#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
 #include "depth_first_search.hpp"
@@ -17,13 +20,10 @@ namespace
 {
 
 
-struct visit_mock
+class visit_mock
 {
-    visit_mock() : visited(false) {}
-
-    void operator()(const int vertex_id) { visited = true; }
-
-    bool visited;
+public:
+    MOCK_METHOD1(visit, void(const int));
 };
 
 
@@ -43,13 +43,17 @@ struct depth_first_search_tester : public gt::Test
 
 TEST_F(depth_first_search_tester, test)
 {
+    using namespace std::placeholders;
+
     // given
     const int starting_vertex = 0;
     visit_mock vm;
 
-    depth_first_search::run(g, starting_vertex, vm);
+    // expect
+    EXPECT_CALL(vm, visit(starting_vertex));
 
-    EXPECT_TRUE(vm.visited);
+    // when and then
+    depth_first_search::run(g, starting_vertex, std::bind(&visit_mock::visit, &vm, _1));
 }
 
 

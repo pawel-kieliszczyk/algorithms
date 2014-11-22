@@ -19,7 +19,7 @@ public:
     static void run(
             const graph<MAX_NUM_OF_VERTICES, MAX_VERTEX_DEGREE>& graph,
             const int starting_vertex_id,
-            visit_function& visit)
+            visit_function visit)
     {
         visit(starting_vertex_id);
     }

@@ -1,5 +1,6 @@
 *.o
 
+libgmock.a
 libgtest.a
 
 run_tests
