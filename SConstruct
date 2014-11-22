@@ -37,6 +37,7 @@ env.Append(LIBS = ["gtest", "pthread"])
 
 source_files = ["bin/tests/main.cpp"]
 
+source_files += ["bin/tests/depth_first_search_tester.cpp"]
 source_files += ["bin/tests/graph_tester.cpp"]
 source_files += ["bin/tests/queue_tester.cpp"]
 source_files += ["bin/tests/stack_tester.cpp"]
