@@ -15,10 +15,15 @@ class graph
 public:
     typedef pk::vector<int, MAX_VERTEX_DEGREE> adjacency_list;
 
+    void add_directed_edge(const int vertex_id_from, const int vertex_id_to)
+    {
+        adjacency_lists[vertex_id_from].push_back(vertex_id_to);
+    }
+
     void add_not_directed_edge(const int vertex_id_1, const int vertex_id_2)
     {
-        adjacency_lists[vertex_id_1].push_back(vertex_id_2);
-        adjacency_lists[vertex_id_2].push_back(vertex_id_1);
+        add_directed_edge(vertex_id_1, vertex_id_2);
+        add_directed_edge(vertex_id_2, vertex_id_1);
     }
 
     int size() const { return MAX_NUM_OF_VERTICES; }
