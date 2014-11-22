@@ -1,5 +1,3 @@
-#include <functional>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -53,7 +51,7 @@ TEST_F(depth_first_search_tester, test)
     EXPECT_CALL(vm, visit(starting_vertex));
 
     // when and then
-    depth_first_search::run(g, starting_vertex, std::bind(&visit_mock::visit, &vm, _1));
+    depth_first_search::run(g, starting_vertex, vm);
 }
 
 

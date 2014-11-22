@@ -15,13 +15,13 @@ public:
     template<
             int MAX_NUM_OF_VERTICES,
             int MAX_VERTEX_DEGREE,
-            class visit_function>
+            class Visitor>
     static void run(
             const graph<MAX_NUM_OF_VERTICES, MAX_VERTEX_DEGREE>& graph,
             const int starting_vertex_id,
-            visit_function visit)
+            Visitor& visitor)
     {
-        visit(starting_vertex_id);
+        visitor.visit(starting_vertex_id);
     }
 };
 

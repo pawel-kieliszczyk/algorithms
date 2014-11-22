@@ -3,7 +3,7 @@ enable_gcov = ARGUMENTS.get('enable_gcov', False)
 
 
 env = Environment(CXX = compiler)
-env.Append(CXXFLAGS = ["-std=c++0x", "-Wall", "-Werror", "-pthread"])
+env.Append(CXXFLAGS = ["-Wall", "-Werror", "-pthread"])
 
 if enable_gcov:
 	env.Append(CXXFLAGS = ["-fprofile-arcs", "-ftest-coverage"])
