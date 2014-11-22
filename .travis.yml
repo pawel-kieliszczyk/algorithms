@@ -17,6 +17,11 @@ branches:
     - /^hotfix\/.*$/
     - /^support\/.*$/
 
+before_script:
+  - which clang
+  - which clang++
+  - echo $PATH
+
 script:
   - scons compiler=$CXX
   - ./run_tests --gtest_shuffle
