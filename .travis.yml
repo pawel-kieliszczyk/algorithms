@@ -18,7 +18,7 @@ branches:
     - /^support\/.*$/
 
 script:
-  - scons
+  - scons compiler=$CXX
   - ./run_tests --gtest_shuffle
 
 notifications:
