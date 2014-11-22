@@ -1,8 +1,13 @@
 compiler = ARGUMENTS.get('compiler', 'clang++')
+enable_gcov = ARGUMENTS.get('enable_gcov', False)
 
 
 env = Environment(CXX = compiler)
 env.Append(CXXFLAGS = ["-Wall", "-Werror", "-pthread"])
+
+if enable_gcov:
+	env.Append(CXXFLAGS = ["-fprofile-arcs", "-ftest-coverage"])
+	env.Append(LINKFLAGS = "-fprofile-arcs")
 
 
 env.Append(CPPPATH = ["libraries/googletest/gtest-1.7.0"])
