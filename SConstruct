@@ -1,4 +1,7 @@
-env = Environment()
+compiler = ARGUMENTS.get('compiler', 'clang++')
+
+
+env = Environment(CXX = compiler)
 env.Append(CXXFLAGS = ["-Wall", "-Werror", "-pthread"])
 
 
