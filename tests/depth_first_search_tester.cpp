@@ -41,8 +41,6 @@ struct depth_first_search_tester : public gt::Test
 
 TEST_F(depth_first_search_tester, tests_empty_graph)
 {
-    using namespace std::placeholders;
-
     // given
     const int starting_vertex = 0;
     visit_mock vm;
@@ -63,8 +61,6 @@ TEST_F(depth_first_search_tester, tests_empty_graph)
  */
 TEST_F(depth_first_search_tester, test_custom_graph)
 {
-    using namespace std::placeholders;
-
     // given
     g.add_not_directed_edge(0, 1);
     g.add_not_directed_edge(0, 3);
