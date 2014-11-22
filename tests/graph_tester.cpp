@@ -85,5 +85,27 @@ TEST_F(graph_tester, test_adding_directed_edge)
 }
 
 
+TEST_F(graph_tester, test_adding_not_directed_edge)
+{
+    // given
+    ASSERT_EQ(3, g.size());
+
+    // when
+    g.add_not_directed_edge(1, 2);
+
+    // then
+    const graph_type::adjacency_list& adj0 = g.get_adjacency_list(0);
+    EXPECT_EQ(0, adj0.size());
+
+    const graph_type::adjacency_list& adj1 = g.get_adjacency_list(1);
+    ASSERT_EQ(1, adj1.size());
+    EXPECT_EQ(2, adj1[0]);
+
+    const graph_type::adjacency_list& adj2 = g.get_adjacency_list(2);
+    EXPECT_EQ(1, adj2.size());
+    EXPECT_EQ(1, adj2[0]);
+}
+
+
 } // namespace testing
 } // namespace pk
