@@ -23,7 +23,7 @@ before_script:
   - echo $PATH
 
 script:
-  - scons compiler=$CXX
+  - scons compiler=`which $CXX`
   - ./run_tests --gtest_shuffle
 
 notifications:
