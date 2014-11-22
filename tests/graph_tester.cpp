@@ -26,11 +26,41 @@ struct graph_tester : public gt::Test
 
 TEST_F(graph_tester, test_empty_graph)
 {
+    // given
     ASSERT_EQ(3, g.size());
 
+    // when and then
     EXPECT_EQ(0, g.get_adjacency_list(0).size());
     EXPECT_EQ(0, g.get_adjacency_list(1).size());
     EXPECT_EQ(0, g.get_adjacency_list(2).size());
+}
+
+
+TEST_F(graph_tester, test_full_graph)
+{
+    // given
+    ASSERT_EQ(3, g.size());
+
+    // when
+    g.add_not_directed_edge(0, 1);
+    g.add_not_directed_edge(0, 2);
+    g.add_not_directed_edge(1, 2);
+
+    // then
+    const graph_type::adjacency_list& adj0 = g.get_adjacency_list(0);
+    ASSERT_EQ(2, adj0.size());
+    EXPECT_EQ(1, adj0[0]);
+    EXPECT_EQ(2, adj0[1]);
+
+    const graph_type::adjacency_list& adj1 = g.get_adjacency_list(1);
+    ASSERT_EQ(2, adj1.size());
+    EXPECT_EQ(0, adj1[0]);
+    EXPECT_EQ(2, adj1[1]);
+
+    const graph_type::adjacency_list& adj2 = g.get_adjacency_list(2);
+    ASSERT_EQ(2, adj2.size());
+    EXPECT_EQ(0, adj2[0]);
+    EXPECT_EQ(1, adj2[1]);
 }
 
 
