@@ -73,6 +73,6 @@ Fixed but custom maximum amount of vertices and maximum vertex degree. No memory
 
 Recursive version.
 
-| Member Function | Time Complexity |
-|-----------------|-----------------|
-| run             | O(|V| + |E|)    |
+| Member Function | Time Complexity | Space Complexity |
+|-----------------|-----------------|------------------|
+| run             | O(V + E)        | O(V)             |
