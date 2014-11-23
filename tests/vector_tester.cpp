@@ -170,14 +170,14 @@ TEST_F(vector_tester, tests_cbegin_and_cend)
     vec.push_back(element1);
 
     // when
-    const pk::vector<int, MAX_ELEMENTS>& constVec = vec;
+    const pk::vector<int, MAX_ELEMENTS>& const_vec = vec;
 
     // then
-    const int* it = constVec.cbegin();
+    const int* it = const_vec.cbegin();
     EXPECT_EQ(element1, *it);
 
     ++it;
-    EXPECT_EQ(constVec.cend(), it);
+    EXPECT_EQ(const_vec.cend(), it);
 }
 
 
