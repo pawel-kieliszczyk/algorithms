@@ -107,5 +107,23 @@ TEST_F(graph_tester, test_adding_not_directed_edge)
 }
 
 
+TEST_F(graph_tester, tests_reset)
+{
+    // given
+    ASSERT_EQ(3, g.size());
+    g.add_directed_edge(0, 1);
+    g.add_directed_edge(1, 2);
+    g.add_directed_edge(2, 0);
+
+    // when
+    g.reset();
+
+    // then
+    EXPECT_EQ(0, g.get_adjacency_list(0).size());
+    EXPECT_EQ(0, g.get_adjacency_list(1).size());
+    EXPECT_EQ(0, g.get_adjacency_list(2).size());
+}
+
+
 } // namespace testing
 } // namespace pk

@@ -62,6 +62,7 @@ Graph class has fixed but custom maximum amount of vertices and maximum vertex d
 | graph::add_directed_edge     | O(1)            | O(1)             |                       |
 | graph::add_not_directed_edge | O(1)            | O(1)             |                       |
 | graph::get_adjacency_list    | O(1)            | O(1)             |                       |
+| graph::reset                 | O(V)            | O(1)             |                       |
 | graph::size                  | O(1)            | O(1)             |                       |
 | depth_first_search::run      | O(V + E)        | O(V)             | Recursive version     |
 | breadth_first_search::run    | O(V + E)        | O(V)             | Non-recursive version |
