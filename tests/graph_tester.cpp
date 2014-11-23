@@ -24,6 +24,21 @@ struct graph_tester : public gt::Test
 };
 
 
+TEST_F(graph_tester, tests_graph_properties)
+{
+    //given
+    const int V = 42;
+    const int E = 1337;
+
+    // when and then
+    const int v = graph<V, E>::max_num_of_vertices;
+    const int e = graph<V, E>::max_vertex_degree;
+
+    EXPECT_EQ(V, v);
+    EXPECT_EQ(E, e);
+}
+
+
 TEST_F(graph_tester, tests_empty_graph)
 {
     // given
@@ -104,6 +119,24 @@ TEST_F(graph_tester, test_adding_not_directed_edge)
     const graph_type::adjacency_list& adj2 = g.get_adjacency_list(2);
     EXPECT_EQ(1, adj2.size());
     EXPECT_EQ(1, adj2[0]);
+}
+
+
+TEST_F(graph_tester, tests_reset)
+{
+    // given
+    ASSERT_EQ(3, g.size());
+    g.add_directed_edge(0, 1);
+    g.add_directed_edge(1, 2);
+    g.add_directed_edge(2, 0);
+
+    // when
+    g.reset();
+
+    // then
+    EXPECT_EQ(0, g.get_adjacency_list(0).size());
+    EXPECT_EQ(0, g.get_adjacency_list(1).size());
+    EXPECT_EQ(0, g.get_adjacency_list(2).size());
 }
 
 

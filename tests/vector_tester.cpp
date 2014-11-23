@@ -181,5 +181,18 @@ TEST_F(vector_tester, tests_cbegin_and_cend)
 }
 
 
+TEST_F(vector_tester, tests_reset)
+{
+    // given
+    vec.push_back(element1);
+
+    // when
+    vec.reset();
+
+    // then
+    EXPECT_TRUE(vec.empty());
+}
+
+
 } // namespace testing
 } // namespace pk
