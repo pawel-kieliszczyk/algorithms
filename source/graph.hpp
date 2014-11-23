@@ -14,6 +14,8 @@ class graph
 {
 public:
     typedef pk::vector<int, MAX_VERTEX_DEGREE> adjacency_list;
+    static const int max_num_of_vertices = MAX_NUM_OF_VERTICES;
+    static const int max_vertex_degree = MAX_VERTEX_DEGREE;
 
     void add_directed_edge(const int vertex_id_from, const int vertex_id_to)
     {
