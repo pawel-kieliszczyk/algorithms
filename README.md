@@ -75,4 +75,4 @@ Recursive version.
 
 | Member Function | Time Complexity | Space Complexity |
 |-----------------|-----------------|------------------|
-| run             | O(V + E)        | O(V)             |
+| run             | O(E)        | O(V)             |
