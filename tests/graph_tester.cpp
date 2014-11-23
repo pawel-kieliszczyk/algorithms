@@ -24,6 +24,21 @@ struct graph_tester : public gt::Test
 };
 
 
+TEST_F(graph_tester, tests_graph_properties)
+{
+    //given
+    const int V = 42;
+    const int E = 1337;
+
+    // when and then
+    const int v = graph<V, E>::max_num_of_vertices;
+    const int e = graph<V, E>::max_vertex_degree;
+
+    EXPECT_EQ(V, v);
+    EXPECT_EQ(E, e);
+}
+
+
 TEST_F(graph_tester, tests_empty_graph)
 {
     // given
