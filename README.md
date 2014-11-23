@@ -68,3 +68,11 @@ Fixed but custom maximum amount of vertices and maximum vertex degree. No memory
 | add_not_directed_edge | O(1)            |
 | get_adjacency_list    | O(1)            |
 | size                  | O(1)            |
+
+###depth_first_search
+
+Recursive version.
+
+| Member Function | Time Complexity |
+|-----------------|-----------------|
+| run             | O(|V| + |E|)    |
