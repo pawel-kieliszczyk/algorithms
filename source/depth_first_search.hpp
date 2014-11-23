@@ -42,7 +42,7 @@ private:
     {
         visited[v] = true;
         visitor.visit(v);
-        
+
         const typename graph<MAX_NUM_OF_VERTICES, MAX_VERTEX_DEGREE>::adjacency_list& adj_v = g.get_adjacency_list(v);
         for(int i = 0; i < adj_v.size(); ++i)
         {

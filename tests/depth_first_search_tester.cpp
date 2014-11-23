@@ -47,7 +47,7 @@ TEST_F(depth_first_search_tester, tests_empty_graph)
  * |   |   |
  * 3 - 4 - 5
  */
-TEST_F(depth_first_search_tester, test_custom_graph)
+TEST_F(depth_first_search_tester, tests_custom_graph)
 {
     // given
     g.add_not_directed_edge(0, 1);
