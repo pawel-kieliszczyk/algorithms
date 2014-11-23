@@ -1,7 +1,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "depth_first_search.hpp"
+#include "breadth_first_search.hpp"
 #include "graph.hpp"
 
 #include "mocks/visitor_mock.hpp"
@@ -16,7 +16,7 @@ namespace testing
 {
 
 
-struct depth_first_search_tester : public gt::Test
+struct breadth_first_search_tester : public gt::Test
 {
     static const int VERTICES = 29;
     static const int MAX_VERTEX_DEGREE = 28;
@@ -27,7 +27,7 @@ struct depth_first_search_tester : public gt::Test
 };
 
 
-TEST_F(depth_first_search_tester, tests_empty_graph)
+TEST_F(breadth_first_search_tester, tests_empty_graph)
 {
     // given
     const int starting_vertex = 0;
@@ -37,7 +37,7 @@ TEST_F(depth_first_search_tester, tests_empty_graph)
     EXPECT_CALL(vm, visit(starting_vertex));
 
     // when and then
-    depth_first_search::run(g, starting_vertex, vm);
+    breadth_first_search::run(g, starting_vertex, vm);
 }
 
 
@@ -47,7 +47,7 @@ TEST_F(depth_first_search_tester, tests_empty_graph)
  * |   |   |
  * 3 - 4 - 5
  */
-TEST_F(depth_first_search_tester, test_custom_graph)
+TEST_F(breadth_first_search_tester, test_custom_graph)
 {
     // given
     g.add_not_directed_edge(0, 1);
@@ -65,13 +65,13 @@ TEST_F(depth_first_search_tester, test_custom_graph)
     gt::InSequence seq;
     EXPECT_CALL(vm, visit(0)); // starting_vertex
     EXPECT_CALL(vm, visit(1));
-    EXPECT_CALL(vm, visit(2));
-    EXPECT_CALL(vm, visit(5));
-    EXPECT_CALL(vm, visit(4));
     EXPECT_CALL(vm, visit(3));
+    EXPECT_CALL(vm, visit(2));
+    EXPECT_CALL(vm, visit(4));
+    EXPECT_CALL(vm, visit(5));
 
     // when and then
-    depth_first_search::run(g, starting_vertex, vm);
+    breadth_first_search::run(g, starting_vertex, vm);
 }
 
 
