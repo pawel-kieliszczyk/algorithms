@@ -1,20 +1,27 @@
 # Algorithms and data structures
 
+
 ##Overview
 
 C++ library of algorithms and data structures focused on high performance. Might be useful in algorithmic competitions such as TopCoder or Sphere Online Judge. This is a header only library compatible with C++03 standard.
+
 
 ##Continuous integration status
 
 [![Build Status](https://travis-ci.org/pawel-kieliszczyk/algorithms.svg)](https://travis-ci.org/pawel-kieliszczyk/algorithms)
 [![Coverage Status](https://img.shields.io/coveralls/pawel-kieliszczyk/algorithms.svg)](https://coveralls.io/r/pawel-kieliszczyk/algorithms?branch=master)
 
+
 ##Features
 
  + STL-like containers
  + graph library
 
+
 ##Performance
+
+The library focuses on high performance both minimizing computational complexity of all algorithms and maximizing possibility of efficient CPU caching.
+
 
 ###vector
 
@@ -34,6 +41,7 @@ Fixed but custom maximum capacity. No memory reallocations once constructed.
 | empty           | O(1)            |
 | size            | O(1)            |
 
+
 ###stack
 
 Fixed but custom maximum capacity. No memory reallocations once constructed.
@@ -45,6 +53,7 @@ Fixed but custom maximum capacity. No memory reallocations once constructed.
 | top             | O(1)            |
 | empty           | O(1)            |
 | size            | O(1)            |
+
 
 ###queue
 
@@ -58,6 +67,7 @@ Fixed but custom maximum capacity. No memory reallocations once constructed.
 | empty           | O(1)            |
 | size            | O(1)            |
 
+
 ###graph
 
 Fixed but custom maximum amount of vertices and maximum vertex degree. No memory reallocations once constructed.
@@ -69,9 +79,19 @@ Fixed but custom maximum amount of vertices and maximum vertex degree. No memory
 | get_adjacency_list    | O(1)            |
 | size                  | O(1)            |
 
+
 ###depth_first_search
 
 Recursive version.
+
+| Member Function | Time Complexity | Space Complexity |
+|-----------------|-----------------|------------------|
+| run             | O(V + E)        | O(V)             |
+
+
+###breadth_first_search
+
+Non-recursive version.
 
 | Member Function | Time Complexity | Space Complexity |
 |-----------------|-----------------|------------------|
