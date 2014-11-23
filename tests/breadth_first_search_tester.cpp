@@ -4,6 +4,8 @@
 #include "breadth_first_search.hpp"
 #include "graph.hpp"
 
+#include "mocks/visitor_mock.hpp"
+
 
 namespace gt = testing;
 
@@ -12,20 +14,6 @@ namespace pk
 {
 namespace testing
 {
-
-
-namespace
-{
-
-
-class visit_mock
-{
-public:
-    MOCK_METHOD1(visit, void(const int));
-};
-
-
-} // namespace anonymous
 
 
 struct breadth_first_search_tester : public gt::Test
@@ -43,7 +31,7 @@ TEST_F(breadth_first_search_tester, tests_empty_graph)
 {
     // given
     const int starting_vertex = 0;
-    visit_mock vm;
+    visitor_mock vm;
 
     // expect
     EXPECT_CALL(vm, visit(starting_vertex));
