@@ -1,5 +1,5 @@
-#ifndef PK_GRAPH_HPP
-#define PK_GRAPH_HPP
+#ifndef PK_WEIGHTEDGRAPH_HPP
+#define PK_WEIGHTEDGRAPH_HPP
 
 
 #include "edge_types.hpp"
@@ -11,23 +11,23 @@ namespace pk
 
 
 template<int MAX_NUM_OF_VERTICES, int MAX_VERTEX_DEGREE>
-class graph
+class weighted_graph
 {
 public:
     static const int max_num_of_vertices = MAX_NUM_OF_VERTICES;
     static const int max_vertex_degree = MAX_VERTEX_DEGREE;
 
-    typedef pk::vector<edge, max_vertex_degree> adjacency_list;
+    typedef pk::vector<weighted_edge, max_vertex_degree> adjacency_list;
 
-    void add_directed_edge(const int vertex_id_from, const int vertex_id_to)
+    void add_directed_edge(const int vertex_id_from, const int vertex_id_to, const int weight)
     {
-        adjacency_lists[vertex_id_from].push_back(edge(vertex_id_to));
+        adjacency_lists[vertex_id_from].push_back(weighted_edge(vertex_id_to, weight));
     }
 
-    void add_not_directed_edge(const int vertex_id_1, const int vertex_id_2)
+    void add_not_directed_edge(const int vertex_id_1, const int vertex_id_2, const int weight)
     {
-        add_directed_edge(vertex_id_1, vertex_id_2);
-        add_directed_edge(vertex_id_2, vertex_id_1);
+        add_directed_edge(vertex_id_1, vertex_id_2, weight);
+        add_directed_edge(vertex_id_2, vertex_id_1, weight);
     }
 
     void reset() { for(int i = 0; i < max_num_of_vertices; ++i) adjacency_lists[i].reset(); }
@@ -44,4 +44,4 @@ private:
 } // namespace pk
 
 
-#endif // PK_GRAPH_HPP
+#endif // PK_WEIGHTEDGRAPH_HPP

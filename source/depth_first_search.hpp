@@ -42,7 +42,7 @@ private:
         const typename Graph::adjacency_list& adj_v = g.get_adjacency_list(v);
         for(int i = 0; i < adj_v.size(); ++i)
         {
-            const int u = adj_v[i];
+            const int u = adj_v[i].to;
             if(!visited[u])
                 run(g, u, visitor, visited);
         }
