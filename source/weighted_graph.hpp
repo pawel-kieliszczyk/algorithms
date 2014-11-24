@@ -30,6 +30,8 @@ public:
         add_directed_edge(vertex_id_2, vertex_id_1, weight);
     }
 
+    void reset() { for(int i = 0; i < max_num_of_vertices; ++i) adjacency_lists[i].reset(); }
+
     int size() const { return max_num_of_vertices; }
 
     const adjacency_list& get_adjacency_list(const int vertex_id) const { return adjacency_lists[vertex_id]; }
