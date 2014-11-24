@@ -47,6 +47,7 @@ source_files += ["bin/tests/graph_tester.cpp"]
 source_files += ["bin/tests/queue_tester.cpp"]
 source_files += ["bin/tests/stack_tester.cpp"]
 source_files += ["bin/tests/vector_tester.cpp"]
+source_files += ["bin/tests/weighted_graph_tester.cpp"]
 
 
 env.Program('run_tests', source_files)
