@@ -3,6 +3,7 @@
 
 #include "breadth_first_search.hpp"
 #include "graph.hpp"
+#include "weighted_graph.hpp"
 
 #include "mocks/visitor_mock.hpp"
 
@@ -22,8 +23,10 @@ struct breadth_first_search_tester : public gt::Test
     static const int MAX_VERTEX_DEGREE = 28;
 
     typedef graph<VERTICES, MAX_VERTEX_DEGREE> graph_type;
+    typedef weighted_graph<VERTICES, MAX_VERTEX_DEGREE> weighted_graph_type;
 
     graph_type g;
+    weighted_graph_type wg;
 };
 
 
@@ -38,6 +41,20 @@ TEST_F(breadth_first_search_tester, tests_empty_graph)
 
     // when and then
     breadth_first_search::run(g, starting_vertex, vm);
+}
+
+
+TEST_F(breadth_first_search_tester, tests_empty_weighted_graph)
+{
+    // given
+    const int starting_vertex = 0;
+    visitor_mock vm;
+
+    // expect
+    EXPECT_CALL(vm, visit(starting_vertex));
+
+    // when and then
+    breadth_first_search::run(wg, starting_vertex, vm);
 }
 
 

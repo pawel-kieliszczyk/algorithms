@@ -2,6 +2,7 @@
 #define PK_GRAPH_HPP
 
 
+#include "edge_types.hpp"
 #include "vector.hpp"
 
 
@@ -16,11 +17,11 @@ public:
     static const int max_num_of_vertices = MAX_NUM_OF_VERTICES;
     static const int max_vertex_degree = MAX_VERTEX_DEGREE;
 
-    typedef pk::vector<int, max_vertex_degree> adjacency_list;
+    typedef pk::vector<edge, max_vertex_degree> adjacency_list;
 
     void add_directed_edge(const int vertex_id_from, const int vertex_id_to)
     {
-        adjacency_lists[vertex_id_from].push_back(vertex_id_to);
+        adjacency_lists[vertex_id_from].push_back(edge(vertex_id_to));
     }
 
     void add_not_directed_edge(const int vertex_id_1, const int vertex_id_2)
