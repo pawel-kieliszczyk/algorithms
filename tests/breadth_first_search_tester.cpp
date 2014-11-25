@@ -34,7 +34,7 @@ TEST_F(breadth_first_search_tester, tests_empty_graph)
 {
     // given
     const int starting_vertex = 0;
-    visitor_mock vm;
+    gt::StrictMock<visitor_mock> vm;
 
     // expect
     EXPECT_CALL(vm, visit(starting_vertex));
@@ -48,7 +48,7 @@ TEST_F(breadth_first_search_tester, tests_empty_weighted_graph)
 {
     // given
     const int starting_vertex = 0;
-    visitor_mock vm;
+    gt::StrictMock<visitor_mock> vm;
 
     // expect
     EXPECT_CALL(vm, visit(starting_vertex));
@@ -76,7 +76,7 @@ TEST_F(breadth_first_search_tester, tests_custom_graph)
     g.add_not_directed_edge(4, 5);
 
     const int starting_vertex = 0;
-    visitor_mock vm;
+    gt::StrictMock<visitor_mock> vm;
 
     // expect
     gt::InSequence seq;
