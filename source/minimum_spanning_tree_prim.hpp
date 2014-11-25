@@ -34,27 +34,20 @@ inline bool operator>(const mst_edge& left, const mst_edge& right)
 
 class minimum_spanning_tree_prim
 {
+private:
+    typedef std::priority_queue<detail::mst_edge, std::vector<detail::mst_edge>, std::greater<detail::mst_edge> > queue_type;
+
 public:
     template<class graph_type, class callback_type>
     static void run(const graph_type& g, const int starting_vertex, callback_type& callback)
     {
-        std::priority_queue<detail::mst_edge, std::vector<detail::mst_edge>, std::greater<detail::mst_edge> > q;
+        queue_type q;
 
         bool visited[graph_type::max_num_of_vertices];
         std::fill(visited, visited + graph_type::max_num_of_vertices, false);
 
-        int u = starting_vertex;
-        visited[u] = true;
-
-        const typename graph_type::adjacency_list& adj_u = g.get_adjacency_list(u);
-        for(int i = 0; i < adj_u.size(); ++i)
-        {
-            const typename graph_type::edge_type& e = adj_u[i];
-            if(!visited[e.to])
-            {
-                q.push(detail::mst_edge(u, e.to, e.weight));
-            }
-        }
+        visited[starting_vertex] = true;
+        add_not_visited_neighbours_to_queue(g, q, starting_vertex, visited);
 
         while(!q.empty())
         {
@@ -65,16 +58,23 @@ public:
                 continue;
 
             callback.notify(e.from, e.to, e.weight);
-            visited[e.to] = true;
 
-            const typename graph_type::adjacency_list& adj_to = g.get_adjacency_list(e.to);
-            for(int i = 0; i < adj_to.size(); ++i)
+            visited[e.to] = true;
+            add_not_visited_neighbours_to_queue(g, q, e.to, visited);
+        }
+    }
+
+private:
+    template<class graph_type>
+    static void add_not_visited_neighbours_to_queue(const graph_type& g, queue_type& q, const int vertex_id, const bool* visited)
+    {
+        const typename graph_type::adjacency_list& adj_list = g.get_adjacency_list(vertex_id);
+        for(int i = 0; i < adj_list.size(); ++i)
+        {
+            const typename graph_type::edge_type& e = adj_list[i];
+            if(!visited[e.to])
             {
-                const typename graph_type::edge_type& to_e = adj_to[i];
-                if(!visited[to_e.to])
-                {
-                    q.push(detail::mst_edge(e.to, to_e.to, to_e.weight));
-                }
+                q.push(detail::mst_edge(vertex_id, e.to, e.weight));
             }
         }
     }
