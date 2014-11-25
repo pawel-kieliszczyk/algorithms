@@ -60,14 +60,14 @@ TEST_F(breadth_first_search_tester, tests_empty_weighted_graph)
 
 /**
  * Tested graph:
- * 0 - 1 - 2
- * |   |   |
- * 3 - 4 - 5
+ * 0 -- 1 -- 2
+ * |    |    |
+ * 3 -- 4 -- 5
  */
 TEST_F(breadth_first_search_tester, tests_custom_graph)
 {
     // given
-    g.add_not_directed_edge(0, 1);
+    g.add_not_directed_edge(0/*from*/, 1/*to*/);
     g.add_not_directed_edge(0, 3);
     g.add_not_directed_edge(1, 2);
     g.add_not_directed_edge(1, 4);

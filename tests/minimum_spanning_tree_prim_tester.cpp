@@ -45,7 +45,7 @@ struct minimum_spanning_tree_prim_tester : public gt::Test
 TEST_F(minimum_spanning_tree_prim_tester, test)
 {
     // given
-    g.add_not_directed_edge(0, 1, 6);
+    g.add_not_directed_edge(0/*from*/, 1/*to*/, 6/*weight*/);
     g.add_not_directed_edge(0, 3, 4);
     g.add_not_directed_edge(1, 2, 5);
     g.add_not_directed_edge(1, 4, 4);
@@ -56,6 +56,7 @@ TEST_F(minimum_spanning_tree_prim_tester, test)
     gt::StrictMock<callback_mock> cm;
 
     // expect
+    gt::InSequence seq;
     EXPECT_CALL(cm, notify(0/*from*/, 3/*to*/, 4/*weight*/));
     EXPECT_CALL(cm, notify(3/*from*/, 4/*to*/, 5/*weight*/));
     EXPECT_CALL(cm, notify(4/*from*/, 5/*to*/, 1/*weight*/));
