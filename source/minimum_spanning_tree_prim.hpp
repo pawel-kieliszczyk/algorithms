@@ -41,6 +41,9 @@ public:
     template<class graph_type, class callback_type>
     static void run(const graph_type& g, const int starting_vertex, callback_type& callback)
     {
+        // TODO: replace the queue so that it contains vertices instead of edges.
+        //       This will increase time complexity to O(E * log(V))
+        //       and space complexity to O(V)
         queue_type q;
 
         bool visited[graph_type::max_num_of_vertices];

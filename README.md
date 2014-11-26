@@ -71,3 +71,4 @@ Graph class has fixed but custom maximum amount of vertices and maximum vertex d
 | weighted_graph::size                  | O(1)            | O(1)             |                       |
 | depth_first_search::run               | O(V + E)        | O(V)             | Recursive version     |
 | breadth_first_search::run             | O(V + E)        | O(V)             | Non-recursive version |
+| minimum_spanning_tree_prim::run       | O(E * log(E))   | O(V + E)         | Will be improved soon |
