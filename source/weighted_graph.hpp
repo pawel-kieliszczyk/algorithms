@@ -18,6 +18,7 @@ public:
     static const int max_vertex_degree = MAX_VERTEX_DEGREE;
 
     typedef pk::vector<weighted_edge, max_vertex_degree> adjacency_list;
+    typedef weighted_edge edge_type;
 
     void add_directed_edge(const int vertex_id_from, const int vertex_id_to, const int weight)
     {
