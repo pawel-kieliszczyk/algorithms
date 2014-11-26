@@ -42,7 +42,7 @@ struct minimum_spanning_tree_prim_tester : public gt::Test
  *  |         |         |
  *  3 --[5]-- 4 --[1]-- 5
  */
-TEST_F(minimum_spanning_tree_prim_tester, test)
+TEST_F(minimum_spanning_tree_prim_tester, tests_sample_graph)
 {
     // given
     g.add_not_directed_edge(0/*from*/, 1/*to*/, 6/*weight*/);
