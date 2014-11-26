@@ -36,11 +36,13 @@ struct minimum_spanning_tree_prim_tester : public gt::Test
 
 /**
  * Tested graph:
- *  0 --[6]-- 1 --[5]-- 2
- *  |         |         |
- * [4]       [4]       [3]
- *  |         |         |
- *  3 --[5]-- 4 --[1]-- 5
+ *     6     5
+ * (0)---(1)---(2)
+ *  |     |     |
+ *  |4    |4    |3
+ *  |     |     |
+ * (3)---(4)---(5)
+ *     5     1
  */
 TEST_F(minimum_spanning_tree_prim_tester, tests_sample_graph)
 {
