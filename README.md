@@ -72,3 +72,4 @@ Graph class has fixed but custom maximum amount of vertices and maximum vertex d
 | depth_first_search::run               | O(V + E)        | O(V)             | Recursive version     |
 | breadth_first_search::run             | O(V + E)        | O(V)             | Non-recursive version |
 | minimum_spanning_tree_prim::run       | O(E * log(E))   | O(V + E)         | Will be improved soon |
+| shortest_paths_dijkstra::run          | O(E * log(V))   | O(V)             |                       |
