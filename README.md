@@ -23,76 +23,53 @@ C++ library of algorithms and data structures focused on high performance. Might
 The library focuses on high performance both minimizing computational complexity of all algorithms and maximizing possibility of efficient CPU caching.
 
 
-###vector
+###Containers
 
-Fixed but custom maximum capacity. No memory reallocations once constructed.
+All containers have fixed but custom maximum capacity. No memory reallocations once they are constructed.
 
-| Member Function | Time Complexity |
-|-----------------|-----------------|
-| push_back       | O(1)            |
-| pop_back        | O(1)            |
-| operator[]      | O(1)            |
-| front           | O(1)            |
-| back            | O(1)            |
-| begin           | O(1)            |
-| cbegin          | O(1)            |
-| end             | O(1)            |
-| cend            | O(1)            |
-| empty           | O(1)            |
-| size            | O(1)            |
-
-
-###stack
-
-Fixed but custom maximum capacity. No memory reallocations once constructed.
-
-| Member Function | Time Complexity |
-|-----------------|-----------------|
-| push            | O(1)            |
-| pop             | O(1)            |
-| top             | O(1)            |
-| empty           | O(1)            |
-| size            | O(1)            |
+| Member Function    | Time Complexity | Space Complexity |
+|--------------------|-----------------|------------------|
+| vector::push_back  | O(1)            | O(1)             |
+| vector::pop_back   | O(1)            | O(1)             |
+| vector::operator[] | O(1)            | O(1)             |
+| vector::front      | O(1)            | O(1)             |
+| vector::back       | O(1)            | O(1)             |
+| vector::begin      | O(1)            | O(1)             |
+| vector::cbegin     | O(1)            | O(1)             |
+| vector::end        | O(1)            | O(1)             |
+| vector::cend       | O(1)            | O(1)             |
+| vector::reset      | O(1)            | O(1)             |
+| vector::empty      | O(1)            | O(1)             |
+| vector::size       | O(1)            | O(1)             |
+| stack::push        | O(1)            | O(1)             |
+| stack::pop         | O(1)            | O(1)             |
+| stack::top         | O(1)            | O(1)             |
+| stack::empty       | O(1)            | O(1)             |
+| stack::size        | O(1)            | O(1)             |
+| queue::push        | O(1)            | O(1)             |
+| queue::pop         | O(1)            | O(1)             |
+| queue::front       | O(1)            | O(1)             |
+| queue::empty       | O(1)            | O(1)             |
+| queue::size        | O(1)            | O(1)             |
 
 
-###queue
+###Graphs
 
-Fixed but custom maximum capacity. No memory reallocations once constructed.
+Graph class has fixed but custom maximum amount of vertices and maximum vertex degree. No memory reallocations once it's constructed.
 
-| Member Function | Time Complexity |
-|-----------------|-----------------|
-| push            | O(1)            |
-| pop             | O(1)            |
-| front           | O(1)            |
-| empty           | O(1)            |
-| size            | O(1)            |
-
-
-###graph
-
-Fixed but custom maximum amount of vertices and maximum vertex degree. No memory reallocations once constructed.
-
-| Member Function       | Time Complexity |
-|-----------------------|-----------------|
-| add_directed_edge     | O(1)            |
-| add_not_directed_edge | O(1)            |
-| get_adjacency_list    | O(1)            |
-| size                  | O(1)            |
-
-
-###depth_first_search
-
-Recursive version.
-
-| Member Function | Time Complexity | Space Complexity |
-|-----------------|-----------------|------------------|
-| run             | O(V + E)        | O(V)             |
-
-
-###breadth_first_search
-
-Non-recursive version.
-
-| Member Function | Time Complexity | Space Complexity |
-|-----------------|-----------------|------------------|
-| run             | O(V + E)        | O(V)             |
+| Member Function                       | Time Complexity | Space Complexity | Notes                 |
+|---------------------------------------|-----------------|------------------|-----------------------|
+| graph::add_directed_edge              | O(1)            | O(1)             |                       |
+| graph::add_not_directed_edge          | O(1)            | O(1)             |                       |
+| graph::get_adjacency_list             | O(1)            | O(1)             |                       |
+| graph::reset                          | O(V)            | O(1)             |                       |
+| graph::size                           | O(1)            | O(1)             |                       |
+| weighted_graph::add_directed_edge     | O(1)            | O(1)             |                       |
+| weighted_graph::add_not_directed_edge | O(1)            | O(1)             |                       |
+| weighted_graph::get_adjacency_list    | O(1)            | O(1)             |                       |
+| weighted_graph::reset                 | O(V)            | O(1)             |                       |
+| weighted_graph::size                  | O(1)            | O(1)             |                       |
+| depth_first_search::run               | O(V + E)        | O(V)             | Recursive version     |
+| breadth_first_search::run             | O(V + E)        | O(V)             | Non-recursive version |
+| minimum_spanning_tree_prim::run       | O(E * log(E))   | O(V + E)         | Will be improved soon |
+| shortest_paths_dijkstra::run          | O(E * log(V))   | O(V)             |                       |

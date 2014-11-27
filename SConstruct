@@ -44,9 +44,12 @@ source_files = ["bin/tests/main.cpp"]
 source_files += ["bin/tests/breadth_first_search_tester.cpp"]
 source_files += ["bin/tests/depth_first_search_tester.cpp"]
 source_files += ["bin/tests/graph_tester.cpp"]
+source_files += ["bin/tests/minimum_spanning_tree_prim_tester.cpp"]
 source_files += ["bin/tests/queue_tester.cpp"]
+source_files += ["bin/tests/shortest_paths_dijkstra_tester.cpp"]
 source_files += ["bin/tests/stack_tester.cpp"]
 source_files += ["bin/tests/vector_tester.cpp"]
+source_files += ["bin/tests/weighted_graph_tester.cpp"]
 
 
 env.Program('run_tests', source_files)
