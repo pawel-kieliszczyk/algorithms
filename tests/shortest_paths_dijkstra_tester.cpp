@@ -71,6 +71,7 @@ TEST_F(shortest_paths_dijkstra_tester, tests_small_graph)
     shortest_paths_dijkstra::run(small_graph, starting_vertex, cm);
 }
 
+
 /**
  * Tested graph:
  *
@@ -120,6 +121,31 @@ TEST_F(shortest_paths_dijkstra_tester, tests_bigger_graph)
 
     // when and then
     shortest_paths_dijkstra::run(bigger_graph, starting_vertex, cm);
+}
+
+
+/**
+ * Tested graph:
+ *
+ *     2
+ * (0)---(1)
+ *
+ * (2)
+ */
+TEST_F(shortest_paths_dijkstra_tester, tests_disconnected_graph)
+{
+    // given
+    small_graph.add_not_directed_edge(0/*from*/, 1/*to*/, 2/*weight*/);
+
+    const int starting_vertex = 0;
+    gt::StrictMock<callback_mock> cm;
+
+    // expect
+    EXPECT_CALL(cm, notify(starting_vertex/*to*/, 0/*path length*/));
+    EXPECT_CALL(cm, notify(1/*to*/, 2/*path length*/));
+
+    // when and then
+    shortest_paths_dijkstra::run(small_graph, starting_vertex, cm);
 }
 
 

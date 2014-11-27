@@ -79,7 +79,7 @@ TEST_F(graph_tester, tests_full_graph)
 }
 
 
-TEST_F(graph_tester, test_adding_directed_edge)
+TEST_F(graph_tester, tests_adding_directed_edge)
 {
     // given
     ASSERT_EQ(3, g.size());
