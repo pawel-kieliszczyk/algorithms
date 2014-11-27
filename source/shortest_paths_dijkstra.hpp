@@ -33,7 +33,7 @@ public:
             const int u = h.get_root();
 
             if(path_lengths[u] == infinity)
-                break;
+                break; // possible if processed graph is disconnected
 
             h.remove_root(path_lengths);
 
