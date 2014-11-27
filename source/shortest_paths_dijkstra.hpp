@@ -18,22 +18,22 @@ public:
     {
         const int infinity = std::numeric_limits<int>::max();
 
-        bool processed_vertices[graph_type::max_num_of_vertices];
-        std::fill(processed_vertices, processed_vertices + graph_type::max_num_of_vertices, false);
+        bool processed_vertices[graph_type::num_of_vertices];
+        std::fill(processed_vertices, processed_vertices + graph_type::num_of_vertices, false);
 
-        int path_lengths[graph_type::max_num_of_vertices];
-        std::fill(path_lengths, path_lengths + graph_type::max_num_of_vertices, infinity);
+        int path_lengths[graph_type::num_of_vertices];
+        std::fill(path_lengths, path_lengths + graph_type::num_of_vertices, infinity);
 
-        dijkstra_heap<graph_type::max_num_of_vertices> h(starting_vertex);
+        dijkstra_heap<graph_type::num_of_vertices> h(starting_vertex);
 
         path_lengths[starting_vertex] = 0;
 
-        for(int i = 0; i < graph_type::max_num_of_vertices; ++i)
+        for(int i = 0; i < graph_type::num_of_vertices; ++i)
         {
             const int u = h.get_root();
 
             if(path_lengths[u] == infinity)
-                break; // possible if processed graph is disconnected
+                break;
 
             h.remove_root(path_lengths);
 

@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include "edge_types.hpp"
 #include "graph.hpp"
 
 
@@ -14,52 +15,79 @@ namespace testing
 
 struct graph_tester : public gt::Test
 {
-    static const int VERTICES = 3;
-    static const int MAX_VERTEX_DEGREE = 5;
+    static const int V = 3;
+    static const int E = 6;
 
-    typedef graph<VERTICES, MAX_VERTEX_DEGREE> graph_type;
+    typedef graph_factory<V, E, edge> graph_factory_type;
+    typedef graph_factory_type::graph_type graph_type;
 
     // tested class:
-    graph_type g;
+    graph_factory_type factory;
 };
-
-
-TEST_F(graph_tester, tests_graph_properties)
-{
-    //given
-    const int V = 42;
-    const int E = 1337;
-
-    // when and then
-    const int v = graph<V, E>::max_num_of_vertices;
-    const int e = graph<V, E>::max_vertex_degree;
-
-    EXPECT_EQ(V, v);
-    EXPECT_EQ(E, e);
-}
 
 
 TEST_F(graph_tester, tests_empty_graph)
 {
-    // given
-    ASSERT_EQ(3, g.size());
+    // when
+    graph_type g = factory.create();
 
-    // when and then
+    // then
     EXPECT_EQ(0, g.get_adjacency_list(0).size());
     EXPECT_EQ(0, g.get_adjacency_list(1).size());
     EXPECT_EQ(0, g.get_adjacency_list(2).size());
 }
 
 
+TEST_F(graph_tester, tests_adding_directed_edge)
+{
+    // when
+    factory.add_directed_edge(edge(1/*from*/, 2/*to*/));
+
+    graph_type g = factory.create();
+
+    // then
+    const graph_type::adjacency_list& adj0 = g.get_adjacency_list(0);
+    EXPECT_EQ(0, adj0.size());
+
+    const graph_type::adjacency_list& adj1 = g.get_adjacency_list(1);
+    ASSERT_EQ(1, adj1.size());
+    EXPECT_EQ(2, adj1[0].to);
+
+    const graph_type::adjacency_list& adj2 = g.get_adjacency_list(2);
+    EXPECT_EQ(0, adj2.size());
+}
+
+
+TEST_F(graph_tester, test_adding_not_directed_edge)
+{
+    // when
+    factory.add_not_directed_edge(edge(1/*from*/, 2/*to*/));
+
+    graph_type g = factory.create();
+
+    // then
+    const graph_type::adjacency_list& adj0 = g.get_adjacency_list(0);
+    EXPECT_EQ(0, adj0.size());
+
+    const graph_type::adjacency_list& adj1 = g.get_adjacency_list(1);
+    ASSERT_EQ(1, adj1.size());
+    EXPECT_EQ(2, adj1[0].to);
+
+    const graph_type::adjacency_list& adj2 = g.get_adjacency_list(2);
+    EXPECT_EQ(1, adj2.size());
+    EXPECT_EQ(1, adj2[0].to);
+}
+
+
 TEST_F(graph_tester, tests_full_graph)
 {
-    // given
-    ASSERT_EQ(3, g.size());
 
     // when
-    g.add_not_directed_edge(0, 1);
-    g.add_not_directed_edge(0, 2);
-    g.add_not_directed_edge(1, 2);
+    factory.add_not_directed_edge(edge(0/*from*/, 1/*to*/));
+    factory.add_not_directed_edge(edge(0, 2));
+    factory.add_not_directed_edge(edge(1, 2));
+
+    graph_type g = factory.create();
 
     // then
     const graph_type::adjacency_list& adj0 = g.get_adjacency_list(0);
@@ -79,59 +107,16 @@ TEST_F(graph_tester, tests_full_graph)
 }
 
 
-TEST_F(graph_tester, tests_adding_directed_edge)
-{
-    // given
-    ASSERT_EQ(3, g.size());
-
-    // when
-    g.add_directed_edge(1, 2);
-
-    // then
-    const graph_type::adjacency_list& adj0 = g.get_adjacency_list(0);
-    EXPECT_EQ(0, adj0.size());
-
-    const graph_type::adjacency_list& adj1 = g.get_adjacency_list(1);
-    ASSERT_EQ(1, adj1.size());
-    EXPECT_EQ(2, adj1[0].to);
-
-    const graph_type::adjacency_list& adj2 = g.get_adjacency_list(2);
-    EXPECT_EQ(0, adj2.size());
-}
-
-
-TEST_F(graph_tester, test_adding_not_directed_edge)
-{
-    // given
-    ASSERT_EQ(3, g.size());
-
-    // when
-    g.add_not_directed_edge(1, 2);
-
-    // then
-    const graph_type::adjacency_list& adj0 = g.get_adjacency_list(0);
-    EXPECT_EQ(0, adj0.size());
-
-    const graph_type::adjacency_list& adj1 = g.get_adjacency_list(1);
-    ASSERT_EQ(1, adj1.size());
-    EXPECT_EQ(2, adj1[0].to);
-
-    const graph_type::adjacency_list& adj2 = g.get_adjacency_list(2);
-    EXPECT_EQ(1, adj2.size());
-    EXPECT_EQ(1, adj2[0].to);
-}
-
-
 TEST_F(graph_tester, tests_reset)
 {
     // given
-    ASSERT_EQ(3, g.size());
-    g.add_directed_edge(0, 1);
-    g.add_directed_edge(1, 2);
-    g.add_directed_edge(2, 0);
+    factory.add_not_directed_edge(edge(0/*from*/, 1/*to*/));
+    factory.add_not_directed_edge(edge(0, 2));
+    factory.add_not_directed_edge(edge(1, 2));
 
     // when
-    g.reset();
+    factory.reset();
+    graph_type g = factory.create();
 
     // then
     EXPECT_EQ(0, g.get_adjacency_list(0).size());

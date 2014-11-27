@@ -2,8 +2,8 @@
 #include <gtest/gtest.h>
 
 #include "depth_first_search.hpp"
+#include "edge_types.hpp"
 #include "graph.hpp"
-#include "weighted_graph.hpp"
 
 #include "mocks/visitor_mock.hpp"
 
@@ -19,20 +19,21 @@ namespace testing
 
 struct depth_first_search_tester : public gt::Test
 {
-    static const int VERTICES = 29;
-    static const int MAX_VERTEX_DEGREE = 28;
+    static const int V = 29;
+    static const int E = 28;
 
-    typedef graph<VERTICES, MAX_VERTEX_DEGREE> graph_type;
-    typedef weighted_graph<VERTICES, MAX_VERTEX_DEGREE> weighted_graph_type;
+    typedef graph_factory<V, E, edge> graph_factory_type;
+    typedef graph_factory_type::graph_type graph_type;
 
-    graph_type g;
-    weighted_graph_type wg;
+    graph_factory_type factory;
 };
 
 
 TEST_F(depth_first_search_tester, tests_empty_graph)
 {
     // given
+    graph_type g = factory.create();
+
     const int starting_vertex = 0;
     gt::StrictMock<visitor_mock> vm;
 
@@ -41,20 +42,6 @@ TEST_F(depth_first_search_tester, tests_empty_graph)
 
     // when and then
     depth_first_search::run(g, starting_vertex, vm);
-}
-
-
-TEST_F(depth_first_search_tester, tests_empty_weighted_graph)
-{
-    // given
-    const int starting_vertex = 0;
-    gt::StrictMock<visitor_mock> vm;
-
-    // expect
-    EXPECT_CALL(vm, visit(starting_vertex));
-
-    // when and then
-    depth_first_search::run(wg, starting_vertex, vm);
 }
 
 
@@ -67,13 +54,15 @@ TEST_F(depth_first_search_tester, tests_empty_weighted_graph)
 TEST_F(depth_first_search_tester, tests_custom_graph)
 {
     // given
-    g.add_not_directed_edge(0/*from*/, 1/*to*/);
-    g.add_not_directed_edge(0, 3);
-    g.add_not_directed_edge(1, 2);
-    g.add_not_directed_edge(1, 4);
-    g.add_not_directed_edge(2, 5);
-    g.add_not_directed_edge(3, 4);
-    g.add_not_directed_edge(4, 5);
+    factory.add_not_directed_edge(edge(0/*from*/, 1/*to*/));
+    factory.add_not_directed_edge(edge(0, 3));
+    factory.add_not_directed_edge(edge(1, 2));
+    factory.add_not_directed_edge(edge(1, 4));
+    factory.add_not_directed_edge(edge(2, 5));
+    factory.add_not_directed_edge(edge(3, 4));
+    factory.add_not_directed_edge(edge(4, 5));
+
+    graph_type g = factory.create();
 
     const int starting_vertex = 0;
     gt::StrictMock<visitor_mock> vm;
