@@ -17,10 +17,11 @@ namespace
 {
 
 
+template<class weight_type>
 class callback_mock
 {
 public:
-    MOCK_METHOD2(notify, void(const int to, const int path_length));
+    MOCK_METHOD2_T(notify, void(const int to, const weight_type path_length));
 };
 
 
@@ -68,7 +69,7 @@ TEST_F(shortest_paths_dijkstra_tester, tests_small_graph)
     small_graph_type g = small_graph_factory.create();
 
     const int starting_vertex = 0;
-    gt::StrictMock<callback_mock> cm;
+    gt::StrictMock<callback_mock<weight_type> > cm;
 
     // expect
     EXPECT_CALL(cm, notify(starting_vertex/*to*/, 0/*path length*/));
@@ -116,7 +117,7 @@ TEST_F(shortest_paths_dijkstra_tester, tests_bigger_graph)
     bigger_graph_type g = bigger_graph_factory.create();
 
     const int starting_vertex = 0;
-    gt::StrictMock<callback_mock> cm;
+    gt::StrictMock< callback_mock<weight_type> > cm;
 
     // expect
     EXPECT_CALL(cm, notify(starting_vertex/*to*/, 0/*path length*/));
@@ -150,11 +151,52 @@ TEST_F(shortest_paths_dijkstra_tester, tests_disconnected_graph)
     small_graph_type g = small_graph_factory.create();
 
     const int starting_vertex = 0;
-    gt::StrictMock<callback_mock> cm;
+    gt::StrictMock< callback_mock<weight_type> > cm;
 
     // expect
     EXPECT_CALL(cm, notify(starting_vertex/*to*/, 0/*path length*/));
     EXPECT_CALL(cm, notify(1, 2));
+
+    // when and then
+    shortest_paths_dijkstra::run(g, starting_vertex, cm);
+}
+
+
+/**
+ * Tested graph:
+ *
+ *     2.1     3.4
+ * (4)---->(0)---->(1)
+ *  |               |
+ *  |10.1        1.1|
+ *  |               |
+ *  '->(3)<---(2)<--'
+ *         3.4
+ */
+TEST_F(shortest_paths_dijkstra_tester, tests_noninteger_directed_weighted_graph)
+{
+    // given
+    typedef weighted_edge<double> weighted_edge_double_type;
+    typedef graph_factory<BIGGER_V, BIGGER_E, weighted_edge_double_type> graph_factory_type;
+    graph_factory_type graph_factory;
+
+    graph_factory.add_directed_edge(weighted_edge_double_type(4/*from*/, 0/*to*/, 2.1/*weight*/));
+    graph_factory.add_directed_edge(weighted_edge_double_type(0, 1, 3.4));
+    graph_factory.add_directed_edge(weighted_edge_double_type(1, 2, 1.1));
+    graph_factory.add_directed_edge(weighted_edge_double_type(2, 3, 3.4));
+    graph_factory.add_directed_edge(weighted_edge_double_type(4, 3, 10.1));
+
+    graph_factory_type::graph_type g = graph_factory.create();
+
+    const int starting_vertex = 4;
+    gt::StrictMock< callback_mock<double> > cm;
+
+    // expect
+    EXPECT_CALL(cm, notify(starting_vertex/*to*/, 0.0/*path length*/));
+    EXPECT_CALL(cm, notify(0, 2.1));
+    EXPECT_CALL(cm, notify(1, 5.5));
+    EXPECT_CALL(cm, notify(2, 6.6));
+    EXPECT_CALL(cm, notify(3, 10.0));
 
     // when and then
     shortest_paths_dijkstra::run(g, starting_vertex, cm);
