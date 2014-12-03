@@ -66,7 +66,7 @@ TEST_F(shortest_paths_dijkstra_tester, tests_small_graph)
     small_graph_factory.add_not_directed_edge(weighted_edge_type(0, 2, 2));
     small_graph_factory.add_not_directed_edge(weighted_edge_type(1, 2, 1));
 
-    small_graph_type g = small_graph_factory.create();
+    const small_graph_type& g = small_graph_factory.create();
 
     const int starting_vertex = 0;
     gt::StrictMock<callback_mock<weight_type> > cm;
@@ -114,7 +114,7 @@ TEST_F(shortest_paths_dijkstra_tester, tests_bigger_graph)
     bigger_graph_factory.add_not_directed_edge(weighted_edge_type(6, 8, 6));
     bigger_graph_factory.add_not_directed_edge(weighted_edge_type(7, 8, 7));
     
-    bigger_graph_type g = bigger_graph_factory.create();
+    const bigger_graph_type& g = bigger_graph_factory.create();
 
     const int starting_vertex = 0;
     gt::StrictMock< callback_mock<weight_type> > cm;
@@ -148,7 +148,7 @@ TEST_F(shortest_paths_dijkstra_tester, tests_disconnected_graph)
     // given
     small_graph_factory.add_not_directed_edge(weighted_edge_type(0/*from*/, 1/*to*/, 2/*weight*/));
 
-    small_graph_type g = small_graph_factory.create();
+    const small_graph_type& g = small_graph_factory.create();
 
     const int starting_vertex = 0;
     gt::StrictMock< callback_mock<weight_type> > cm;
@@ -186,7 +186,7 @@ TEST_F(shortest_paths_dijkstra_tester, tests_noninteger_directed_weighted_graph)
     graph_factory.add_directed_edge(weighted_edge_double_type(2, 3, 3.4));
     graph_factory.add_directed_edge(weighted_edge_double_type(4, 3, 10.1));
 
-    graph_factory_type::graph_type g = graph_factory.create();
+    const graph_factory_type::graph_type& g = graph_factory.create();
 
     const int starting_vertex = 4;
     gt::StrictMock< callback_mock<double> > cm;
