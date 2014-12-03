@@ -41,7 +41,7 @@ public:
             visited[v] = true;
 
             const typename graph_type::adjacency_list& adj_v = g.get_adjacency_list(v);
-            for(int i = adj_v.size(); i >= 0; --i)
+            for(int i = adj_v.size() - 1; i >= 0; --i)
             {
                 const int u = adj_v[i].to;
 
