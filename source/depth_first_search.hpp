@@ -4,6 +4,8 @@
 
 #include <algorithm>
 
+#include "stack.hpp"
+
 
 namespace pk
 {
@@ -20,31 +22,34 @@ public:
             const int starting_vertex_id,
             visitor_type& visitor)
     {
+        pk::stack<int, graph_type::max_num_of_edges> s;
+
         bool visited[graph_type::num_of_vertices];
         std::fill(visited, visited + graph_type::num_of_vertices, false);
 
-        run(g, starting_vertex_id, visitor, visited);
-    }
+        s.push(starting_vertex_id);
 
-private:
-    template<
-            class graph_type,
-            class visitor_type>
-    static void run(
-            const graph_type& g,
-            const int v,
-            visitor_type& visitor,
-            bool* visited)
-    {
-        visited[v] = true;
-        visitor.visit(v);
-
-        const typename graph_type::adjacency_list& adj_v = g.get_adjacency_list(v);
-        for(int i = 0; i < adj_v.size(); ++i)
+        while(!s.empty())
         {
-            const int u = adj_v[i].to;
-            if(!visited[u])
-                run(g, u, visitor, visited);
+            const int v = s.top();
+            s.pop();
+
+            if(visited[v])
+                continue;
+
+            visitor.visit(v);
+            visited[v] = true;
+
+            const typename graph_type::adjacency_list& adj_v = g.get_adjacency_list(v);
+            for(int i = adj_v.size() - 1; i >= 0; --i)
+            {
+                const int u = adj_v[i].to;
+
+                if(visited[u])
+                    continue;
+
+                s.push(u);
+            }
         }
     }
 };
