@@ -5,6 +5,7 @@
 #include <algorithm>
 
 #include "stack.hpp"
+#include "vector.hpp"
 
 
 namespace pk
@@ -23,9 +24,7 @@ public:
             visitor_type& visitor)
     {
         pk::stack<int, graph_type::max_num_of_edges> s;
-
-        bool visited[graph_type::num_of_vertices];
-        std::fill(visited, visited + graph_type::num_of_vertices, false);
+        pk::vector<bool, graph_type::num_of_vertices> visited(false);
 
         s.push(starting_vertex_id);
 
