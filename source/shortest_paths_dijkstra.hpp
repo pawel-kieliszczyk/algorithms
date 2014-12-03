@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <limits>
 
+#include "vector.hpp"
+
 
 namespace pk
 {
@@ -19,13 +21,10 @@ public:
         typedef typename graph_type::edge_type::weight_type weight_type;
         const weight_type infinity = std::numeric_limits<weight_type>::max();
 
-        bool processed_vertices[graph_type::num_of_vertices];
-        std::fill(processed_vertices, processed_vertices + graph_type::num_of_vertices, false);
+        pk::vector<bool, graph_type::num_of_vertices> processed_vertices(false);
+        pk::vector<weight_type, graph_type::num_of_vertices> path_lengths(infinity);
 
-        weight_type path_lengths[graph_type::num_of_vertices];
-        std::fill(path_lengths, path_lengths + graph_type::num_of_vertices, infinity);
-
-        dijkstra_heap<graph_type::num_of_vertices, weight_type> h(starting_vertex, path_lengths);
+        dijkstra_heap<graph_type::num_of_vertices, weight_type> h(starting_vertex, path_lengths.cbegin());
 
         path_lengths[starting_vertex] = weight_type();
 

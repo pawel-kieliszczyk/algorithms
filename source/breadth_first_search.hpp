@@ -5,7 +5,7 @@
 #include <algorithm>
 
 #include "queue.hpp"
-
+#include "vector.hpp"
 
 namespace pk
 {
@@ -23,9 +23,7 @@ public:
             visitor_type& visitor)
     {
         pk::queue<int, graph_type::num_of_vertices> q;
-
-        bool visited[graph_type::num_of_vertices];
-        std::fill(visited, visited + graph_type::num_of_vertices, false);
+        pk::vector<bool, graph_type::num_of_vertices> visited(false);
 
         q.push(starting_vertex_id);
         visited[starting_vertex_id] = true;

@@ -4,6 +4,8 @@
 
 #include <algorithm>
 
+#include "vector.hpp"
+
 
 namespace pk
 {
@@ -38,7 +40,10 @@ public:
     typedef edge_t edge_type;
     typedef detail::graph_adjacency_list<edge_type> adjacency_list;
 
-    graph(const edge_type* edges, const int num_of_edges)
+    graph() { adjacency_lists = new adjacency_list[num_of_vertices]; }
+    ~graph() { delete[] adjacency_lists; }
+
+    void set_edges(const edge_type* edges, const int num_of_edges)
     {
         for(int first = 0; first < num_of_edges; )
         {
@@ -57,7 +62,10 @@ public:
     const adjacency_list& get_adjacency_list(const int vertex_id) const { return adjacency_lists[vertex_id]; }
 
 private:
-    adjacency_list adjacency_lists[num_of_vertices];
+    graph(const graph&);
+    graph& operator=(const graph&);
+
+    adjacency_list* adjacency_lists;
 };
 
 
@@ -70,30 +78,28 @@ class graph_factory
 public:
     typedef detail::graph<num_of_vertices, max_num_of_edges, edge_type> graph_type;
 
-    graph_factory() : edges_count(0) {}
-
     void add_directed_edge(const edge_type& e)
     {
-        edges[edges_count++] = e;
+        edges.push_back(e);
     }
 
     void add_not_directed_edge(const edge_type& e)
     {
-        edges[edges_count] = e;
+        edges.push_back(e);
 
-        edges[++edges_count] = e;
-        std::swap(edges[edges_count].from, edges[edges_count].to);
-
-        ++edges_count;
+        edges.push_back(e);
+        std::swap(edges.back().from, edges.back().to);
     }
 
-    graph_type create()
+    const graph_type& create()
     {
-        std::sort(edges, edges + edges_count, edges_sorter());
-        return graph_type(edges, edges_count);
+        std::sort(edges.begin(), edges.end(), edges_sorter());
+        g.set_edges(edges.begin(), edges.size());
+
+        return g;
     }
 
-    void reset() { edges_count = 0; }
+    void reset() { edges.reset(); }
 
 private:
     struct edges_sorter
@@ -101,8 +107,8 @@ private:
         bool operator()(const edge_type& left, const edge_type& right) { return (left.from < right.from); }
     };
 
-    edge_type edges[max_num_of_edges];
-    int edges_count;
+    pk::vector<edge_type, max_num_of_edges> edges;
+    graph_type g;
 };
 
 

@@ -6,6 +6,8 @@
 #include <functional>
 #include <queue>
 
+#include "vector.hpp"
+
 
 namespace pk
 {
@@ -42,11 +44,10 @@ public:
                 std::vector<edge_type_pointer>,
                 detail::edge_type_greater_comparator<edge_type> > q;
 
-        bool visited[graph_type::num_of_vertices];
-        std::fill(visited, visited + graph_type::num_of_vertices, false);
+        pk::vector<bool, graph_type::num_of_vertices> visited(false);
 
         visited[starting_vertex] = true;
-        add_not_visited_neighbours_to_queue(g, q, starting_vertex, visited);
+        add_not_visited_neighbours_to_queue(g, q, starting_vertex, visited.cbegin());
 
         while(!q.empty())
         {
@@ -59,7 +60,7 @@ public:
             callback.notify(*e);
 
             visited[e->to] = true;
-            add_not_visited_neighbours_to_queue(g, q, e->to, visited);
+            add_not_visited_neighbours_to_queue(g, q, e->to, visited.cbegin());
         }
     }
 

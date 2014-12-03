@@ -31,7 +31,7 @@ struct weighted_graph_tester : public gt::Test
 TEST_F(weighted_graph_tester, tests_empty_graph)
 {
     // when
-    graph_type g = factory.create();
+    const graph_type& g = factory.create();
 
     // then
     EXPECT_EQ(0, g.get_adjacency_list(0).size());
@@ -45,7 +45,7 @@ TEST_F(weighted_graph_tester, tests_adding_directed_edge)
     // when
     factory.add_directed_edge(weighted_edge_type(1/*from*/, 2/*to*/, 11/*weight*/));
 
-    graph_type g = factory.create();
+    const graph_type& g = factory.create();
 
     // then
     const graph_type::adjacency_list& adj0 = g.get_adjacency_list(0);
@@ -66,7 +66,7 @@ TEST_F(weighted_graph_tester, test_adding_not_directed_edge)
     // when
     factory.add_not_directed_edge(weighted_edge_type(1/*from*/, 2/*to*/, 11/*weight*/));
 
-    graph_type g = factory.create();
+    const graph_type& g = factory.create();
 
     // then
     const graph_type::adjacency_list& adj0 = g.get_adjacency_list(0);
@@ -92,7 +92,7 @@ TEST_F(weighted_graph_tester, tests_full_graph)
     factory.add_not_directed_edge(weighted_edge_type(0, 2, 22));
     factory.add_not_directed_edge(weighted_edge_type(1, 2, 33));
 
-    graph_type g = factory.create();
+    const graph_type& g = factory.create();
 
     // then
     const graph_type::adjacency_list& adj0 = g.get_adjacency_list(0);
@@ -133,7 +133,7 @@ TEST_F(weighted_graph_tester, tests_reset)
 
     // when
     factory.reset();
-    graph_type g = factory.create();
+    const graph_type& g = factory.create();
 
     // then
     EXPECT_EQ(0, g.get_adjacency_list(0).size());
