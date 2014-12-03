@@ -10,7 +10,8 @@ template<class T, int MAX_SIZE>
 class vector
 {
 public:
-    vector() : sz(0) {}
+    vector() : sz(0) { data = new T[MAX_SIZE]; }
+    ~vector() { delete[] data; }
 
     void push_back(const T& elem) { data[sz++] = elem; }
     void pop_back() { --sz; }
@@ -36,7 +37,10 @@ public:
     int size() const { return sz; }
 
 private:
-    T data[MAX_SIZE];
+    vector(const vector&);
+    vector& operator=(const vector&);
+
+    T* data;
     int sz;
 };
 
