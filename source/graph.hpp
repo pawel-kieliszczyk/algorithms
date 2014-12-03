@@ -28,11 +28,12 @@ private:
 };
 
 
-template<int V, class edge_t>
+template<int V, int E, class edge_t>
 class graph
 {
 public:
     static const int num_of_vertices = V;
+    static const int max_num_of_edges = E;
 
     typedef edge_t edge_type;
     typedef detail::graph_adjacency_list<edge_type> adjacency_list;
@@ -67,7 +68,7 @@ template<int num_of_vertices, int max_num_of_edges, class edge_type>
 class graph_factory
 {
 public:
-    typedef detail::graph<num_of_vertices, edge_type> graph_type;
+    typedef detail::graph<num_of_vertices, max_num_of_edges, edge_type> graph_type;
 
     graph_factory() : edges_count(0) {}
 
