@@ -194,5 +194,22 @@ TEST_F(vector_tester, tests_reset)
 }
 
 
+TEST_F(vector_tester, tests_fill_constructor_of_vector)
+{
+    // given
+    const int fill_value = 42;
+    const int SIZE = 5;
+
+    // when
+    pk::vector<int, SIZE> v(fill_value);
+
+    // then
+    ASSERT_EQ(SIZE, v.size());
+
+    for(int i = 0; i < SIZE; ++i)
+        EXPECT_EQ(v[i], fill_value);
+}
+
+
 } // namespace testing
 } // namespace pk

@@ -2,6 +2,9 @@
 #define PK_VECTOR_HPP
 
 
+#include <algorithm>
+
+
 namespace pk
 {
 
@@ -11,6 +14,8 @@ class vector
 {
 public:
     vector() : sz(0) { data = new T[MAX_SIZE]; }
+    vector(const T& fill_value) : sz(MAX_SIZE) { data = new T[MAX_SIZE]; std::fill(data, data + sz, fill_value); }
+
     ~vector() { delete[] data; }
 
     void push_back(const T& elem) { data[sz++] = elem; }
