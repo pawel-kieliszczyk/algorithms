@@ -10,18 +10,19 @@ template<class T, int SIZE>
 class cyclic_array
 {
 public:
-    cyclic_array() { data = new T[SIZE]; }
+    cyclic_array() : first_index(0) { data = new T[SIZE]; }
 
-    T& operator[](const int i) { return data[i]; }
-    const T& operator[](const int i) const { return data[i]; }
+    T& operator[](const int i) { return data[(first_index + i) % SIZE]; }
+    const T& operator[](const int i) const { return data[(first_index + i) % SIZE]; }
 
-    void shift(const int d) {}
+    void shift_left(const int d) { first_index += d; }
 
 private:
     cyclic_array(const cyclic_array&);
     cyclic_array& operator=(const cyclic_array&);
 
     T* data;
+    int first_index;
 };
 
 
