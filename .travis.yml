@@ -26,7 +26,7 @@ script:
   - bin/test --gtest_shuffle
 
 after_success:
-  - if [ "$CXX" == "g++" ]; then coveralls --exclude libraries --exclude tests --gcov-options '\-lp' ; fi
+  - if [ "$CXX" == "g++" ]; then coveralls --root bin --exclude bin/libraries --exclude bin/tests --gcov-options '\-lp' ; fi
 
 notifications:
   email:
