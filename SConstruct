@@ -1,6 +1,3 @@
-import os
-
-
 compiler = ARGUMENTS.get('compiler', 'clang++')
 
 
