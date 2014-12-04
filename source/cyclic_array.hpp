@@ -15,7 +15,7 @@ public:
     T& operator[](const int i) { return data[(first_index + i) % SIZE]; }
     const T& operator[](const int i) const { return data[(first_index + i) % SIZE]; }
 
-    void shift_left(const int d) { first_index += d; }
+    void shift_left(const int d) { first_index = (first_index + d) % SIZE; }
 
 private:
     cyclic_array(const cyclic_array&);

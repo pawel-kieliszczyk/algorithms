@@ -56,5 +56,17 @@ TEST_F(cyclic_array_tester, tests_shift_left_by_small_value)
 }
 
 
+TEST_F(cyclic_array_tester, tests_shift_left_by_bigger_value)
+{
+    // when
+    ca.shift_left(5);
+
+    // then
+    EXPECT_EQ(elem3, ca[0]);
+    EXPECT_EQ(elem1, ca[1]);
+    EXPECT_EQ(elem2, ca[2]);
+}
+
+
 } // namespace testing
 } // namespace pk
