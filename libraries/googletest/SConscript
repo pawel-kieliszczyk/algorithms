@@ -1,0 +1,13 @@
+Import('env')
+local_env = env.Clone()
+
+
+local_env.Append(CPPPATH = ["gtest-1.7.0"])
+local_env.Append(CPPPATH = ["gtest-1.7.0/include"])
+
+
+source_files = ["gtest-1.7.0/src/gtest-all.cc"]
+
+
+local_env.StaticLibrary('gtest', source_files)
+env.Alias('gtest', '.')
