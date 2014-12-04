@@ -20,6 +20,7 @@ if enable_gcov:
 source_files = ['tests/main.cpp']
 
 source_files += ['tests/breadth_first_search_tester.cpp']
+source_files += ['tests/cyclic_array_tester.cpp']
 source_files += ['tests/depth_first_search_tester.cpp']
 source_files += ['tests/graph_tester.cpp']
 source_files += ['tests/minimum_spanning_tree_prim_tester.cpp']
