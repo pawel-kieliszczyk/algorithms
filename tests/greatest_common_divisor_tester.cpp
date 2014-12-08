@@ -12,6 +12,7 @@ namespace testing
 TEST(greatest_common_divisor_tester, tests_two_same_numbers)
 {
     // when and then
+    EXPECT_EQ(1, greatest_common_divisor(1, 1));
     EXPECT_EQ(5, greatest_common_divisor(5, 5));
     EXPECT_EQ(42, greatest_common_divisor(42, 42));
 }
