@@ -10,7 +10,8 @@ template<class T, int MAX_SIZE>
 class stack
 {
 public:
-    stack() : sz(0) {}
+    stack() : sz(0) { data = new T[MAX_SIZE]; }
+    ~stack() { delete[] data; }
 
     void push(const T& elem) { data[sz++] = elem; }
     void pop() { --sz; }
@@ -22,7 +23,10 @@ public:
     int size() const { return sz; }
 
 private:
-    T data[MAX_SIZE];
+    stack(const stack&);
+    stack& operator=(const stack&);
+
+    T* data;
     int sz;
 };
 

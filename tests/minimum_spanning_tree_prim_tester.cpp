@@ -1,8 +1,9 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include "edge_types.hpp"
+#include "graph.hpp"
 #include "minimum_spanning_tree_prim.hpp"
-#include "weighted_graph.hpp"
 
 
 namespace gt = testing;
@@ -12,26 +13,31 @@ namespace pk
 {
 namespace testing
 {
+
+
+struct minimum_spanning_tree_prim_tester : public gt::Test
+{
+    static const int V = 6;
+    static const int E = 14;
+
+    typedef int weight_type;
+    typedef weighted_edge<weight_type> weighted_edge_type;
+    typedef graph_factory<V, E, weighted_edge_type> graph_factory_type;
+    typedef graph_factory_type::graph_type graph_type;
+
+    graph_factory_type factory;
+};
+
+
 namespace
 {
 
 struct callback_mock
 {
-    MOCK_METHOD3(notify, void(const int, const int, const int));
+    MOCK_METHOD1(notify, void(const minimum_spanning_tree_prim_tester::weighted_edge_type&));
 };
 
 } // namespace anonymous
-
-
-struct minimum_spanning_tree_prim_tester : public gt::Test
-{
-    static const int VERTICES = 9;
-    static const int MAX_VERTEX_DEGREE = 13;
-
-    typedef weighted_graph<VERTICES, MAX_VERTEX_DEGREE> weighted_graph_type;
-
-    weighted_graph_type g;
-};
 
 
 /**
@@ -47,23 +53,24 @@ struct minimum_spanning_tree_prim_tester : public gt::Test
 TEST_F(minimum_spanning_tree_prim_tester, tests_sample_graph)
 {
     // given
-    g.add_not_directed_edge(0/*from*/, 1/*to*/, 6/*weight*/);
-    g.add_not_directed_edge(0, 3, 4);
-    g.add_not_directed_edge(1, 2, 5);
-    g.add_not_directed_edge(1, 4, 4);
-    g.add_not_directed_edge(2, 5, 3);
-    g.add_not_directed_edge(3, 4, 5);
-    g.add_not_directed_edge(4, 5, 1);
+    factory.add_not_directed_edge(weighted_edge_type(0/*from*/, 1/*to*/, 6/*weight*/));
+    factory.add_not_directed_edge(weighted_edge_type(0, 3, 4));
+    factory.add_not_directed_edge(weighted_edge_type(1, 2, 5));
+    factory.add_not_directed_edge(weighted_edge_type(1, 4, 4));
+    factory.add_not_directed_edge(weighted_edge_type(2, 5, 3));
+    factory.add_not_directed_edge(weighted_edge_type(3, 4, 5));
+    factory.add_not_directed_edge(weighted_edge_type(4, 5, 1));
 
+    const graph_type& g = factory.create();
     gt::StrictMock<callback_mock> cm;
 
     // expect
     gt::InSequence seq;
-    EXPECT_CALL(cm, notify(0/*from*/, 3/*to*/, 4/*weight*/));
-    EXPECT_CALL(cm, notify(3/*from*/, 4/*to*/, 5/*weight*/));
-    EXPECT_CALL(cm, notify(4/*from*/, 5/*to*/, 1/*weight*/));
-    EXPECT_CALL(cm, notify(5/*from*/, 2/*to*/, 3/*weight*/));
-    EXPECT_CALL(cm, notify(4/*from*/, 1/*to*/, 4/*weight*/));
+    EXPECT_CALL(cm, notify(weighted_edge_type(0/*from*/, 3/*to*/, 4/*weight*/)));
+    EXPECT_CALL(cm, notify(weighted_edge_type(3, 4, 5)));
+    EXPECT_CALL(cm, notify(weighted_edge_type(4, 5, 1)));
+    EXPECT_CALL(cm, notify(weighted_edge_type(5, 2, 3)));
+    EXPECT_CALL(cm, notify(weighted_edge_type(4, 1, 4)));
 
     // when and then
     minimum_spanning_tree_prim::run(g, 0/*starting vertex*/, cm);

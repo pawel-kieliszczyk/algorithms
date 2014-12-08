@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <limits>
 
+#include "vector.hpp"
+
 
 namespace pk
 {
@@ -16,26 +18,24 @@ public:
     template<class graph_type, class callback_type>
     static void run(const graph_type& g, const int starting_vertex, callback_type& callback)
     {
-        const int infinity = std::numeric_limits<int>::max();
+        typedef typename graph_type::edge_type::weight_type weight_type;
+        const weight_type infinity = std::numeric_limits<weight_type>::max();
 
-        bool processed_vertices[graph_type::max_num_of_vertices];
-        std::fill(processed_vertices, processed_vertices + graph_type::max_num_of_vertices, false);
+        pk::vector<bool, graph_type::num_of_vertices> processed_vertices(false);
+        pk::vector<weight_type, graph_type::num_of_vertices> path_lengths(infinity);
 
-        int path_lengths[graph_type::max_num_of_vertices];
-        std::fill(path_lengths, path_lengths + graph_type::max_num_of_vertices, infinity);
+        dijkstra_heap<graph_type::num_of_vertices, weight_type> h(starting_vertex, path_lengths.cbegin());
 
-        dijkstra_heap<graph_type::max_num_of_vertices> h(starting_vertex);
+        path_lengths[starting_vertex] = weight_type();
 
-        path_lengths[starting_vertex] = 0;
-
-        for(int i = 0; i < graph_type::max_num_of_vertices; ++i)
+        for(int i = 0; i < graph_type::num_of_vertices; ++i)
         {
             const int u = h.get_root();
 
             if(path_lengths[u] == infinity)
-                break; // possible if processed graph is disconnected
+                break;
 
-            h.remove_root(path_lengths);
+            h.remove_root();
 
             processed_vertices[u] = true;
             callback.notify(u, path_lengths[u]);
@@ -50,18 +50,18 @@ public:
                 if(path_lengths[v] > path_lengths[u] + adj_u[j].weight)
                 {
                     path_lengths[v] = path_lengths[u] + adj_u[j].weight;
-                    h.fix_heap_after_path_length_change(path_lengths, v);
+                    h.fix_heap_after_path_length_change(v);
                 }
             }
         }
     }
 
 private:
-    template<int heap_size>
+    template<int heap_size, class weight_type>
     class dijkstra_heap
     {
     public:
-        dijkstra_heap(const int starting_vertex) : size(heap_size)
+        dijkstra_heap(const int starting_vertex, const weight_type* path_lengths_) : size(heap_size), path_lengths(path_lengths_)
         {
             prepare_heap();
             fix_heap_with_starting_vertex(starting_vertex);
@@ -72,7 +72,7 @@ private:
             return heap_array[0];
         }
 
-        void remove_root(const int* path_lengths)
+        void remove_root()
         {
             heap_array[0] = heap_array[--size];
             heap_array_index[heap_array[0]] = 0;
@@ -110,7 +110,7 @@ private:
             }
         }
 
-        void fix_heap_after_path_length_change(const int* path_lengths, const int vertex_with_changed_path_length)
+        void fix_heap_after_path_length_change(const int vertex_with_changed_path_length)
         {
             int child = heap_array_index[vertex_with_changed_path_length];
             while(child != 0)
@@ -148,6 +148,8 @@ private:
         int size; ///< current number of elements in the heap
         int heap_array[heap_size]; ///< contains vertex ids organized by path lengths
         int heap_array_index[heap_size]; ///< heap_array_index[u] contains the index of u in heap_array
+
+        const weight_type* path_lengths; ///< pointer to lengths of all already calculated paths
     };
 };
 

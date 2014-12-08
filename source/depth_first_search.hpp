@@ -4,6 +4,9 @@
 
 #include <algorithm>
 
+#include "stack.hpp"
+#include "vector.hpp"
+
 
 namespace pk
 {
@@ -13,38 +16,39 @@ class depth_first_search
 {
 public:
     template<
-            class Graph,
-            class Visitor>
+            class graph_type,
+            class visitor_type>
     static void run(
-            const Graph& g,
+            const graph_type& g,
             const int starting_vertex_id,
-            Visitor& visitor)
+            visitor_type& visitor)
     {
-        bool visited[Graph::max_num_of_vertices];
-        std::fill(visited, visited + Graph::max_num_of_vertices, false);
+        pk::stack<int, graph_type::max_num_of_edges> s;
+        pk::vector<bool, graph_type::num_of_vertices> visited(false);
 
-        run(g, starting_vertex_id, visitor, visited);
-    }
+        s.push(starting_vertex_id);
 
-private:
-    template<
-            class Graph,
-            class Visitor>
-    static void run(
-            const Graph& g,
-            const int v,
-            Visitor& visitor,
-            bool* visited)
-    {
-        visited[v] = true;
-        visitor.visit(v);
-
-        const typename Graph::adjacency_list& adj_v = g.get_adjacency_list(v);
-        for(int i = 0; i < adj_v.size(); ++i)
+        while(!s.empty())
         {
-            const int u = adj_v[i].to;
-            if(!visited[u])
-                run(g, u, visitor, visited);
+            const int v = s.top();
+            s.pop();
+
+            if(visited[v])
+                continue;
+
+            visitor.visit(v);
+            visited[v] = true;
+
+            const typename graph_type::adjacency_list& adj_v = g.get_adjacency_list(v);
+            for(int i = adj_v.size() - 1; i >= 0; --i)
+            {
+                const int u = adj_v[i].to;
+
+                if(visited[u])
+                    continue;
+
+                s.push(u);
+            }
         }
     }
 };

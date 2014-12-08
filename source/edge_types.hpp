@@ -9,19 +9,30 @@ namespace pk
 struct edge
 {
     edge() {}
-    edge(const int to_) : to(to_) {}
+    edge(const int from_, const int to_) : from(from_), to(to_) {}
 
+    int from;
     int to;
 };
 
 
+template<class weight_t = int>
 struct weighted_edge : public edge
 {
-    weighted_edge() {}
-    weighted_edge(const int to_, const int weight_) : edge(to_), weight(weight_) {}
+    typedef weight_t weight_type;
 
-    int weight;
+    weighted_edge() {}
+    weighted_edge(const int from_, const int to_, const weight_type weight_) : edge(from_, to_), weight(weight_) {}
+
+    weight_type weight;
 };
+
+
+template<class weight_type>
+inline bool operator==(const weighted_edge<weight_type>& left, const weighted_edge<weight_type>& right)
+{
+    return ((left.from == right.from) && (left.to == right.to) && (left.weight == right.weight));
+}
 
 
 } // namespace pk
