@@ -51,6 +51,11 @@ All containers have fixed but custom maximum capacity. No memory reallocations o
 | queue::front              | O(1)            | O(1)             |
 | queue::empty              | O(1)            | O(1)             |
 | queue::size               | O(1)            | O(1)             |
+| priority_queue::push      | O(log(n))       | O(1)             |
+| priority_queue::pop       | O(log(n))       | O(1)             |
+| priority_queue::top       | O(1)            | O(1)             |
+| priority_queue::empty     | O(1)            | O(1)             |
+| priority_queue::size      | O(1)            | O(1)             |
 | cyclic_array::operator[]  | O(1)            | O(1)             |
 | cyclic_array::shift_left  | O(1)            | O(1)             |
 | cyclic_array::shift_right | O(1)            | O(1)             |

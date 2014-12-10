@@ -4,8 +4,8 @@
 
 #include <algorithm>
 #include <functional>
-#include <queue>
 
+#include "priority_queue.hpp"
 #include "vector.hpp"
 
 
@@ -39,9 +39,9 @@ public:
         //       and space complexity to O(V)
         typedef const typename graph_type::edge_type edge_type;
         typedef edge_type* edge_type_pointer;
-        std::priority_queue<
+        pk::priority_queue<
                 edge_type_pointer,
-                std::vector<edge_type_pointer>,
+                graph_type::max_num_of_edges,
                 detail::edge_type_greater_comparator<edge_type> > q;
 
         pk::vector<bool, graph_type::num_of_vertices> visited(false);
