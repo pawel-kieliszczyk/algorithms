@@ -1,5 +1,5 @@
-#ifndef PK_HEAP_HPP
-#define PK_HEAP_HPP
+#ifndef PK_PRIORITYQUEUE_HPP
+#define PK_PRIORITYQUEUE_HPP
 
 
 #include <algorithm>
@@ -13,7 +13,7 @@ namespace pk
 
 
 template<class T, int Size, class Compare>
-class heap
+class priority_queue
 {
 public:
     void push(const T& elem)
@@ -34,11 +34,11 @@ private:
 };
 
 
-template<class T, int Size> class min_heap : public heap<T, Size, std::greater<T> > {};
-template<class T, int Size> class max_heap : public heap<T, Size, std::less<T> > {};
+template<class T, int Size> class min_priority_queue : public priority_queue<T, Size, std::greater<T> > {};
+template<class T, int Size> class max_priority_queue : public priority_queue<T, Size, std::less<T> > {};
 
 
 } // namespace pk
 
 
-#endif // PK_HEAP_HPP
+#endif // PK_PRIORITYQUEUE_HPP
