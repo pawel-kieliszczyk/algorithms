@@ -101,5 +101,26 @@ TEST_F(priority_queue_tester, tests_push)
 }
 
 
+TEST_F(priority_queue_tester, tests_pop)
+{
+    // given
+    prio_queue.push(42);
+    prio_queue.push(7);
+    prio_queue.push(1337);
+
+    // when
+    prio_queue.pop();
+
+    // then
+    EXPECT_EQ(42, prio_queue.top());
+
+    // when
+    prio_queue.pop();
+
+    // then
+    EXPECT_EQ(1337, prio_queue.top());
+}
+
+
 } // namespace testing
 } // namespace pk

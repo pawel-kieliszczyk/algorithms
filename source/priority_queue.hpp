@@ -21,7 +21,12 @@ public:
         data.push_back(elem);
         std::push_heap(data.begin(), data.end(), comp);
     }
-    void pop() { data.pop_back(); }
+
+    void pop()
+    {
+        std::pop_heap(data.begin(), data.end(), comp);
+        data.pop_back();
+    }
 
     const T& top() const { return data.front(); }
 
