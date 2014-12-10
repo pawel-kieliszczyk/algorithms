@@ -17,7 +17,7 @@ struct heap_tester : public gt::Test
     static const int MAX_SIZE = 29;
 
     // tested class:
-    pk::heap<int, MAX_SIZE> h;
+    pk::min_heap<int, MAX_SIZE> h;
 };
 
 
@@ -76,6 +76,28 @@ TEST_F(heap_tester, tests_size_of_nonempty_heap)
     // when and then
     h.pop();
     EXPECT_EQ(1, h.size());
+}
+
+
+TEST_F(heap_tester, tests_push)
+{
+    // when
+    h.push(42);
+
+    // then
+    EXPECT_EQ(42, h.top());
+
+    // when
+    h.push(7);
+
+    // then
+    EXPECT_EQ(7, h.top());
+
+    // when
+    h.push(1337);
+
+    // then
+    EXPECT_EQ(7, h.top());
 }
 
 
