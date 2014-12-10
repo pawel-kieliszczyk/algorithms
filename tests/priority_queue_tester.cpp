@@ -122,5 +122,31 @@ TEST_F(priority_queue_tester, tests_pop)
 }
 
 
+TEST_F(priority_queue_tester, tests_fill_constructor_of_priority_queue)
+{
+    // given
+    const int data[] = { 42, 7, 1337 };
+
+    // when
+    pk::max_priority_queue<int, MAX_SIZE> q(data, data + 3);
+
+    // then
+    ASSERT_EQ(3, q.size());
+    EXPECT_EQ(1337, q.top());
+
+    // when
+    q.pop();
+
+    // then
+    EXPECT_EQ(42, q.top());
+
+    // when
+    q.pop();
+
+    // then
+    EXPECT_EQ(7, q.top());
+}
+
+
 } // namespace testing
 } // namespace pk

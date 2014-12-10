@@ -16,6 +16,16 @@ template<class T, int Size, class Compare>
 class priority_queue
 {
 public:
+    priority_queue() {}
+
+    priority_queue(const T* first, const T* last)
+    {
+        while(first != last)
+            data.push_back(*first++);
+
+        std::make_heap(data.begin(), data.end(), comp);
+    }
+
     void push(const T& elem)
     {
         data.push_back(elem);
@@ -39,8 +49,20 @@ private:
 };
 
 
-template<class T, int Size> class min_priority_queue : public priority_queue<T, Size, std::greater<T> > {};
-template<class T, int Size> class max_priority_queue : public priority_queue<T, Size, std::less<T> > {};
+template<class T, int Size> class min_priority_queue : public priority_queue<T, Size, std::greater<T> >
+{
+public:
+    min_priority_queue() {}
+    min_priority_queue(const T* first, const T* last) : priority_queue<T, Size, std::greater<T> >(first, last) {}
+};
+
+
+template<class T, int Size> class max_priority_queue : public priority_queue<T, Size, std::less<T> >
+{
+public:
+    max_priority_queue() {}
+    max_priority_queue(const T* first, const T* last) : priority_queue<T, Size, std::less<T> >(first, last) {}
+};
 
 
 } // namespace pk
