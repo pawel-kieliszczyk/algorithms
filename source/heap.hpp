@@ -16,7 +16,8 @@ public:
     void push(const T& elem) { data.push_back(elem); }
     void pop() { data.pop_back(); }
 
-    bool empty() { return data.empty(); }
+    bool empty() const { return data.empty(); }
+    int size() const { return data.size(); }
 
 private:
     pk::vector<T, SIZE> data;

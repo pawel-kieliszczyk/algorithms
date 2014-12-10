@@ -38,7 +38,7 @@ public:
 
     void reset() { sz = 0; }
 
-    bool empty() { return (sz == 0); }
+    bool empty() const { return (sz == 0); }
     int size() const { return sz; }
 
 private:
