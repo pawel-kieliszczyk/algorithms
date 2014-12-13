@@ -13,18 +13,52 @@ template<int MAX_ELEM_ID>
 class disjoint_sets
 {
 public:
-    static const int no_set = -1;
+    disjoint_sets()
+    {
+        for(int elem_id = 0; elem_id <= MAX_ELEM_ID; ++elem_id)
+        {
+            nodes[elem_id].up = elem_id;
+            nodes[elem_id].rank = 0;
+        }
+    }
 
-    disjoint_sets() : nodes(-1) {}
+    void union_sets(const int elem_id_1, const int elem_id_2)
+    {
+        const int elem_1_set_id = get_set_id(elem_id_1);
+        const int elem_2_set_id = get_set_id(elem_id_2);
 
-    void make_set(const int elem_id) { nodes[elem_id] = elem_id; }
+        if(elem_1_set_id != elem_2_set_id)
+        {
+            if(nodes[elem_1_set_id].rank > nodes[elem_2_set_id].rank)
+            {
+                nodes[elem_2_set_id].up = elem_1_set_id;
+            }
+            else
+            {
+                nodes[elem_1_set_id].up = elem_2_set_id;
 
-    void union_sets(const int elem_id_1, const int elem_id_2) {}
+                if(nodes[elem_1_set_id].rank == nodes[elem_2_set_id].rank)
+                    nodes[elem_2_set_id].rank++;
+            }
+        }
+    }
 
-    int get_set_id(const int elem_id) const { return nodes[elem_id]; }
+    int get_set_id(const int elem_id)
+    {
+        if(nodes[elem_id].up != elem_id)
+            nodes[elem_id].up = get_set_id(nodes[elem_id].up);
+
+        return nodes[elem_id].up;
+    }
 
 private:
-    pk::vector<int, MAX_ELEM_ID + 1> nodes;
+    struct node
+    {
+        int up;
+        int rank;
+    };
+
+    pk::vector<node, MAX_ELEM_ID + 1> nodes;
 };
 
 
