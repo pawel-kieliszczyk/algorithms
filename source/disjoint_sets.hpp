@@ -2,9 +2,6 @@
 #define PK_DISJOINTSETS_HPP
 
 
-#include "vector.hpp"
-
-
 namespace pk
 {
 
@@ -58,7 +55,7 @@ private:
         int rank;
     };
 
-    pk::vector<node, MAX_ELEM_ID + 1> nodes;
+    node nodes[MAX_ELEM_ID+1];
 };
 
 
