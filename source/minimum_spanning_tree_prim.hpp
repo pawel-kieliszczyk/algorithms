@@ -35,10 +35,10 @@ public:
     static void run(const graph_type& g, const int starting_vertex, callback_type& callback)
     {
         // TODO: replace the queue so that it contains vertices instead of edges.
-        //       This will increase time complexity to O(E * log(V))
-        //       and space complexity to O(V)
+        //       This will improve space complexity to O(V)
         typedef const typename graph_type::edge_type edge_type;
         typedef edge_type* edge_type_pointer;
+
         pk::priority_queue<
                 edge_type_pointer,
                 graph_type::max_num_of_edges,
