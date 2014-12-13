@@ -29,7 +29,7 @@ class minimum_spanning_tree_kruskal
 {
 public:
     template<class graph_type, class callback_type>
-    static void run(const graph_type& g, const int starting_vertex, callback_type& callback)
+    static void run(const graph_type& g, callback_type& callback)
     {
         typedef const typename graph_type::edge_type edge_type;
         typedef edge_type* edge_type_pointer;
