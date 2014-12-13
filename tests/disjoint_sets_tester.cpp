@@ -62,5 +62,19 @@ TEST_F(disjoint_sets_tester, tests_different_ids_of_two_sets)
 }
 
 
+TEST_F(disjoint_sets_tester, tests_unions_two_sets)
+{
+    // given
+    ds.make_set(elem_id_1);
+    ds.make_set(elem_id_2);
+
+    // when
+    ds.union_sets(elem_id_1, elem_id_2);
+
+    // then
+    EXPECT_EQ(ds.get_set_id(elem_id_1), ds.get_set_id(elem_id_2));
+}
+
+
 } // namespace testing
 } // namespace pk

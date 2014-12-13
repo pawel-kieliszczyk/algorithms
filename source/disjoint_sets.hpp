@@ -19,6 +19,8 @@ public:
 
     void make_set(const int elem_id) { nodes[elem_id] = elem_id; }
 
+    void union_sets(const int elem_id_1, const int elem_id_2) {}
+
     int get_set_id(const int elem_id) const { return nodes[elem_id]; }
 
 private:
