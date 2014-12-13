@@ -10,7 +10,7 @@ template<int MAX_ELEM_ID>
 class disjoint_sets
 {
 public:
-    disjoint_sets()
+    disjoint_sets() : nodes(new node[MAX_ELEM_ID+1])
     {
         for(int elem_id = 0; elem_id <= MAX_ELEM_ID; ++elem_id)
         {
@@ -18,6 +18,8 @@ public:
             nodes[elem_id].rank = 0;
         }
     }
+
+    ~disjoint_sets() { delete[] nodes; }
 
     void union_sets(const int elem_id_1, const int elem_id_2)
     {
@@ -55,7 +57,10 @@ private:
         int rank;
     };
 
-    node nodes[MAX_ELEM_ID+1];
+    disjoint_sets(const disjoint_sets&);
+    disjoint_sets& operator=(const disjoint_sets&);
+
+    node* nodes;
 };
 
 
