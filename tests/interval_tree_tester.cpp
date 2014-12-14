@@ -12,7 +12,7 @@ namespace testing
 {
 
 
-struct interval_tree_testing : public gt::Test
+struct interval_tree_tester : public gt::Test
 {
     static const int RANGE = 8;
 
@@ -21,14 +21,14 @@ struct interval_tree_testing : public gt::Test
 };
 
 
-TEST_F(interval_tree_testing, tests_empty_tree)
+TEST_F(interval_tree_tester, tests_empty_tree)
 {
     // when and then
     EXPECT_EQ(0, t.count(0, 7));
 }
 
 
-TEST_F(interval_tree_testing, tests_one_point_once_in_tree)
+TEST_F(interval_tree_tester, tests_one_point_once_in_tree)
 {
     // given
     const int x = 3;
@@ -44,7 +44,7 @@ TEST_F(interval_tree_testing, tests_one_point_once_in_tree)
 }
 
 
-TEST_F(interval_tree_testing, tests_one_point_twice_in_tree)
+TEST_F(interval_tree_tester, tests_one_point_twice_in_tree)
 {
     // given
     const int x = 3;
@@ -61,7 +61,7 @@ TEST_F(interval_tree_testing, tests_one_point_twice_in_tree)
 }
 
 
-TEST_F(interval_tree_testing, tests_two_points_once_in_tree)
+TEST_F(interval_tree_tester, tests_two_points_once_in_tree)
 {
     // given
     const int x1 = 3;
@@ -83,7 +83,7 @@ TEST_F(interval_tree_testing, tests_two_points_once_in_tree)
 }
 
 
-TEST_F(interval_tree_testing, tests_two_points_twice_in_tree)
+TEST_F(interval_tree_tester, tests_two_points_twice_in_tree)
 {
     // given
     const int x1 = 0;
