@@ -15,13 +15,13 @@ namespace testing
 struct disjoint_sets_tester : public gt::Test
 {
     static const int MAX_ID = 7;
-    typedef pk::disjoint_sets<MAX_ID> disjoint_sets_type;
 
     disjoint_sets_tester()
       : elem_id_1(0),
         elem_id_2(3),
         elem_id_3(5),
-        elem_id_4(6)
+        elem_id_4(6),
+        ds(MAX_ID)
     {
     }
 
@@ -31,7 +31,7 @@ struct disjoint_sets_tester : public gt::Test
     const int elem_id_4;
 
     // tested class:
-    disjoint_sets_type ds;
+    pk::disjoint_sets ds;
 };
 
 

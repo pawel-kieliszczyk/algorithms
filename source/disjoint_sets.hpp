@@ -6,13 +6,12 @@ namespace pk
 {
 
 
-template<int MAX_ELEM_ID>
 class disjoint_sets
 {
 public:
-    disjoint_sets() : nodes(new node[MAX_ELEM_ID+1])
+    disjoint_sets(const int max_elem_id) : nodes(new node[max_elem_id+1])
     {
-        for(int elem_id = 0; elem_id <= MAX_ELEM_ID; ++elem_id)
+        for(int elem_id = 0; elem_id <= max_elem_id; ++elem_id)
         {
             nodes[elem_id].up = elem_id;
             nodes[elem_id].rank = 0;

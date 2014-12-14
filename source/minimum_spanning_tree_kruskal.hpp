@@ -39,7 +39,7 @@ public:
                 graph_type::max_num_of_edges,
                 detail::edge_type_greater_comparator<edge_type> > q;
 
-        pk::disjoint_sets<graph_type::num_of_vertices - 1> sets;
+        pk::disjoint_sets sets(graph_type::num_of_vertices - 1);
 
         for(int vertex_id = 0; vertex_id < graph_type::num_of_vertices; ++vertex_id)
         {
