@@ -67,14 +67,15 @@ All containers have fixed but custom maximum capacity. No memory reallocations o
 
 Graph class has fixed but custom maximum amount of vertices and maximum vertex degree. No memory reallocations once it's constructed.
 
-| Member Function                       | Time Complexity | Space Complexity | Notes                 |
-|---------------------------------------|-----------------|------------------|-----------------------|
-| graph::add_directed_edge              | O(1)            | O(1)             |                       |
-| graph::add_not_directed_edge          | O(1)            | O(1)             |                       |
-| graph::get_adjacency_list             | O(1)            | O(1)             |                       |
-| graph::reset                          | O(V)            | O(1)             |                       |
-| graph::size                           | O(1)            | O(1)             |                       |
-| depth_first_search::run               | O(V + E)        | O(V + E)         | Non-recursive version |
-| breadth_first_search::run             | O(V + E)        | O(V)             | Non-recursive version |
-| minimum_spanning_tree_prim::run       | O(E * log(V))   | O(V + E)         | Will be improved soon |
-| shortest_paths_dijkstra::run          | O(E * log(V))   | O(V)             |                       |
+| Member Function                    | Time Complexity | Space Complexity | Notes                 |
+|------------------------------------|-----------------|------------------|-----------------------|
+| graph::add_directed_edge           | O(1)            | O(1)             |                       |
+| graph::add_not_directed_edge       | O(1)            | O(1)             |                       |
+| graph::get_adjacency_list          | O(1)            | O(1)             |                       |
+| graph::reset                       | O(V)            | O(1)             |                       |
+| graph::size                        | O(1)            | O(1)             |                       |
+| depth_first_search::run            | O(V + E)        | O(V + E)         | Non-recursive version |
+| breadth_first_search::run          | O(V + E)        | O(V)             | Non-recursive version |
+| minimum_spanning_tree_kruskal::run | O(E * log(V))   | O(V + E)         |                       |
+| minimum_spanning_tree_prim::run    | O(E * log(V))   | O(V + E)         | Will be improved soon |
+| shortest_paths_dijkstra::run       | O(E * log(V))   | O(V)             |                       |
