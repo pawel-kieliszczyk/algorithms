@@ -15,7 +15,7 @@ template<int RANGE>
 class interval_tree
 {
 public:
-    interval_tree()
+    interval_tree() : counters(new int[COUNTERS_SIZE])
     {
         std::fill(counters, counters + COUNTERS_SIZE, 0);
     }
@@ -61,7 +61,10 @@ private:
     static const int COUNTERS_SIZE = meta::interval_tree_size<RANGE-1>::value;
     static const int M = COUNTERS_SIZE / 2;
 
-    int counters[COUNTERS_SIZE];
+    interval_tree(const interval_tree&);
+    interval_tree& operator=(const interval_tree&);
+
+    int* counters;
 };
 
 

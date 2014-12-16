@@ -42,6 +42,8 @@ public:
     typedef detail::entry_type entry_type;
     typedef detail::range_type range_type;
 
+    interval_tree_2d() : next_dim_tree(new pk::interval_tree<RANGE_2>[THIS_DIM_SIZE]) {}
+
     void insert(const entry_type& e)
     {
         int v = M + e.x1;
@@ -83,7 +85,10 @@ private:
     static const int THIS_DIM_SIZE = meta::interval_tree_size<RANGE_1 - 1>::value;
     static const int M = THIS_DIM_SIZE / 2;
 
-    pk::interval_tree<RANGE_2> next_dim_tree[THIS_DIM_SIZE];
+    interval_tree_2d(const interval_tree_2d&);
+    interval_tree_2d& operator=(const interval_tree_2d&);
+
+    pk::interval_tree<RANGE_2>* next_dim_tree;
 };
 
 
