@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "interval_tree.hpp"
+#include "interval_tree_dim.hpp"
 
 
 namespace gt = testing;
@@ -16,93 +16,106 @@ struct interval_tree_tester : public gt::Test
 {
     static const int RANGE = 8;
 
+    typedef pk::interval_tree_dim<int, RANGE> interval_tree_type;
+    typedef interval_tree_type::entry_type entry_type;
+    typedef interval_tree_type::range_type range_type;
+    typedef interval_tree_type::subrange_type subrange_type;
+
     // tested class:
-    pk::interval_tree<int, RANGE> t; // accepts values from [0, RANGE-1]
+    interval_tree_type t; // accepts values from [0, RANGE-1]
 };
 
 
 TEST_F(interval_tree_tester, tests_empty_tree)
 {
     // when and then
-    EXPECT_EQ(0, t.count(0, 7));
+    range_type range = build_interval_tree_range(subrange_type(0, 7));
+    EXPECT_EQ(0, t.count(range));
 }
 
 
 TEST_F(interval_tree_tester, tests_one_point_once_in_tree)
 {
     // given
-    const int x = 3;
+    const entry_type entry = build_interval_tree_entry(3);
     const int value = 1;
 
     // when
-    t.insert(x, value);
+    t.insert(entry, value);
 
     // then
-    EXPECT_EQ(1, t.count(0, 7));
-    EXPECT_EQ(0, t.count(0, 2));
-    EXPECT_EQ(1, t.count(3, 3));
-    EXPECT_EQ(0, t.count(4, 7));
+    EXPECT_EQ(1, t.count(build_interval_tree_range(subrange_type(0, 7))));
+
+    EXPECT_EQ(0, t.count(build_interval_tree_range(subrange_type(0, 2))));
+    EXPECT_EQ(0, t.count(build_interval_tree_range(subrange_type(4, 7))));
+
+    EXPECT_EQ(1, t.count(build_interval_tree_range(subrange_type(3, 3))));
 }
 
 
 TEST_F(interval_tree_tester, tests_one_point_twice_in_tree)
 {
     // given
-    const int x = 3;
+    const entry_type entry = build_interval_tree_entry(3);
     const int value = 1;
 
     // when
-    t.insert(x, value);
-    t.insert(x, value);
+    t.insert(entry, value);
+    t.insert(entry, value);
 
     // then
-    EXPECT_EQ(2, t.count(0, 7));
-    EXPECT_EQ(0, t.count(0, 2));
-    EXPECT_EQ(2, t.count(3, 3));
-    EXPECT_EQ(0, t.count(4, 7));
+    EXPECT_EQ(2, t.count(build_interval_tree_range(subrange_type(0, 7))));
+
+    EXPECT_EQ(0, t.count(build_interval_tree_range(subrange_type(0, 2))));
+    EXPECT_EQ(0, t.count(build_interval_tree_range(subrange_type(4, 7))));
+
+    EXPECT_EQ(2, t.count(build_interval_tree_range(subrange_type(3, 3))));
 }
 
 
 TEST_F(interval_tree_tester, tests_two_points_once_in_tree)
 {
     // given
-    const int x1 = 3;
-    const int x2 = 5;
+    const entry_type entry1 = build_interval_tree_entry(3);
+    const entry_type entry2 = build_interval_tree_entry(5);
     const int value = 1;
 
     // when
-    t.insert(x1, value);
-    t.insert(x2, value);
+    t.insert(entry1, value);
+    t.insert(entry2, value);
 
     // then
-    EXPECT_EQ(2, t.count(0, 7));
-    EXPECT_EQ(0, t.count(0, 2));
-    EXPECT_EQ(1, t.count(3, 3));
-    EXPECT_EQ(0, t.count(4, 4));
-    EXPECT_EQ(1, t.count(5, 5));
-    EXPECT_EQ(0, t.count(6, 7));
+    EXPECT_EQ(2, t.count(build_interval_tree_range(subrange_type(0, 7))));
 
-    EXPECT_EQ(2, t.count(3, 5));
+    EXPECT_EQ(0, t.count(build_interval_tree_range(subrange_type(0, 2))));
+    EXPECT_EQ(0, t.count(build_interval_tree_range(subrange_type(4, 4))));
+    EXPECT_EQ(0, t.count(build_interval_tree_range(subrange_type(6, 7))));
+
+    EXPECT_EQ(1, t.count(build_interval_tree_range(subrange_type(3, 3))));
+    EXPECT_EQ(1, t.count(build_interval_tree_range(subrange_type(5, 5))));
 }
 
 
 TEST_F(interval_tree_tester, tests_two_points_twice_in_tree)
 {
     // given
-    const int x1 = 0;
-    const int x2 = 7;
+    const entry_type entry1 = build_interval_tree_entry(3);
+    const entry_type entry2 = build_interval_tree_entry(5);
     const int value = 2;
 
     // when
-    t.insert(x1, value);
-
-    t.insert(x2, value);
+    t.insert(entry1, value);
+    t.insert(entry2, value);
 
     // then
-    EXPECT_EQ(4, t.count(0, 7));
-    EXPECT_EQ(2, t.count(0, 0));
-    EXPECT_EQ(0, t.count(1, 6));
-    EXPECT_EQ(2, t.count(7, 7));
+    EXPECT_EQ(4, t.count(build_interval_tree_range(subrange_type(0, 7))));
+
+    EXPECT_EQ(0, t.count(build_interval_tree_range(subrange_type(0, 2))));
+    EXPECT_EQ(0, t.count(build_interval_tree_range(subrange_type(4, 4))));
+    EXPECT_EQ(0, t.count(build_interval_tree_range(subrange_type(6, 7))));
+
+    EXPECT_EQ(2, t.count(build_interval_tree_range(subrange_type(3, 3))));
+    EXPECT_EQ(2, t.count(build_interval_tree_range(subrange_type(5, 5))));
 }
 
 
@@ -113,18 +126,13 @@ TEST_F(interval_tree_tester, tests_all_points_once_in_tree)
 
     // when
     for(int x = 0; x <= 7; ++x)
-        t.insert(x, value);
+        t.insert(build_interval_tree_entry(x), value);
 
     // then
-    EXPECT_EQ(8, t.count(0, 7));
-    EXPECT_EQ(1, t.count(0, 0));
-    EXPECT_EQ(1, t.count(1, 1));
-    EXPECT_EQ(1, t.count(2, 2));
-    EXPECT_EQ(1, t.count(3, 3));
-    EXPECT_EQ(1, t.count(4, 4));
-    EXPECT_EQ(1, t.count(5, 5));
-    EXPECT_EQ(1, t.count(6, 6));
-    EXPECT_EQ(1, t.count(7, 7));
+    EXPECT_EQ(8, t.count(build_interval_tree_range(subrange_type(0, 7))));
+
+    for(int x = 0; x <= 7; ++x)
+        EXPECT_EQ(1, t.count(build_interval_tree_range(subrange_type(x, x))));
 }
 
 

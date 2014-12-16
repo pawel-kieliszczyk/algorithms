@@ -52,7 +52,7 @@ TEST_F(interval_tree_2d_tester, tests_one_point_once_in_tree)
 
     EXPECT_EQ(0, t.count(build_interval_tree_range(subrange_type(0, 7), subrange_type(0, 1))));
     EXPECT_EQ(0, t.count(build_interval_tree_range(subrange_type(0, 7), subrange_type(3, 5))));
-    
+
     EXPECT_EQ(1, t.count(build_interval_tree_range(subrange_type(3, 3), subrange_type(2, 2))));
 }
 

@@ -15,7 +15,7 @@ namespace detail
 
 template<int RANGE_1, int RANGE_2, int RANGE_3> struct interval_tree_dim_counter                      { static const int value = 3; };
 template<int RANGE_1, int RANGE_2>              struct interval_tree_dim_counter<RANGE_1, RANGE_2, 0> { static const int value = 2; };
-//template<int RANGE_1>                           struct interval_tree_dim_counter<RANGE_1, 0, 0>       { static const int value = 1; }
+template<int RANGE_1>                           struct interval_tree_dim_counter<RANGE_1, 0, 0>       { static const int value = 1; };
 
 
 template<int DIM>
@@ -104,6 +104,7 @@ template<class INSERT_VALUE_TYPE, int RANGE_1>
 class interval_tree_dim<INSERT_VALUE_TYPE, RANGE_1, 0, 0>
 {
 public:
+    typedef detail::subrange_type subrange_type;
     typedef INSERT_VALUE_TYPE value_type;
 
     interval_tree_dim() : values(new value_type[VALUES_SIZE])
@@ -167,7 +168,7 @@ private:
 } // namespace detail
 
 
-template<class INSERT_VALUE_TYPE, int RANGE_1, int RANGE_2, int RANGE_3 = 0>
+template<class INSERT_VALUE_TYPE, int RANGE_1, int RANGE_2 = 0, int RANGE_3 = 0>
 class interval_tree_dim
 {
 private:
@@ -194,6 +195,15 @@ private:
 };
 
 
+inline detail::entry_type<1> build_interval_tree_entry(const int e0)
+{
+    detail::entry_type<1> entry;
+    entry.x[0] = e0;
+
+    return entry;
+}
+
+
 inline detail::entry_type<2> build_interval_tree_entry(const int e0, const int e1)
 {
     detail::entry_type<2> entry;
@@ -212,6 +222,16 @@ inline detail::entry_type<3> build_interval_tree_entry(const int e0, const int e
     entry.x[2] = e2;
 
     return entry;
+}
+
+
+inline detail::range_type<1> build_interval_tree_range(
+        const detail::subrange_type& s0)
+{
+    detail::range_type<1> range;
+    range.subrange[0] = s0;
+
+    return range;
 }
 
 
