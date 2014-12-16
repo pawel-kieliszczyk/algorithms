@@ -3,6 +3,7 @@
 
 
 #include "interval_tree.hpp"
+#include "interval_tree_size.hpp"
 
 
 namespace pk
@@ -79,7 +80,7 @@ public:
     }
 
 private:
-    static const int THIS_DIM_SIZE = detail::counters_size<RANGE_1 - 1>::value;
+    static const int THIS_DIM_SIZE = meta::interval_tree_size<RANGE_1 - 1>::value;
     static const int M = THIS_DIM_SIZE / 2;
 
     pk::interval_tree<RANGE_2> next_dim_tree[THIS_DIM_SIZE];

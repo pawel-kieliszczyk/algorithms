@@ -4,28 +4,11 @@
 
 #include <algorithm>
 
+#include "interval_tree_size.hpp"
+
 
 namespace pk
 {
-namespace detail
-{
-
-
-template<int N>
-struct counters_size
-{
-    static const int value = 2 * counters_size<N / 2>::value;
-};
-
-
-template<>
-struct counters_size<0>
-{
-    static const int value = 2;
-};
-
-
-} // namespace detail
 
 
 template<int RANGE>
@@ -75,7 +58,7 @@ public:
     }
 
 private:
-    static const int COUNTERS_SIZE = detail::counters_size<RANGE-1>::value;
+    static const int COUNTERS_SIZE = meta::interval_tree_size<RANGE-1>::value;
     static const int M = COUNTERS_SIZE / 2;
 
     int counters[COUNTERS_SIZE];
