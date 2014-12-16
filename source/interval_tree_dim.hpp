@@ -13,6 +13,11 @@ namespace detail
 {
 
 
+template<int RANGE_1, int RANGE_2, int RANGE_3> struct interval_tree_dim_counter                      { static const int value = 3; };
+template<int RANGE_1, int RANGE_2>              struct interval_tree_dim_counter<RANGE_1, RANGE_2, 0> { static const int value = 2; };
+//template<int RANGE_1>                           struct interval_tree_dim_counter<RANGE_1, 0, 0>       { static const int value = 1; }
+
+
 template<int DIM>
 struct entry_type
 {
@@ -162,15 +167,15 @@ private:
 } // namespace detail
 
 
-template<class INSERT_VALUE_TYPE, int RANGE_1, int RANGE_2, int RANGE_3>
+template<class INSERT_VALUE_TYPE, int RANGE_1, int RANGE_2, int RANGE_3 = 0>
 class interval_tree_dim
 {
 private:
     typedef detail::interval_tree_dim<INSERT_VALUE_TYPE, RANGE_1, RANGE_2, RANGE_3> interval_tree_impl_type;
 
 public:
-    typedef detail::entry_type<3> entry_type;
-    typedef detail::range_type<3> range_type;
+    typedef detail::entry_type<detail::interval_tree_dim_counter<RANGE_1, RANGE_2, RANGE_3>::value> entry_type;
+    typedef detail::range_type<detail::interval_tree_dim_counter<RANGE_1, RANGE_2, RANGE_3>::value> range_type;
     typedef typename interval_tree_impl_type::subrange_type subrange_type;
     typedef typename interval_tree_impl_type::value_type value_type;
 
@@ -189,6 +194,16 @@ private:
 };
 
 
+inline detail::entry_type<2> build_interval_tree_entry(const int e0, const int e1)
+{
+    detail::entry_type<2> entry;
+    entry.x[0] = e0;
+    entry.x[1] = e1;
+
+    return entry;
+}
+
+
 inline detail::entry_type<3> build_interval_tree_entry(const int e0, const int e1, const int e2)
 {
     detail::entry_type<3> entry;
@@ -197,6 +212,18 @@ inline detail::entry_type<3> build_interval_tree_entry(const int e0, const int e
     entry.x[2] = e2;
 
     return entry;
+}
+
+
+inline detail::range_type<2> build_interval_tree_range(
+        const detail::subrange_type& s0,
+        const detail::subrange_type& s1)
+{
+    detail::range_type<2> range;
+    range.subrange[0] = s0;
+    range.subrange[1] = s1;
+
+    return range;
 }
 
 
