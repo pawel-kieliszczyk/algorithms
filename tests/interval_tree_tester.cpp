@@ -104,5 +104,24 @@ TEST_F(interval_tree_tester, tests_two_points_twice_in_tree)
 }
 
 
+TEST_F(interval_tree_tester, tests_all_points_once_in_tree)
+{
+    // when
+    for(int x = 0; x <= 7; ++x)
+        t.insert(x);
+
+    // then
+    EXPECT_EQ(8, t.count(0, 7));
+    EXPECT_EQ(1, t.count(0, 0));
+    EXPECT_EQ(1, t.count(1, 1));
+    EXPECT_EQ(1, t.count(2, 2));
+    EXPECT_EQ(1, t.count(3, 3));
+    EXPECT_EQ(1, t.count(4, 4));
+    EXPECT_EQ(1, t.count(5, 5));
+    EXPECT_EQ(1, t.count(6, 6));
+    EXPECT_EQ(1, t.count(7, 7));
+}
+
+
 } // namespace testing
 } // namespace pk
