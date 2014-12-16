@@ -17,7 +17,7 @@ struct interval_tree_tester : public gt::Test
     static const int RANGE = 8;
 
     // tested class:
-    pk::interval_tree<RANGE> t; // accepts values from [0, RANGE-1]
+    pk::interval_tree<int, RANGE> t; // accepts values from [0, RANGE-1]
 };
 
 
@@ -32,9 +32,10 @@ TEST_F(interval_tree_tester, tests_one_point_once_in_tree)
 {
     // given
     const int x = 3;
+    const int value = 1;
 
     // when
-    t.insert(x);
+    t.insert(x, value);
 
     // then
     EXPECT_EQ(1, t.count(0, 7));
@@ -48,10 +49,11 @@ TEST_F(interval_tree_tester, tests_one_point_twice_in_tree)
 {
     // given
     const int x = 3;
+    const int value = 1;
 
     // when
-    t.insert(x);
-    t.insert(x);
+    t.insert(x, value);
+    t.insert(x, value);
 
     // then
     EXPECT_EQ(2, t.count(0, 7));
@@ -66,10 +68,11 @@ TEST_F(interval_tree_tester, tests_two_points_once_in_tree)
     // given
     const int x1 = 3;
     const int x2 = 5;
+    const int value = 1;
 
     // when
-    t.insert(x1);
-    t.insert(x2);
+    t.insert(x1, value);
+    t.insert(x2, value);
 
     // then
     EXPECT_EQ(2, t.count(0, 7));
@@ -88,13 +91,12 @@ TEST_F(interval_tree_tester, tests_two_points_twice_in_tree)
     // given
     const int x1 = 0;
     const int x2 = 7;
+    const int value = 2;
 
     // when
-    t.insert(x1);
-    t.insert(x1);
+    t.insert(x1, value);
 
-    t.insert(x2);
-    t.insert(x2);
+    t.insert(x2, value);
 
     // then
     EXPECT_EQ(4, t.count(0, 7));
@@ -106,9 +108,12 @@ TEST_F(interval_tree_tester, tests_two_points_twice_in_tree)
 
 TEST_F(interval_tree_tester, tests_all_points_once_in_tree)
 {
+    // given
+    const int value = 1;
+
     // when
     for(int x = 0; x <= 7; ++x)
-        t.insert(x);
+        t.insert(x, value);
 
     // then
     EXPECT_EQ(8, t.count(0, 7));

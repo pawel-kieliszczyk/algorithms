@@ -35,25 +35,26 @@ struct entry_type
 } // namespace detail
 
 
-template<int RANGE_1, int RANGE_2>
+template<class INSERT_VALUE_TYPE, int RANGE_1, int RANGE_2>
 class interval_tree_2d
 {
 public:
     typedef detail::entry_type entry_type;
     typedef detail::range_type range_type;
+    typedef INSERT_VALUE_TYPE value_type;
 
-    interval_tree_2d() : next_dim_tree(new pk::interval_tree<RANGE_2>[THIS_DIM_SIZE]) {}
+    interval_tree_2d() : next_dim_tree(new pk::interval_tree<value_type, RANGE_2>[THIS_DIM_SIZE]) {}
     ~interval_tree_2d() { delete[] next_dim_tree; }
 
-    void insert(const entry_type& e)
+    void insert(const entry_type& e, const value_type& value)
     {
         int v = M + e.x1;
-        next_dim_tree[v].insert(e.x2);
+        next_dim_tree[v].insert(e.x2, value);
 
         while(v != 1)
         {
             v /= 2;
-            next_dim_tree[v].insert(e.x2);
+            next_dim_tree[v].insert(e.x2, value);
         }
     }
 
@@ -89,7 +90,7 @@ private:
     interval_tree_2d(const interval_tree_2d&);
     interval_tree_2d& operator=(const interval_tree_2d&);
 
-    pk::interval_tree<RANGE_2>* next_dim_tree;
+    pk::interval_tree<int, RANGE_2>* next_dim_tree;
 };
 
 

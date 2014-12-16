@@ -17,7 +17,7 @@ struct interval_tree_2d_tester : public gt::Test
     static const int RANGE_1 = 8;
     static const int RANGE_2 = 6;
 
-    typedef pk::interval_tree_2d<RANGE_1, RANGE_2> interval_tree_type;
+    typedef pk::interval_tree_2d<int, RANGE_1, RANGE_2> interval_tree_type;
     typedef interval_tree_type::entry_type entry_type;
     typedef interval_tree_type::range_type range_type;
 
@@ -37,9 +37,10 @@ TEST_F(interval_tree_2d_tester, tests_one_point_once_in_tree)
 {
     // given
     const entry_type e(3, 2);
+    const int value = 1;
 
     // when
-    t.insert(e);
+    t.insert(e, value);
 
     // then
     EXPECT_EQ(1, t.count(range_type(0, 7), range_type(0, 5)));
@@ -58,10 +59,11 @@ TEST_F(interval_tree_2d_tester, tests_one_point_twice_in_tree)
 {
     // given
     const entry_type e(3, 2);
+    const int value = 1;
 
     // when
-    t.insert(e);
-    t.insert(e);
+    t.insert(e, value);
+    t.insert(e, value);
 
     // then
     EXPECT_EQ(2, t.count(range_type(0, 7), range_type(0, 5)));
@@ -81,10 +83,11 @@ TEST_F(interval_tree_2d_tester, tests_two_points_once_in_tree)
     // given
     const entry_type e1(3, 2);
     const entry_type e2(5, 4);
+    const int value = 1;
 
     // when
-    t.insert(e1);
-    t.insert(e2);
+    t.insert(e1, value);
+    t.insert(e2, value);
 
     // then
     EXPECT_EQ(2, t.count(range_type(0, 7), range_type(0, 5)));
@@ -107,13 +110,11 @@ TEST_F(interval_tree_2d_tester, tests_two_points_twice_in_tree)
     // given
     const entry_type e1(0, 0);
     const entry_type e2(7, 5);
+    const int value = 2;
 
     // when
-    t.insert(e1);
-    t.insert(e1);
-
-    t.insert(e2);
-    t.insert(e2);
+    t.insert(e1, value);
+    t.insert(e2, value);
 
     // then
     EXPECT_EQ(4, t.count(range_type(0, 7), range_type(0, 5)));
@@ -128,10 +129,13 @@ TEST_F(interval_tree_2d_tester, tests_two_points_twice_in_tree)
 
 TEST_F(interval_tree_2d_tester, tests_all_points_once_in_tree)
 {
+    // given
+    const int value = 1;
+
     // when
     for(int x = 0; x <= 7; ++x)
         for(int y = 0; y <= 5; ++y)
-            t.insert(entry_type(x, y));
+            t.insert(entry_type(x, y), value);
 
     // then
     EXPECT_EQ(48, t.count(range_type(0, 7), range_type(0, 5)));

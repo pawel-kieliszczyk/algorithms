@@ -11,29 +11,31 @@ namespace pk
 {
 
 
-template<int RANGE>
+template<class INSERT_VALUE_TYPE, int RANGE>
 class interval_tree
 {
 public:
-    interval_tree() : counters(new int[COUNTERS_SIZE])
+    typedef INSERT_VALUE_TYPE value_type;
+
+    interval_tree() : values(new value_type[VALUES_SIZE])
     {
-        std::fill(counters, counters + COUNTERS_SIZE, 0);
+        std::fill(values, values + VALUES_SIZE, value_type());
     }
 
     ~interval_tree()
     {
-        delete[] counters;
+        delete[] values;
     }
 
-    void insert(const int x)
+    void insert(const int x, const value_type& value)
     {
         int v = M + x;
-        ++counters[v];
+        values[v] += value;
 
         while(v != 1)
         {
             v /= 2;
-            counters[v] = counters[2*v] + counters[2*v+1];
+            values[v] = values[2*v] + values[2*v+1];
         }
     }
 
@@ -42,18 +44,18 @@ public:
         int va = M + a;
         int vb = M + b;
 
-        int result = counters[va];
+        int result = values[va];
 
         if(va != vb)
-            result += counters[vb];
+            result += values[vb];
 
         while((va / 2) != (vb / 2))
         {
             if(va % 2 == 0)
-                result += counters[va+1];
+                result += values[va+1];
 
             if (vb % 2 == 1)
-                result += counters[vb-1];
+                result += values[vb-1];
 
             va /= 2;
             vb /= 2;
@@ -63,13 +65,13 @@ public:
     }
 
 private:
-    static const int COUNTERS_SIZE = meta::interval_tree_size<RANGE-1>::value;
-    static const int M = COUNTERS_SIZE / 2;
+    static const int VALUES_SIZE = meta::interval_tree_size<RANGE-1>::value;
+    static const int M = VALUES_SIZE / 2;
 
     interval_tree(const interval_tree&);
     interval_tree& operator=(const interval_tree&);
 
-    int* counters;
+    value_type* values;
 };
 
 
