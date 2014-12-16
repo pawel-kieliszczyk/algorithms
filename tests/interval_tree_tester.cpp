@@ -17,7 +17,7 @@ struct interval_tree_tester : public gt::Test
     static const int RANGE = 8;
 
     // tested class:
-    pk::interval_tree<RANGE> t; // accepts points from [0, RANGE-1]
+    pk::interval_tree<RANGE> t; // accepts values from [0, RANGE-1]
 };
 
 
