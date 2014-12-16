@@ -20,6 +20,11 @@ public:
         std::fill(counters, counters + COUNTERS_SIZE, 0);
     }
 
+    ~interval_tree()
+    {
+        delete[] counters;
+    }
+
     void insert(const int x)
     {
         int v = M + x;

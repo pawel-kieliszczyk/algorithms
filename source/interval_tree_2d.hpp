@@ -43,6 +43,7 @@ public:
     typedef detail::range_type range_type;
 
     interval_tree_2d() : next_dim_tree(new pk::interval_tree<RANGE_2>[THIS_DIM_SIZE]) {}
+    ~interval_tree_2d() { delete[] next_dim_tree; }
 
     void insert(const entry_type& e)
     {
