@@ -61,8 +61,8 @@ All containers have fixed but custom maximum capacity. No memory reallocations o
 | cyclic_array::shift_right | O(1)            | O(1)             |                                                  |
 | disjoint_sets::union_sets | O(m * a(m,n)    | O(1)             | m - number of operations, a - Ackermann function |
 | disjoint_sets::get_set_id | O(m * a(m,n)    | O(1)             | m - number of operations, a - Ackermann function |
-| interval_tree_dim::insert | O(log(n))       | O(1)             |                                                  |
-| interval_tree_dim::count  | O(log(n))       | O(1)             |                                                  |
+| interval_tree::insert     | O(log(n))       | O(1)             |                                                  |
+| interval_tree::count      | O(log(n))       | O(1)             |                                                  |
 
 
 ###Graphs
