@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "interval_tree_dim.hpp"
+#include "interval_tree.hpp"
 
 
 namespace gt = testing;
@@ -19,7 +19,7 @@ struct interval_tree_4d_tester : public gt::Test
     static const int RANGE_3 = 10;
     static const int RANGE_4 = 3;
 
-    typedef pk::interval_tree_dim<int, RANGE_1, RANGE_2, RANGE_3, RANGE_4> interval_tree_type;
+    typedef pk::interval_tree<int, RANGE_1, RANGE_2, RANGE_3, RANGE_4> interval_tree_type;
     typedef interval_tree_type::entry_type entry_type;
     typedef interval_tree_type::range_type range_type;
     typedef interval_tree_type::subrange_type subrange_type;

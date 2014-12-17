@@ -14,13 +14,13 @@ namespace detail
 
 
 template<int RANGE_1, int RANGE_2, int RANGE_3, int RANGE_4>
-struct interval_tree_dim_counter
+struct interval_tree_dimension_calculator
 {
-    static const int value = interval_tree_dim_counter<RANGE_2, RANGE_3, RANGE_4, 0>::value + 1;
+    static const int value = interval_tree_dimension_calculator<RANGE_2, RANGE_3, RANGE_4, 0>::value + 1;
 };
 
 template<int RANGE_1>
-struct interval_tree_dim_counter<RANGE_1, 0, 0, 0>
+struct interval_tree_dimension_calculator<RANGE_1, 0, 0, 0>
 {
     static const int value = 1;
 };
@@ -51,14 +51,14 @@ struct range_type
 
 
 template<class INSERT_VALUE_TYPE, int RANGE_1, int RANGE_2, int RANGE_3, int RANGE_4>
-class interval_tree_dim
+class interval_tree
 {
 public:
     typedef detail::subrange_type subrange_type;
     typedef INSERT_VALUE_TYPE value_type;
 
-    interval_tree_dim() : next_dim_trees(new interval_tree_dim<value_type, RANGE_2, RANGE_3, RANGE_4, 0>[THIS_DIM_SIZE]) {}
-    ~interval_tree_dim() { delete[] next_dim_trees; }
+    interval_tree() : next_dim_trees(new interval_tree<value_type, RANGE_2, RANGE_3, RANGE_4, 0>[THIS_DIM_SIZE]) {}
+    ~interval_tree() { delete[] next_dim_trees; }
 
     void insert(const int* x, const value_type& value)
     {
@@ -101,26 +101,26 @@ private:
     static const int THIS_DIM_SIZE = meta::interval_tree_size<RANGE_1 - 1>::value;
     static const int M = THIS_DIM_SIZE / 2;
 
-    interval_tree_dim(const interval_tree_dim&);
-    interval_tree_dim& operator=(const interval_tree_dim&);
+    interval_tree(const interval_tree&);
+    interval_tree& operator=(const interval_tree&);
 
-    interval_tree_dim<int, RANGE_2, RANGE_3, RANGE_4, 0>* next_dim_trees;
+    interval_tree<int, RANGE_2, RANGE_3, RANGE_4, 0>* next_dim_trees;
 };
 
 
 template<class INSERT_VALUE_TYPE, int RANGE_1>
-class interval_tree_dim<INSERT_VALUE_TYPE, RANGE_1, 0, 0, 0>
+class interval_tree<INSERT_VALUE_TYPE, RANGE_1, 0, 0, 0>
 {
 public:
     typedef detail::subrange_type subrange_type;
     typedef INSERT_VALUE_TYPE value_type;
 
-    interval_tree_dim() : values(new value_type[VALUES_SIZE])
+    interval_tree() : values(new value_type[VALUES_SIZE])
     {
         std::fill(values, values + VALUES_SIZE, value_type());
     }
 
-    ~interval_tree_dim()
+    ~interval_tree()
     {
         delete[] values;
     }
@@ -166,8 +166,8 @@ private:
     static const int VALUES_SIZE = meta::interval_tree_size<RANGE_1 - 1>::value;
     static const int M = VALUES_SIZE / 2;
 
-    interval_tree_dim(const interval_tree_dim&);
-    interval_tree_dim& operator=(const interval_tree_dim&);
+    interval_tree(const interval_tree&);
+    interval_tree& operator=(const interval_tree&);
 
     value_type* values;
 };
@@ -177,14 +177,14 @@ private:
 
 
 template<class INSERT_VALUE_TYPE, int RANGE_1, int RANGE_2 = 0, int RANGE_3 = 0, int RANGE_4 = 0>
-class interval_tree_dim
+class interval_tree
 {
 private:
-    typedef detail::interval_tree_dim<INSERT_VALUE_TYPE, RANGE_1, RANGE_2, RANGE_3, RANGE_4> interval_tree_impl_type;
+    typedef detail::interval_tree<INSERT_VALUE_TYPE, RANGE_1, RANGE_2, RANGE_3, RANGE_4> interval_tree_impl_type;
 
 public:
-    typedef detail::entry_type<detail::interval_tree_dim_counter<RANGE_1, RANGE_2, RANGE_3, RANGE_4>::value> entry_type;
-    typedef detail::range_type<detail::interval_tree_dim_counter<RANGE_1, RANGE_2, RANGE_3, RANGE_4>::value> range_type;
+    typedef detail::entry_type<detail::interval_tree_dimension_calculator<RANGE_1, RANGE_2, RANGE_3, RANGE_4>::value> entry_type;
+    typedef detail::range_type<detail::interval_tree_dimension_calculator<RANGE_1, RANGE_2, RANGE_3, RANGE_4>::value> range_type;
     typedef typename interval_tree_impl_type::subrange_type subrange_type;
     typedef typename interval_tree_impl_type::value_type value_type;
 
