@@ -8,21 +8,6 @@
 
 namespace pk
 {
-namespace detail
-{
-
-
-template<class edge_type>
-struct edge_type_greater_comparator
-{
-    bool operator()(const edge_type* left, const edge_type* right)
-    {
-        return (left->weight > right->weight);
-    }
-};
-
-
-} // namespace detail
 
 
 class minimum_spanning_tree_kruskal
@@ -37,7 +22,7 @@ public:
         pk::priority_queue<
                 edge_type_pointer,
                 graph_type::max_num_of_edges,
-                detail::edge_type_greater_comparator<edge_type> > q;
+                edge_type_greater_comparator<edge_type> > q;
 
         pk::disjoint_sets sets(graph_type::num_of_vertices - 1);
 
@@ -63,6 +48,16 @@ public:
             sets.union_sets(e->from, e->to);
         }
     }
+
+private:
+    template<class edge_type>
+    struct edge_type_greater_comparator
+    {
+        bool operator()(const edge_type* left, const edge_type* right)
+        {
+            return (left->weight > right->weight);
+        }
+    };
 };
 
 

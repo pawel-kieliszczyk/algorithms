@@ -23,7 +23,7 @@ C++ library of algorithms and data structures focused on high performance. Might
 The library focuses on high performance both minimizing computational complexity of all algorithms and maximizing possibility of efficient CPU caching.
 
 
-###Containers
+###Data structures
 
 All containers have fixed but custom maximum capacity. No memory reallocations once they are constructed.
 
@@ -61,6 +61,8 @@ All containers have fixed but custom maximum capacity. No memory reallocations o
 | cyclic_array::shift_right | O(1)            | O(1)             |                                                  |
 | disjoint_sets::union_sets | O(m * a(m,n)    | O(1)             | m - number of operations, a - Ackermann function |
 | disjoint_sets::get_set_id | O(m * a(m,n)    | O(1)             | m - number of operations, a - Ackermann function |
+| interval_tree::insert     | O(log(n))       | O(1)             |                                                  |
+| interval_tree::count      | O(log(n))       | O(1)             |                                                  |
 
 
 ###Graphs
