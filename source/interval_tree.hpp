@@ -84,12 +84,12 @@ public:
         }
     }
 
-    int count(const subrange_type* subrange)
+    value_type count(const subrange_type* subrange)
     {
         int va = M + subrange->from;
         int vb = M + subrange->to;
 
-        int result = next_dim_trees[va].count(subrange + 1);
+        value_type result = next_dim_trees[va].count(subrange + 1);
 
         if(va != vb)
             result += next_dim_trees[vb].count(subrange + 1);
@@ -116,7 +116,7 @@ private:
     interval_tree(const interval_tree&);
     interval_tree& operator=(const interval_tree&);
 
-    interval_tree<int, RANGE_2, RANGE_3, RANGE_4, 0>* next_dim_trees;
+    interval_tree<value_type, RANGE_2, RANGE_3, RANGE_4, 0>* next_dim_trees;
 };
 
 
@@ -149,12 +149,12 @@ public:
         }
     }
 
-    int count(const subrange_type* subrange)
+    value_type count(const subrange_type* subrange)
     {
         int va = M + subrange->from;
         int vb = M + subrange->to;
 
-        int result = values[va];
+        value_type result = values[va];
 
         if(va != vb)
             result += values[vb];
@@ -205,7 +205,7 @@ public:
         interval_tree_impl.insert(e.x, value);
     }
 
-    int count(const range_type& range)
+    value_type count(const range_type& range)
     {
         return interval_tree_impl.count(range.subrange);
     }
