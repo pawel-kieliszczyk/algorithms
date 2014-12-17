@@ -4,8 +4,6 @@
 
 #include <algorithm>
 
-#include "interval_tree_size.hpp"
-
 
 namespace pk
 {
@@ -23,6 +21,20 @@ template<int RANGE_1>
 struct interval_tree_dimension_calculator<RANGE_1, 0, 0, 0>
 {
     static const int value = 1;
+};
+
+
+template<int N>
+struct interval_tree_size
+{
+    static const int value = 2 * interval_tree_size<N / 2>::value;
+};
+
+
+template<>
+struct interval_tree_size<0>
+{
+    static const int value = 2;
 };
 
 
@@ -98,7 +110,7 @@ public:
     }
 
 private:
-    static const int THIS_DIM_SIZE = meta::interval_tree_size<RANGE_1 - 1>::value;
+    static const int THIS_DIM_SIZE = interval_tree_size<RANGE_1 - 1>::value;
     static const int M = THIS_DIM_SIZE / 2;
 
     interval_tree(const interval_tree&);
@@ -163,7 +175,7 @@ public:
     }
 
 private:
-    static const int VALUES_SIZE = meta::interval_tree_size<RANGE_1 - 1>::value;
+    static const int VALUES_SIZE = interval_tree_size<RANGE_1 - 1>::value;
     static const int M = VALUES_SIZE / 2;
 
     interval_tree(const interval_tree&);
