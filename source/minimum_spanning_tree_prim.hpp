@@ -11,21 +11,6 @@
 
 namespace pk
 {
-namespace detail
-{
-
-
-template<class edge_type>
-struct edge_type_greater_comparator
-{
-    bool operator()(const edge_type* left, const edge_type* right)
-    {
-        return (left->weight > right->weight);
-    }
-};
-
-
-} // namespace detail
 
 
 class minimum_spanning_tree_prim
@@ -42,7 +27,7 @@ public:
         pk::priority_queue<
                 edge_type_pointer,
                 graph_type::max_num_of_edges,
-                detail::edge_type_greater_comparator<edge_type> > q;
+                edge_type_greater_comparator<edge_type> > q;
 
         pk::vector<bool, graph_type::num_of_vertices> visited(false);
 
@@ -65,6 +50,15 @@ public:
     }
 
 private:
+    template<class edge_type>
+    struct edge_type_greater_comparator
+    {
+        bool operator()(const edge_type* left, const edge_type* right)
+        {
+            return (left->weight > right->weight);
+        }
+    };
+
     template<class graph_type, class queue_type>
     static void add_not_visited_neighbours_to_queue(const graph_type& g, queue_type& q, const int vertex_id, const bool* visited)
     {
