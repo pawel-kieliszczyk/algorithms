@@ -4,28 +4,13 @@
 
 #include <algorithm>
 #include <functional>
-#include <queue>
 
+#include "priority_queue.hpp"
 #include "vector.hpp"
 
 
 namespace pk
 {
-namespace detail
-{
-
-
-template<class edge_type>
-struct edge_type_greater_comparator
-{
-    bool operator()(const edge_type* left, const edge_type* right)
-    {
-        return (left->weight > right->weight);
-    }
-};
-
-
-} // namespace detail
 
 
 class minimum_spanning_tree_prim
@@ -35,14 +20,14 @@ public:
     static void run(const graph_type& g, const int starting_vertex, callback_type& callback)
     {
         // TODO: replace the queue so that it contains vertices instead of edges.
-        //       This will increase time complexity to O(E * log(V))
-        //       and space complexity to O(V)
+        //       This will improve space complexity to O(V)
         typedef const typename graph_type::edge_type edge_type;
         typedef edge_type* edge_type_pointer;
-        std::priority_queue<
+
+        pk::priority_queue<
                 edge_type_pointer,
-                std::vector<edge_type_pointer>,
-                detail::edge_type_greater_comparator<edge_type> > q;
+                graph_type::max_num_of_edges,
+                edge_type_greater_comparator<edge_type> > q;
 
         pk::vector<bool, graph_type::num_of_vertices> visited(false);
 
@@ -65,6 +50,15 @@ public:
     }
 
 private:
+    template<class edge_type>
+    struct edge_type_greater_comparator
+    {
+        bool operator()(const edge_type* left, const edge_type* right)
+        {
+            return (left->weight > right->weight);
+        }
+    };
+
     template<class graph_type, class queue_type>
     static void add_not_visited_neighbours_to_queue(const graph_type& g, queue_type& q, const int vertex_id, const bool* visited)
     {
