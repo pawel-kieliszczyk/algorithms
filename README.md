@@ -59,10 +59,20 @@ All containers have fixed but custom maximum capacity. No memory reallocations o
 | cyclic_array::operator[]  | O(1)            | O(1)             |                                                  |
 | cyclic_array::shift_left  | O(1)            | O(1)             |                                                  |
 | cyclic_array::shift_right | O(1)            | O(1)             |                                                  |
-| disjoint_sets::union_sets | O(m * a(m,n)    | O(1)             | m - number of operations, a - Ackermann function |
-| disjoint_sets::get_set_id | O(m * a(m,n)    | O(1)             | m - number of operations, a - Ackermann function |
+| disjoint_sets::union_sets | O(m*a(m,n)      | O(1)             | m - number of operations, a - Ackermann function |
+| disjoint_sets::get_set_id | O(m*a(m,n)      | O(1)             | m - number of operations, a - Ackermann function |
 | interval_tree::insert     | O(log^d(n))     | O(1)             | d - number of dimensions                         |
 | interval_tree::count      | O(log^d(n))     | O(1)             | d - number of dimensions                         |
+
+
+###Algorithms
+
+| Algorithm                                          | Time Complexity | Space Complexity | Notes |
+|----------------------------------------------------|-----------------|------------------|-------|
+| longest_monotonic_subsequence::strictly_decreasing | O(n*log(n))     | O(n)             |       |
+| longest_monotonic_subsequence::strictly_increasing | O(n*log(n))     | O(n)             |       |
+| longest_monotonic_subsequence::weakly_decreasing   | O(n*log(n))     | O(n)             |       |
+| longest_monotonic_subsequence::weakly_increasing   | O(n*log(n))     | O(n)             |       |
 
 
 ###Graphs
