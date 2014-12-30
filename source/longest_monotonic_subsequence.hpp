@@ -24,7 +24,7 @@ public:
         return run< std::greater<value_type> >(
                 first,
                 last,
-                std::numeric_limits<value_type>::min(),
+                -std::numeric_limits<value_type>::max(), // not min() to support floating point numbers
                 std::numeric_limits<value_type>::max());
     }
 
@@ -37,7 +37,7 @@ public:
                 first,
                 last,
                 std::numeric_limits<value_type>::max(),
-                std::numeric_limits<value_type>::min());
+                -std::numeric_limits<value_type>::max()); // not min() to support floating point numbers
     }
 
     template<class ForwardIterator>
@@ -48,7 +48,7 @@ public:
         return run< std::greater_equal<value_type> >(
                 first,
                 last,
-                std::numeric_limits<value_type>::min(),
+                -std::numeric_limits<value_type>::max(), // not min() to support floating point numbers
                 std::numeric_limits<value_type>::max());
     }
 
@@ -61,7 +61,7 @@ public:
                 first,
                 last,
                 std::numeric_limits<value_type>::max(),
-                std::numeric_limits<value_type>::min());
+                -std::numeric_limits<value_type>::max()); // not min() to support floating point numbers
     }
 
 private:

@@ -136,5 +136,24 @@ TEST_F(longest_strictly_decreasing_subsequence_tester, tests_sequence_of_randomi
 }
 
 
+TEST_F(longest_strictly_decreasing_subsequence_tester, tests_sequence_of_floatoing_point_elements)
+{
+    // given
+    std::vector<double> numbers;
+    numbers.push_back(1.1);
+    numbers.push_back(1.2);
+    numbers.push_back(1.2);
+    numbers.push_back(1.1);
+    numbers.push_back(0.0);
+    numbers.push_back(0.0);
+    numbers.push_back(0.0);
+    numbers.push_back(-0.1);
+    numbers.push_back(-0.3);
+
+    // when and then
+    EXPECT_EQ(5, lms::strictly_decreasing(numbers.begin(), numbers.end()));
+}
+
+
 } // namespace testing
 } // namespace pk
