@@ -15,10 +15,10 @@ template<int MAX_SEQUENCE_SIZE>
 class longest_monotonic_subsequence
 {
 public:
-    template<class Iterator>
-    static int strictly_increasing(Iterator first, Iterator last)
+    template<class ForwardIterator>
+    static int strictly_increasing(ForwardIterator first, ForwardIterator last)
     {
-        typedef typename std::iterator_traits<Iterator>::value_type value_type;
+        typedef typename std::iterator_traits<ForwardIterator>::value_type value_type;
         const value_type infinity = std::numeric_limits<value_type>::max();
         const int sequence_size = std::distance(first, last);
         const int layers_size = sequence_size + 2;
@@ -40,10 +40,11 @@ public:
 
         return (longest - 1);
     }
-    template<class Iterator>
-    static int weakly_increasing(Iterator first, Iterator last)
+
+    template<class ForwardIterator>
+    static int weakly_increasing(ForwardIterator first, ForwardIterator last)
     {
-        typedef typename std::iterator_traits<Iterator>::value_type value_type;
+        typedef typename std::iterator_traits<ForwardIterator>::value_type value_type;
         const value_type infinity = std::numeric_limits<value_type>::max();
         const int sequence_size = std::distance(first, last);
         const int layers_size = sequence_size + 2;
