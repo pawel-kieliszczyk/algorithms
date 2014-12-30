@@ -17,6 +17,32 @@ class longest_monotonic_subsequence
 {
 public:
     template<class ForwardIterator>
+    static int strictly_decreasing(ForwardIterator first, ForwardIterator last)
+    {
+        typedef typename std::iterator_traits<ForwardIterator>::value_type value_type;
+        const value_type minus_infinity = std::numeric_limits<value_type>::min();
+        const int sequence_size = std::distance(first, last);
+        const int layers_size = sequence_size + 2;
+
+        value_type layers[MAX_SEQUENCE_SIZE+2];
+
+        std::fill(layers, layers + layers_size, minus_infinity);
+        layers[0] = std::numeric_limits<value_type>::max();
+
+        while(first != last)
+        {
+            value_type* t = std::lower_bound(layers, layers + layers_size, *first, std::greater<value_type>());
+            *t = *first++;
+        }
+
+        int longest = 0;
+        while(layers[longest] != minus_infinity)
+            ++longest;
+
+        return (longest - 1);
+    }
+
+    template<class ForwardIterator>
     static int strictly_increasing(ForwardIterator first, ForwardIterator last)
     {
         typedef typename std::iterator_traits<ForwardIterator>::value_type value_type;
@@ -43,7 +69,7 @@ public:
     }
 
     template<class ForwardIterator>
-    static int strictly_decreasing(ForwardIterator first, ForwardIterator last)
+    static int weakly_decreasing(ForwardIterator first, ForwardIterator last)
     {
         typedef typename std::iterator_traits<ForwardIterator>::value_type value_type;
         const value_type minus_infinity = std::numeric_limits<value_type>::min();
@@ -57,7 +83,7 @@ public:
 
         while(first != last)
         {
-            value_type* t = std::lower_bound(layers, layers + layers_size, *first, std::greater<value_type>());
+            value_type* t = std::upper_bound(layers, layers + layers_size, *first, std::greater<value_type>());
             *t = *first++;
         }
 
