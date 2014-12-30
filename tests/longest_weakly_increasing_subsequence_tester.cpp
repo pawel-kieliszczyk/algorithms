@@ -16,7 +16,7 @@ namespace testing
 
 struct longest_weakly_increasing_subsequence_tester : public gt::Test
 {
-    static const int MAX_SEQUENCE_SIZE = 6;
+    static const int MAX_SEQUENCE_SIZE = 9;
 
     // tested class:
     typedef longest_monotonic_subsequence<MAX_SEQUENCE_SIZE> lms;
@@ -61,9 +61,11 @@ TEST_F(longest_weakly_increasing_subsequence_tester, tests_sequence_of_all_stric
 {
     // given
     std::vector<int> numbers;
-    numbers.push_back(42);
-    numbers.push_back(41);
-    numbers.push_back(40);
+    numbers.push_back(33);
+    numbers.push_back(11);
+    numbers.push_back(0);
+    numbers.push_back(-22);
+    numbers.push_back(-55);
 
     // when and then
     EXPECT_EQ(1, lms::weakly_increasing(numbers.begin(), numbers.end()));
@@ -74,12 +76,14 @@ TEST_F(longest_weakly_increasing_subsequence_tester, tests_sequence_of_all_stric
 {
     // given
     std::vector<int> numbers;
-    numbers.push_back(42);
-    numbers.push_back(43);
-    numbers.push_back(44);
+    numbers.push_back(-55);
+    numbers.push_back(-22);
+    numbers.push_back(0);
+    numbers.push_back(11);
+    numbers.push_back(33);
 
     // when and then
-    EXPECT_EQ(3, lms::weakly_increasing(numbers.begin(), numbers.end()));
+    EXPECT_EQ(5, lms::weakly_increasing(numbers.begin(), numbers.end()));
 }
 
 
@@ -103,6 +107,9 @@ TEST_F(longest_weakly_increasing_subsequence_tester, tests_sequence_of_randomize
     // given
     std::vector<int> numbers;
     numbers.push_back(55);
+    numbers.push_back(-22);
+    numbers.push_back(33);
+    numbers.push_back(77);
     numbers.push_back(22);
     numbers.push_back(22);
     numbers.push_back(44);
@@ -110,7 +117,7 @@ TEST_F(longest_weakly_increasing_subsequence_tester, tests_sequence_of_randomize
     numbers.push_back(66);
 
     // when and then
-    EXPECT_EQ(4, lms::weakly_increasing(numbers.begin(), numbers.end()));
+    EXPECT_EQ(5, lms::weakly_increasing(numbers.begin(), numbers.end()));
 }
 
 

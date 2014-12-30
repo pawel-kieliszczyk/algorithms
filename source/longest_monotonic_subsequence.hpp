@@ -26,7 +26,7 @@ public:
         value_type layers[MAX_SEQUENCE_SIZE+2];
 
         std::fill(layers, layers + layers_size, infinity);
-        layers[0] = value_type();
+        layers[0] = std::numeric_limits<value_type>::min();
 
         while(first != last)
         {
