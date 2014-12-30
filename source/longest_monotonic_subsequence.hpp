@@ -16,6 +16,31 @@ class longest_monotonic_subsequence
 {
 public:
     template<class Iterator>
+    static int strictly_increasing(Iterator first, Iterator last)
+    {
+        typedef typename std::iterator_traits<Iterator>::value_type value_type;
+        const value_type infinity = std::numeric_limits<value_type>::max();
+        const int sequence_size = std::distance(first, last);
+        const int layers_size = sequence_size + 2;
+
+        value_type layers[MAX_SEQUENCE_SIZE+2];
+
+        std::fill(layers, layers + layers_size, infinity);
+        layers[0] = std::numeric_limits<value_type>::min();
+
+        while(first != last)
+        {
+            value_type* t = std::lower_bound(layers, layers + layers_size, *first);
+            *t = *first++;
+        }
+
+        int longest = 0;
+        while(layers[longest] != infinity)
+            ++longest;
+
+        return (longest - 1);
+    }
+    template<class Iterator>
     static int weakly_increasing(Iterator first, Iterator last)
     {
         typedef typename std::iterator_traits<Iterator>::value_type value_type;
