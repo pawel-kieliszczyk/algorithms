@@ -21,12 +21,11 @@ public:
     {
         typedef typename std::iterator_traits<ForwardIterator>::value_type value_type;
 
-        return run(
+        return run< std::greater<value_type> >(
                 first,
                 last,
                 std::numeric_limits<value_type>::min(),
-                std::numeric_limits<value_type>::max(),
-                std::greater<value_type>());
+                std::numeric_limits<value_type>::max());
     }
 
     template<class ForwardIterator>
@@ -34,12 +33,11 @@ public:
     {
         typedef typename std::iterator_traits<ForwardIterator>::value_type value_type;
 
-        return run(
+        return run< std::less<value_type> >(
                 first,
                 last,
                 std::numeric_limits<value_type>::max(),
-                std::numeric_limits<value_type>::min(),
-                std::less<value_type>());
+                std::numeric_limits<value_type>::min());
     }
 
     template<class ForwardIterator>
@@ -47,12 +45,11 @@ public:
     {
         typedef typename std::iterator_traits<ForwardIterator>::value_type value_type;
 
-        return run(
+        return run< std::greater_equal<value_type> >(
                 first,
                 last,
                 std::numeric_limits<value_type>::min(),
-                std::numeric_limits<value_type>::max(),
-                std::greater_equal<value_type>());
+                std::numeric_limits<value_type>::max());
     }
 
     template<class ForwardIterator>
@@ -60,22 +57,20 @@ public:
     {
         typedef typename std::iterator_traits<ForwardIterator>::value_type value_type;
 
-        return run(
+        return run< std::less_equal<value_type> >(
                 first,
                 last,
                 std::numeric_limits<value_type>::max(),
-                std::numeric_limits<value_type>::min(),
-                std::less_equal<value_type>());
+                std::numeric_limits<value_type>::min());
     }
 
 private:
-    template<class ForwardIterator, class BoundCompare>
+    template<class BoundCompare, class ForwardIterator>
     static int run(
             ForwardIterator first,
             ForwardIterator last,
             const typename std::iterator_traits<ForwardIterator>::value_type& infinity,
-            const typename std::iterator_traits<ForwardIterator>::value_type& layers_zero_elements,
-            BoundCompare bound_compare)
+            const typename std::iterator_traits<ForwardIterator>::value_type& layers_zero_elements)
     {
         typedef typename std::iterator_traits<ForwardIterator>::value_type value_type;
         const int sequence_size = std::distance(first, last);
@@ -88,7 +83,7 @@ private:
 
         while(first != last)
         {
-            value_type* t = std::lower_bound(layers, layers + layers_size, *first, bound_compare);
+            value_type* t = std::lower_bound(layers, layers + layers_size, *first, BoundCompare());
             *t = *first++;
         }
 
