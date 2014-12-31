@@ -32,7 +32,7 @@ public:
         increase(index, value - old_value);
     }
 
-    int count_less_equal(int index) const
+    value_type count_less_equal(int index) const
     {
         value_type sum = value_type();
 
@@ -46,7 +46,7 @@ public:
         return sum;
     }
 
-    int count_in_range(const int from, const int to) const
+    value_type count_in_range(const int from, const int to) const
     {
         return (count_less_equal(to) - count_less_equal(from - 1));
     }

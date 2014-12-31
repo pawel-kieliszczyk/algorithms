@@ -67,7 +67,7 @@ public:
         increase(e, value - old_value);
     }
 
-    int count_less_equal(int x, int y) const
+    value_type count_less_equal(int x, int y) const
     {
         value_type sum = value_type();
 
@@ -88,7 +88,7 @@ public:
         return sum;
     }
 
-    int count_in_range(const subrange& x_subrange, const subrange& y_subrange) const
+    value_type count_in_range(const subrange& x_subrange, const subrange& y_subrange) const
     {
         return (count_less_equal(x_subrange.to, y_subrange.to)
                 - count_less_equal(x_subrange.to, y_subrange.from - 1)
