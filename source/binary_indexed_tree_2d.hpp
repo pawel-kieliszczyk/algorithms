@@ -63,7 +63,7 @@ public:
 
     void set(const entry& e, const value_type& value)
     {
-        const value_type old_value = count_less_equal(e.x, e.y);
+        const value_type old_value = count_in_range(subrange(e.x, e.x), subrange(e.y, e.y));
         increase(e, value - old_value);
     }
 
