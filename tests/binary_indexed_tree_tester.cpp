@@ -17,7 +17,7 @@ struct binary_indexed_tree_tester : public gt::Test
     static const int RANGE = 20;
 
     // tested class:
-    binary_indexed_tree<int, RANGE> t; // accepts values from [0, RANGE-1]
+    binary_indexed_tree<int, RANGE> t; // accepts entries from [0, RANGE-1]
 };
 
 
