@@ -28,7 +28,7 @@ public:
 
     void set(const int index, const value_type& value)
     {
-        const value_type old_value = count_less_equal(index);
+        const value_type old_value = count_in_range(index, index);
         increase(index, value - old_value);
     }
 
