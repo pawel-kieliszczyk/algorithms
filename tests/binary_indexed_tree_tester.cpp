@@ -37,7 +37,7 @@ TEST_F(binary_indexed_tree_tester, tests_one_element_once_in_tree)
     const int value = 1;
 
     // when
-    t.insert(elem, value);
+    t.increase(elem, value);
 
     // then
     EXPECT_EQ(0, t.count_less_equal(6));
@@ -60,8 +60,8 @@ TEST_F(binary_indexed_tree_tester, tests_one_element_twice_in_tree)
     const int value2 = 3;
 
     // when
-    t.insert(elem, value1);
-    t.insert(elem, value2);
+    t.increase(elem, value1);
+    t.increase(elem, value2);
 
     // then
     EXPECT_EQ(0, t.count_less_equal(6));
@@ -86,8 +86,8 @@ TEST_F(binary_indexed_tree_tester, tests_two_elements_once_in_tree)
     const int value2 = 3;
 
     // when
-    t.insert(elem1, value1);
-    t.insert(elem2, value2);
+    t.increase(elem1, value1);
+    t.increase(elem2, value2);
 
     // then
     EXPECT_EQ(2, t.count_less_equal(0));
@@ -114,10 +114,10 @@ TEST_F(binary_indexed_tree_tester, tests_two_elements_twice_in_tree)
     const int value2 = 3;
 
     // when
-    t.insert(elem1, value1);
-    t.insert(elem1, value1);
-    t.insert(elem2, value2);
-    t.insert(elem2, value2);
+    t.increase(elem1, value1);
+    t.increase(elem1, value1);
+    t.increase(elem2, value2);
+    t.increase(elem2, value2);
 
     // then
     EXPECT_EQ(0, t.count_less_equal(6));
@@ -131,6 +131,31 @@ TEST_F(binary_indexed_tree_tester, tests_two_elements_twice_in_tree)
     EXPECT_EQ(6, t.count_in_range(19, 19));
 
     EXPECT_EQ(10, t.count_in_range(0, 19));
+}
+
+
+TEST_F(binary_indexed_tree_tester, tests_setting_elements)
+{
+    // given
+    const int elem = 7;
+    const int old_value = 1337;
+    const int new_value = 42;
+
+    t.increase(elem, old_value);
+
+    // when
+    t.set(elem, new_value);
+
+    // then
+    EXPECT_EQ(0, t.count_less_equal(6));
+    EXPECT_EQ(42, t.count_less_equal(7));
+    EXPECT_EQ(42, t.count_less_equal(19));
+
+    EXPECT_EQ(0, t.count_in_range(0, 6));
+    EXPECT_EQ(42, t.count_in_range(7, 7));
+    EXPECT_EQ(0, t.count_in_range(8, 19));
+
+    EXPECT_EQ(42, t.count_in_range(0, 19));
 }
 
 

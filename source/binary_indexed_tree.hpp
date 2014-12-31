@@ -20,10 +20,16 @@ public:
         std::fill(data, data + Range, value_type());
     }
 
-    void insert(const int index, const value_type& value)
+    void increase(const int index, const value_type& value)
     {
         for(int i = index; i < Range; i |= i + 1)
             data[i] += value;
+    }
+
+    void set(const int index, const value_type& value)
+    {
+        const value_type old_value = count_less_equal(index);
+        increase(index, value - old_value);
     }
 
     int count_less_equal(int index) const
