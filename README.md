@@ -27,42 +27,51 @@ The library focuses on high performance both minimizing computational complexity
 
 All containers have fixed but custom maximum capacity. No memory reallocations once they are constructed.
 
-| Member Function           | Time Complexity | Space Complexity | Notes                                            |
-|---------------------------|-----------------|------------------|--------------------------------------------------|
-| vector::push_back         | O(1)            | O(1)             |                                                  |
-| vector::pop_back          | O(1)            | O(1)             |                                                  |
-| vector::operator[]        | O(1)            | O(1)             |                                                  |
-| vector::front             | O(1)            | O(1)             |                                                  |
-| vector::back              | O(1)            | O(1)             |                                                  |
-| vector::begin             | O(1)            | O(1)             |                                                  |
-| vector::cbegin            | O(1)            | O(1)             |                                                  |
-| vector::end               | O(1)            | O(1)             |                                                  |
-| vector::cend              | O(1)            | O(1)             |                                                  |
-| vector::reset             | O(1)            | O(1)             |                                                  |
-| vector::empty             | O(1)            | O(1)             |                                                  |
-| vector::size              | O(1)            | O(1)             |                                                  |
-| stack::push               | O(1)            | O(1)             |                                                  |
-| stack::pop                | O(1)            | O(1)             |                                                  |
-| stack::top                | O(1)            | O(1)             |                                                  |
-| stack::empty              | O(1)            | O(1)             |                                                  |
-| stack::size               | O(1)            | O(1)             |                                                  |
-| queue::push               | O(1)            | O(1)             |                                                  |
-| queue::pop                | O(1)            | O(1)             |                                                  |
-| queue::front              | O(1)            | O(1)             |                                                  |
-| queue::empty              | O(1)            | O(1)             |                                                  |
-| queue::size               | O(1)            | O(1)             |                                                  |
-| priority_queue::push      | O(log(n))       | O(1)             |                                                  |
-| priority_queue::pop       | O(log(n))       | O(1)             |                                                  |
-| priority_queue::top       | O(1)            | O(1)             |                                                  |
-| priority_queue::empty     | O(1)            | O(1)             |                                                  |
-| priority_queue::size      | O(1)            | O(1)             |                                                  |
-| cyclic_array::operator[]  | O(1)            | O(1)             |                                                  |
-| cyclic_array::shift_left  | O(1)            | O(1)             |                                                  |
-| cyclic_array::shift_right | O(1)            | O(1)             |                                                  |
-| disjoint_sets::union_sets | O(m*a(m,n)      | O(1)             | m - number of operations, a - Ackermann function |
-| disjoint_sets::get_set_id | O(m*a(m,n)      | O(1)             | m - number of operations, a - Ackermann function |
-| interval_tree::insert     | O(log^d(n))     | O(1)             | d - number of dimensions                         |
-| interval_tree::count      | O(log^d(n))     | O(1)             | d - number of dimensions                         |
+| Member Function                          | Time Complexity | Space Complexity | Notes                                            |
+|------------------------------------------|-----------------|------------------|--------------------------------------------------|
+| vector::push_back                        | O(1)            | O(1)             |                                                  |
+| vector::pop_back                         | O(1)            | O(1)             |                                                  |
+| vector::operator[]                       | O(1)            | O(1)             |                                                  |
+| vector::front                            | O(1)            | O(1)             |                                                  |
+| vector::back                             | O(1)            | O(1)             |                                                  |
+| vector::begin                            | O(1)            | O(1)             |                                                  |
+| vector::cbegin                           | O(1)            | O(1)             |                                                  |
+| vector::end                              | O(1)            | O(1)             |                                                  |
+| vector::cend                             | O(1)            | O(1)             |                                                  |
+| vector::reset                            | O(1)            | O(1)             |                                                  |
+| vector::empty                            | O(1)            | O(1)             |                                                  |
+| vector::size                             | O(1)            | O(1)             |                                                  |
+| stack::push                              | O(1)            | O(1)             |                                                  |
+| stack::pop                               | O(1)            | O(1)             |                                                  |
+| stack::top                               | O(1)            | O(1)             |                                                  |
+| stack::empty                             | O(1)            | O(1)             |                                                  |
+| stack::size                              | O(1)            | O(1)             |                                                  |
+| queue::push                              | O(1)            | O(1)             |                                                  |
+| queue::pop                               | O(1)            | O(1)             |                                                  |
+| queue::front                             | O(1)            | O(1)             |                                                  |
+| queue::empty                             | O(1)            | O(1)             |                                                  |
+| queue::size                              | O(1)            | O(1)             |                                                  |
+| priority_queue::push                     | O(log(n))       | O(1)             |                                                  |
+| priority_queue::pop                      | O(log(n))       | O(1)             |                                                  |
+| priority_queue::top                      | O(1)            | O(1)             |                                                  |
+| priority_queue::empty                    | O(1)            | O(1)             |                                                  |
+| priority_queue::size                     | O(1)            | O(1)             |                                                  |
+| cyclic_array::operator[]                 | O(1)            | O(1)             |                                                  |
+| cyclic_array::shift_left                 | O(1)            | O(1)             |                                                  |
+| cyclic_array::shift_right                | O(1)            | O(1)             |                                                  |
+| disjoint_sets::union_sets                | O(m*a(m,n)      | O(1)             | m - number of operations, a - Ackermann function |
+| disjoint_sets::get_set_id                | O(m*a(m,n)      | O(1)             | m - number of operations, a - Ackermann function |
+| interval_tree::insert                    | O(log^d(n))     | O(1)             | d - number of dimensions                         |
+| interval_tree::count                     | O(log^d(n))     | O(1)             | d - number of dimensions                         |
+| binary_indexed_tree::increase            | O(log(n))       | O(1)             |                                                  |
+| binary_indexed_tree::count_less_equal    | O(log(n))       | O(1)             |                                                  |
+| binary_indexed_tree::count_in_range      | O(log(n))       | O(1)             |                                                  |
+| binary_indexed_tree_2d::increase         | O(log(n))       | O(1)             |                                                  |
+| binary_indexed_tree_2d::count_less_equal | O(log(n))       | O(1)             |                                                  |
+| binary_indexed_tree_2d::count_in_range   | O(log(n))       | O(1)             |                                                  |
+| binary_indexed_tree_3d::increase         | O(log(n))       | O(1)             |                                                  |
+| binary_indexed_tree_3d::count_less_equal | O(log(n))       | O(1)             |                                                  |
+| binary_indexed_tree_3d::count_in_range   | O(log(n))       | O(1)             |                                                  |
 
 
 ###Algorithms
