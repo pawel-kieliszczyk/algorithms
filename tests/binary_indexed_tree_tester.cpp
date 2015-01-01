@@ -134,6 +134,27 @@ TEST_F(binary_indexed_tree_tester, tests_two_elements_twice_in_tree)
 }
 
 
+TEST_F(binary_indexed_tree_tester, tests_fully_filled_tree)
+{
+    // when
+    for(int x = 0; x < RANGE; ++x)
+        t.increase(x, 1);
+
+    // then
+    EXPECT_EQ(1, t.count_less_equal(0));
+    EXPECT_EQ(8, t.count_less_equal(7));
+    EXPECT_EQ(20, t.count_less_equal(19));
+
+    EXPECT_EQ(1, t.count_in_range(0, 0));
+    EXPECT_EQ(8, t.count_in_range(0, 7));
+    EXPECT_EQ(1, t.count_in_range(7, 7));
+    EXPECT_EQ(12, t.count_in_range(8, 19));
+    EXPECT_EQ(1, t.count_in_range(19, 19));
+
+    EXPECT_EQ(20, t.count_in_range(0, 19));
+}
+
+
 TEST_F(binary_indexed_tree_tester, tests_setting_elements)
 {
     // given

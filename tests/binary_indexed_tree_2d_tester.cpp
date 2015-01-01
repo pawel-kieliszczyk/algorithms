@@ -135,6 +135,26 @@ TEST_F(binary_indexed_tree_2d_tester, tests_two_elements_once_in_tree)
 }
 
 
+TEST_F(binary_indexed_tree_2d_tester, tests_fully_filled_tree)
+{
+    // when
+    for(int x = 0; x < RANGE_1; ++x)
+        for(int y = 0; y < RANGE_2; ++y)
+            t.increase(bit::entry(x, y), 1);
+
+    // then
+    EXPECT_EQ(1, t.count_less_equal(0, 0));
+    EXPECT_EQ(112, t.count_less_equal(7, 13));
+    EXPECT_EQ(600, t.count_less_equal(19, 29));
+
+    EXPECT_EQ(1, t.count_in_range(bit::subrange(0, 0), bit::subrange(0, 0)));
+    EXPECT_EQ(35, t.count_in_range(bit::subrange(0, 4), bit::subrange(0, 6)));
+    EXPECT_EQ(1, t.count_in_range(bit::subrange(5, 5), bit::subrange(8, 8)));
+    EXPECT_EQ(42, t.count_in_range(bit::subrange(7, 12), bit::subrange(9, 15)));
+    EXPECT_EQ(600, t.count_in_range(bit::subrange(0, 19), bit::subrange(0, 29)));
+}
+
+
 TEST_F(binary_indexed_tree_2d_tester, tests_setting_elements)
 {
     // given

@@ -153,6 +153,27 @@ TEST_F(binary_indexed_tree_3d_tester, tests_two_elements_once_in_tree)
 }
 
 
+TEST_F(binary_indexed_tree_3d_tester, tests_fully_filled_tree)
+{
+    // when
+    for(int x = 0; x < RANGE_1; ++x)
+        for(int y = 0; y < RANGE_2; ++y)
+            for(int z = 0; z < RANGE_3; ++z)
+            t.increase(bit::entry(x, y, z), 1);
+
+    // then
+    EXPECT_EQ(1, t.count_less_equal(0, 0, 0));
+    EXPECT_EQ(336, t.count_less_equal(7, 13, 2));
+    EXPECT_EQ(24000, t.count_less_equal(19, 29, 39));
+
+    EXPECT_EQ(1, t.count_in_range(bit::subrange(0, 0), bit::subrange(0, 0), bit::subrange(0, 0)));
+    EXPECT_EQ(105, t.count_in_range(bit::subrange(0, 4), bit::subrange(0, 6), bit::subrange(0, 2)));
+    EXPECT_EQ(1, t.count_in_range(bit::subrange(5, 5), bit::subrange(8, 8), bit::subrange(15, 15)));
+    EXPECT_EQ(420, t.count_in_range(bit::subrange(7, 12), bit::subrange(9, 15), bit::subrange(13, 22)));
+    EXPECT_EQ(24000, t.count_in_range(bit::subrange(0, 19), bit::subrange(0, 29), bit::subrange(0, 39)));
+}
+
+
 TEST_F(binary_indexed_tree_3d_tester, tests_setting_elements)
 {
     // given
