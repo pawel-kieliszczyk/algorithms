@@ -21,6 +21,7 @@ source_files = ['tests/main.cpp']
 
 source_files += ['tests/binary_indexed_tree_tester.cpp']
 source_files += ['tests/binary_indexed_tree_2d_tester.cpp']
+source_files += ['tests/binary_indexed_tree_3d_tester.cpp']
 source_files += ['tests/breadth_first_search_tester.cpp']
 source_files += ['tests/cyclic_array_tester.cpp']
 source_files += ['tests/disjoint_sets_tester.cpp']

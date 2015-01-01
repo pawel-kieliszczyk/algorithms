@@ -90,8 +90,8 @@ public:
 
     value_type count_in_range(const subrange& x_subrange, const subrange& y_subrange) const
     {
-        return (count_less_equal(x_subrange.to, y_subrange.to)
-                - count_less_equal(x_subrange.to, y_subrange.from - 1)
+        return (  count_less_equal(x_subrange.to,       y_subrange.to)
+                - count_less_equal(x_subrange.to,       y_subrange.from - 1)
                 - count_less_equal(x_subrange.from - 1, y_subrange.to)
                 + count_less_equal(x_subrange.from - 1, y_subrange.from - 1));
     }
