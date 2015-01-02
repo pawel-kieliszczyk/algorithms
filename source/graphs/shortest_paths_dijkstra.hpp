@@ -10,6 +10,8 @@
 
 namespace pk
 {
+namespace graphs
+{
 
 
 class shortest_paths_dijkstra
@@ -154,6 +156,7 @@ private:
 };
 
 
+} // namespace graphs
 } // namespace pk
 
 

@@ -7,6 +7,8 @@
 
 namespace pk
 {
+namespace graphs
+{
 namespace testing
 {
 
@@ -19,6 +21,7 @@ public:
 
 
 } // namespace testing
+} // namespace graphs
 } // namespace pk
 
 

@@ -9,6 +9,8 @@
 
 namespace pk
 {
+namespace graphs
+{
 namespace detail
 {
 
@@ -112,6 +114,7 @@ private:
 };
 
 
+} // namespace graphs
 } // namespace pk
 
 

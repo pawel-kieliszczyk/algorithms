@@ -11,6 +11,8 @@
 
 namespace pk
 {
+namespace graphs
+{
 
 
 class minimum_spanning_tree_prim
@@ -74,6 +76,7 @@ private:
 };
 
 
+} // namespace graphs
 } // namespace pk
 
 
