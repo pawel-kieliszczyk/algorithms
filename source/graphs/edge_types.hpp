@@ -4,6 +4,8 @@
 
 namespace pk
 {
+namespace graphs
+{
 
 
 struct edge
@@ -35,6 +37,7 @@ inline bool operator==(const weighted_edge<weight_type>& left, const weighted_ed
 }
 
 
+} // namespace graphs
 } // namespace pk
 
 

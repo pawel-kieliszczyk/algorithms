@@ -1,15 +1,17 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "edge_types.hpp"
-#include "graph.hpp"
-#include "shortest_paths_dijkstra.hpp"
+#include "graphs/edge_types.hpp"
+#include "graphs/graph.hpp"
+#include "graphs/shortest_paths_dijkstra.hpp"
 
 
 namespace gt = testing;
 
 
 namespace pk
+{
+namespace graphs
 {
 namespace testing
 {
@@ -204,4 +206,5 @@ TEST_F(shortest_paths_dijkstra_tester, tests_noninteger_directed_weighted_graph)
 
 
 } // namespace testing
+} // namespace graphs
 } // namespace pk

@@ -8,6 +8,8 @@
 
 namespace pk
 {
+namespace graphs
+{
 
 
 class minimum_spanning_tree_kruskal
@@ -61,6 +63,7 @@ private:
 };
 
 
+} // namespace graphs
 } // namespace pk
 
 

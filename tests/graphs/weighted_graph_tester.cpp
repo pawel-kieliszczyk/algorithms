@@ -1,13 +1,15 @@
 #include <gtest/gtest.h>
 
-#include "edge_types.hpp"
-#include "graph.hpp"
+#include "graphs/edge_types.hpp"
+#include "graphs/graph.hpp"
 
 
 namespace gt = testing;
 
 
 namespace pk
+{
+namespace graphs
 {
 namespace testing
 {
@@ -143,4 +145,5 @@ TEST_F(weighted_graph_tester, tests_reset)
 
 
 } // namespace testing
+} // namespace graphs
 } // namespace pk
