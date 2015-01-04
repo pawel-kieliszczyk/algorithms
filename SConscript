@@ -19,6 +19,7 @@ if enable_gcov:
 
 source_files = ['tests/main.cpp']
 
+source_files += ['tests/allocator_tester.cpp']
 source_files += ['tests/binary_indexed_tree_tester.cpp']
 source_files += ['tests/binary_indexed_tree_2d_tester.cpp']
 source_files += ['tests/binary_indexed_tree_3d_tester.cpp']
