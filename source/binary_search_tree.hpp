@@ -23,6 +23,9 @@ public:
         node* new_node = root;
         while(new_node != 0)
         {
+            if(elem == new_node->value)
+                return;
+
             parent = new_node;
             new_node = (elem < new_node->value) ? new_node->left : new_node->right;
         }

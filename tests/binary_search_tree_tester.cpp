@@ -49,8 +49,8 @@ TEST_F(binary_search_tree_tester, tests_searching_existing_elements)
 {
     // given
     const int elem1 = 11;
-    const int elem2 = 22;
-    const int elem3 = 33;
+    const int elem2 = 33;
+    const int elem3 = 22;
 
     // when
     bst.insert(elem1);
@@ -67,8 +67,8 @@ TEST_F(binary_search_tree_tester, tests_searching_existing_elements)
     ASSERT_NE(reinterpret_cast<const int*>(0), found_elem3);
 
     EXPECT_EQ(11, *found_elem1);
-    EXPECT_EQ(22, *found_elem2);
-    EXPECT_EQ(33, *found_elem3);
+    EXPECT_EQ(33, *found_elem2);
+    EXPECT_EQ(22, *found_elem3);
 }
 
 
@@ -76,8 +76,8 @@ TEST_F(binary_search_tree_tester, tests_searching_non_existing_elements)
 {
     // given
     const int elem1 = 11;
-    const int elem2 = 22;
-    const int elem3 = 33;
+    const int elem2 = 33;
+    const int elem3 = 22;
 
     const int elem4 = 44;
     const int elem5 = 55;
@@ -93,6 +93,21 @@ TEST_F(binary_search_tree_tester, tests_searching_non_existing_elements)
 
     ASSERT_EQ(reinterpret_cast<const int*>(0), found_elem4);
     ASSERT_EQ(reinterpret_cast<const int*>(0), found_elem5);
+}
+
+
+TEST_F(binary_search_tree_tester, tests_elements_discinction)
+{
+    // given
+    const int elem1 = 11;
+    const int elem2 = elem1;
+
+    // when
+    bst.insert(elem1);
+    bst.insert(elem2);
+
+    // then
+    EXPECT_EQ(1, bst.size());
 }
 
 
