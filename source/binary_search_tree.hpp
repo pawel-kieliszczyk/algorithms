@@ -122,35 +122,35 @@ private:
 
     void remove(node* to_remove, node* parent)
     {
+        node* const original_to_remove = to_remove;
+
         if(to_remove != 0)
         {
-            node* y = to_remove;
-            node* y_parent = parent;
             if((to_remove->left != 0) && (to_remove->right != 0))
             {
-                y = to_remove->right;
-                y_parent = to_remove;
+                parent = to_remove;
+                to_remove = to_remove->right;
 
-                while(y->left != 0)
+                while(to_remove->left != 0)
                 {
-                    y_parent = y;
-                    y = y->left;
+                    parent = to_remove;
+                    to_remove = to_remove->left;
                 }
             }
 
-            node* x = (y->left != 0) ? y->left : y->right;
+            node* x = (to_remove->left != 0) ? to_remove->left : to_remove->right;
 
-            if(y_parent == 0)
+            if(parent == 0)
                 root = x;
-            else if(y == y_parent->left)
-                y_parent->left = x;
+            else if(to_remove == parent->left)
+                parent->left = x;
             else
-                y_parent->right = x;
+                parent->right = x;
 
-            if(y != to_remove)
-                to_remove->value = y->value;
+            if(to_remove != original_to_remove)
+                original_to_remove->value = to_remove->value;
 
-            alloc.deallocate(y);
+            alloc.deallocate(to_remove);
             --sz;
         }
     }
