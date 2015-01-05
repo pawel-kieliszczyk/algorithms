@@ -111,5 +111,35 @@ TEST_F(binary_search_tree_tester, tests_elements_discinction)
 }
 
 
+TEST_F(binary_search_tree_tester, tests_min_element_in_empty_tree)
+{
+    // when and then
+    const int* min_elem = bst.min();
+    ASSERT_EQ(reinterpret_cast<const int*>(0), min_elem);
+}
+
+
+TEST_F(binary_search_tree_tester, tests_min_element_in_non_empty_tree)
+{
+    // given
+    const int elem1 = -10;
+    const int elem2 = 13;
+    const int elem3 = -29;
+    const int elem4 = 0;
+
+    // when
+    bst.insert(elem1);
+    bst.insert(elem2);
+    bst.insert(elem3);
+    bst.insert(elem4);
+
+    //then
+    const int* min_elem = bst.min();
+
+    ASSERT_NE(reinterpret_cast<const int*>(0), min_elem);
+    EXPECT_EQ(-29, *min_elem);
+}
+
+
 } // namespace testing
 } // namespace pk

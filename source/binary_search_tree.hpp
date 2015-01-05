@@ -52,7 +52,7 @@ public:
         ++sz;
     }
 
-    const value_type* search(const value_type& elem)
+    const value_type* search(const value_type& elem) const
     {
         node* result = root;
 
@@ -60,6 +60,18 @@ public:
             result = (elem < result->value) ? result->left : result->right;
 
         return (result != 0) ? &result->value : 0;
+    }
+
+    const value_type* min() const
+    {
+        if(root == 0)
+            return 0;
+
+        node* result = root;
+        while(result->left != 0)
+            result = result->left;
+
+        return &result->value;
     }
 
     int size() const
