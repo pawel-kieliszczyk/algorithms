@@ -1,5 +1,5 @@
-#ifndef PK_DEPTHFIRSTSEARCH_HPP
-#define PK_DEPTHFIRSTSEARCH_HPP
+#ifndef PK_GRAPHS_DEPTHFIRSTSEARCH_HPP
+#define PK_GRAPHS_DEPTHFIRSTSEARCH_HPP
 
 
 #include <algorithm>
@@ -60,4 +60,4 @@ public:
 } // namespace pk
 
 
-#endif // PK_DEPTHFIRSTSEARCH_HPP
+#endif // PK_GRAPHS_DEPTHFIRSTSEARCH_HPP

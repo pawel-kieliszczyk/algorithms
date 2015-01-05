@@ -1,5 +1,5 @@
-#ifndef PK_BINARYSEARCHTREE_HPP
-#define PK_BINARYSEARCHTREE_HPP
+#ifndef PK_GRAPHS_BINARYSEARCHTREE_HPP
+#define PK_GRAPHS_BINARYSEARCHTREE_HPP
 
 
 #include "allocator.hpp"
@@ -86,4 +86,4 @@ private:
 } // namespace pk
 
 
-#endif // PK_BINARYSEARCHTREE_HPP
+#endif // PK_GRAPHS_BINARYSEARCHTREE_HPP

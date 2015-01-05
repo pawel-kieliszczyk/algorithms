@@ -1,11 +1,12 @@
-#ifndef PK_BREADTHFIRSTSEARCH_HPP
-#define PK_BREADTHFIRSTSEARCH_HPP
+#ifndef PK_GRAPHS_BREADTHFIRSTSEARCH_HPP
+#define PK_GRAPHS_BREADTHFIRSTSEARCH_HPP
 
 
 #include <algorithm>
 
 #include "queue.hpp"
 #include "vector.hpp"
+
 
 namespace pk
 {
@@ -57,4 +58,4 @@ public:
 } // namespace pk
 
 
-#endif // PK_BREADTHFIRSTSEARCH_HPP
+#endif // PK_GRAPHS_BREADTHFIRSTSEARCH_HPP
