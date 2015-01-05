@@ -9,7 +9,7 @@ namespace pk
 {
 
 
-template<class T, int MaxElements>
+template<class T, int MaxElements, template<class, int> class Allocator = allocator>
 class binary_search_tree
 {
 public:
@@ -76,7 +76,7 @@ private:
         node* right;
     };
 
-    allocator<node, MaxElements> alloc;
+    Allocator<node, MaxElements> alloc;
 
     node* root;
     int sz;
