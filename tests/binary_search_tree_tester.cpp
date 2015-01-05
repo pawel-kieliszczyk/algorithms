@@ -28,7 +28,7 @@ TEST_F(binary_search_tree_tester, tests_size_of_empty_tree)
 }
 
 
-TEST_F(binary_search_tree_tester, tests_insertions)
+TEST_F(binary_search_tree_tester, tests_size_of_non_empty_tree)
 {
     // given
     const int elem1 = 11;

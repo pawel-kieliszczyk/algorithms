@@ -9,6 +9,9 @@ namespace pk
 {
 
 
+/**
+ * Binary search tree which keeps distinct elements (no duplications allowed).
+ */
 template<class T, int MaxElements, template<class, int> class Allocator = allocator>
 class binary_search_tree
 {
