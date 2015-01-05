@@ -74,6 +74,18 @@ public:
         return &result->value;
     }
 
+    const value_type* max() const
+    {
+        if(root == 0)
+            return 0;
+
+        node* result = root;
+        while(result->right != 0)
+            result = result->right;
+
+        return &result->value;
+    }
+
     int size() const
     {
         return sz;
