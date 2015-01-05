@@ -403,5 +403,44 @@ TEST_F(binary_search_tree_tester, tests_removing_root_with_right_child)
 }
 
 
+/**
+ * Removes 33 from:
+ * (11)
+ *    \
+ *    (33)
+ *    /  \
+ * (22)  (55)
+ *       /
+ *    (44)
+ */
+TEST_F(binary_search_tree_tester, tests_removing_node_with_two_childs)
+{
+    // given
+    const int elem1 = 11;
+    const int elem2 = 33;
+    const int elem3 = 22;
+    const int elem4 = 55;
+    const int elem5 = 44;
+
+    bst.insert(elem1);
+    bst.insert(elem2);
+    bst.insert(elem3);
+    bst.insert(elem4);
+    bst.insert(elem5);
+
+    // when
+    bst.remove(elem3);
+
+    // then
+    EXPECT_EQ(4, bst.size());
+
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem1));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem2));
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem3));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem4));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem5));
+}
+
+
 } // namespace testing
 } // namespace pk

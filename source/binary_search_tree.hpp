@@ -124,40 +124,27 @@ private:
     {
         if(to_remove != 0)
         {
-            node* child = to_remove->left;
-            if(child == 0)
-                child = to_remove->right;
-
-            if(child == 0)
+            node* y = to_remove;
+            if((to_remove->left != 0) && (to_remove->right != 0))
             {
-                if(parent == 0)
-                {
-                    root = 0;
-                }
-                else
-                {
-                    if(to_remove == parent->left)
-                        parent->left = 0;
-                    else
-                        parent->right = 0;
-                }
+                y = to_remove->right;
+                while(y->left != 0)
+                    y = y->left;
             }
+
+            node* x = (y->left != 0) ? y->left : y->right;
+
+            if(parent == 0)
+                root = x;
+            else if(y == parent->left)
+                parent->left = x;
             else
-            {
-                if(parent == 0)
-                {
-                    root = child;
-                }
-                else
-                {
-                    if(to_remove == parent->left)
-                        parent->left = child;
-                    else
-                        parent->right = child;
-                }
-            }
+                parent->right = x;
 
-            alloc.deallocate(to_remove);
+            if(y != to_remove)
+                to_remove->value = y->value;
+
+            alloc.deallocate(y);
             --sz;
         }
     }
