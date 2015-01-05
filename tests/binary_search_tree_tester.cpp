@@ -171,5 +171,61 @@ TEST_F(binary_search_tree_tester, tests_max_element_in_non_empty_tree)
 }
 
 
+TEST_F(binary_search_tree_tester, test_removing_left_child_leaf)
+{
+    // given
+    const int elem1 = 11;
+    const int elem2 = 7;
+
+    bst.insert(elem1);
+    bst.insert(elem2);
+
+    // when
+    bst.remove(elem2);
+
+    // then
+    EXPECT_EQ(1, bst.size());
+
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem1));
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem2));
+}
+
+
+TEST_F(binary_search_tree_tester, test_removing_right_child_leaf)
+{
+    // given
+    const int elem1 = 11;
+    const int elem2 = 22;
+
+    bst.insert(elem1);
+    bst.insert(elem2);
+
+    // when
+    bst.remove(elem2);
+
+    // then
+    EXPECT_EQ(1, bst.size());
+
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem1));
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem2));
+}
+
+
+TEST_F(binary_search_tree_tester, test_removing_root_leaf)
+{
+    // given
+    const int elem = 42;
+
+    bst.insert(elem);
+
+    // when
+    bst.remove(elem);
+
+    // then
+    EXPECT_EQ(0, bst.size());
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem));
+}
+
+
 } // namespace testing
 } // namespace pk

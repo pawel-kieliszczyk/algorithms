@@ -55,6 +55,23 @@ public:
         ++sz;
     }
 
+    void remove(const value_type& elem)
+    {
+        node* parent = 0;
+        node* to_remove = root;
+
+        while(to_remove != 0)
+        {
+            if(elem == to_remove->value)
+                break;
+
+            parent = to_remove;
+            to_remove = (elem < to_remove->value) ? to_remove->left : to_remove->right;
+        }
+
+        remove(to_remove, parent);
+    }
+
     const value_type* search(const value_type& elem) const
     {
         node* result = root;
@@ -102,6 +119,27 @@ private:
         node* left;
         node* right;
     };
+
+    void remove(node* to_remove, node* parent)
+    {
+        if(to_remove != 0)
+        {
+            if(parent == 0)
+            {
+                root = 0;
+            }
+            else
+            {
+                if(to_remove == parent->left)
+                    parent->left = 0;
+                else
+                    parent->right = 0;
+            }
+
+            alloc.deallocate(to_remove);
+            --sz;
+        }
+    }
 
     Allocator<node, MaxElements> alloc;
 
