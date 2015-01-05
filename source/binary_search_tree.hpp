@@ -125,21 +125,27 @@ private:
         if(to_remove != 0)
         {
             node* y = to_remove;
+            node* y_parent = parent;
             if((to_remove->left != 0) && (to_remove->right != 0))
             {
                 y = to_remove->right;
+                y_parent = to_remove;
+
                 while(y->left != 0)
+                {
+                    y_parent = y;
                     y = y->left;
+                }
             }
 
             node* x = (y->left != 0) ? y->left : y->right;
 
-            if(parent == 0)
+            if(y_parent == 0)
                 root = x;
-            else if(y == parent->left)
-                parent->left = x;
+            else if(y == y_parent->left)
+                y_parent->left = x;
             else
-                parent->right = x;
+                y_parent->right = x;
 
             if(y != to_remove)
                 to_remove->value = y->value;

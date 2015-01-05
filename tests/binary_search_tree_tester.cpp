@@ -442,5 +442,177 @@ TEST_F(binary_search_tree_tester, tests_removing_node_with_two_childs)
 }
 
 
+/**
+ * Removes 22 from:
+ *    (22)
+ *    /  \
+ * (11)  (33)
+ */
+TEST_F(binary_search_tree_tester, tests_removing_root_with_two_childs)
+{
+    // given
+    const int elem1 = 22;
+    const int elem2 = 11;
+    const int elem3 = 33;
+
+    bst.insert(elem1);
+    bst.insert(elem2);
+    bst.insert(elem3);
+
+    // when
+    bst.remove(elem1);
+
+    // then
+    EXPECT_EQ(2, bst.size());
+
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem1));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem2));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem3));
+}
+
+
+/**
+ * Removes all nodes in sequence (5, 3, 6, 7, 1, 4, 2, 8, 9):
+ *       (5)
+ *      /   \
+ *   (3)     (7)
+ *   / \     / \
+ * (1) (4) (6) (9)
+ *   \         /
+ *   (2)     (8)
+ */
+TEST_F(binary_search_tree_tester, tests_removing_many_nodes)
+{
+    // given
+    const int elem1 = 5;
+    const int elem2 = 3;
+    const int elem3 = 1;
+    const int elem4 = 2;
+    const int elem5 = 4;
+    const int elem6 = 7;
+    const int elem7 = 6;
+    const int elem8 = 9;
+    const int elem9 = 8;
+
+    bst.insert(elem1);
+    bst.insert(elem2);
+    bst.insert(elem3);
+    bst.insert(elem4);
+    bst.insert(elem5);
+    bst.insert(elem6);
+    bst.insert(elem7);
+    bst.insert(elem8);
+    bst.insert(elem9);
+
+    // when
+    bst.remove(elem1);
+
+    // then
+    EXPECT_EQ(8, bst.size());
+
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem1));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem2));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem3));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem4));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem5));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem6));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem7));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem8));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem9));
+
+    // when
+    bst.remove(elem2);
+
+    // then
+    EXPECT_EQ(7, bst.size());
+
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem2));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem3));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem4));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem5));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem6));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem7));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem8));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem9));
+
+    // when
+    bst.remove(elem7);
+
+    // then
+    EXPECT_EQ(6, bst.size());
+
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem3));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem4));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem5));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem6));
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem7));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem8));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem9));
+
+    // when
+    bst.remove(elem6);
+
+    // then
+    EXPECT_EQ(5, bst.size());
+
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem3));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem4));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem5));
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem6));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem8));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem9));
+
+    // when
+    bst.remove(elem3);
+
+    // then
+    EXPECT_EQ(4, bst.size());
+
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem3));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem4));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem5));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem8));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem9));
+
+    // when
+    bst.remove(elem5);
+
+    // then
+    EXPECT_EQ(3, bst.size());
+
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem4));
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem5));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem8));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem9));
+
+    // when
+    bst.remove(elem4);
+
+    // then
+    EXPECT_EQ(2, bst.size());
+
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem4));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem8));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem9));
+
+    // when
+    bst.remove(elem9);
+
+    // then
+    EXPECT_EQ(1, bst.size());
+
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem8));
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem9));
+
+    // when
+    bst.remove(elem8);
+
+    // then
+    EXPECT_EQ(0, bst.size());
+
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem8));
+}
+
+
 } // namespace testing
 } // namespace pk
