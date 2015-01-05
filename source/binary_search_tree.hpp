@@ -124,16 +124,37 @@ private:
     {
         if(to_remove != 0)
         {
-            if(parent == 0)
+            node* child = to_remove->left;
+            if(child == 0)
+                child = to_remove->right;
+
+            if(child == 0)
             {
-                root = 0;
+                if(parent == 0)
+                {
+                    root = 0;
+                }
+                else
+                {
+                    if(to_remove == parent->left)
+                        parent->left = 0;
+                    else
+                        parent->right = 0;
+                }
             }
             else
             {
-                if(to_remove == parent->left)
-                    parent->left = 0;
+                if(parent == 0)
+                {
+                    root = child;
+                }
                 else
-                    parent->right = 0;
+                {
+                    if(to_remove == parent->left)
+                        parent->left = child;
+                    else
+                        parent->right = child;
+                }
             }
 
             alloc.deallocate(to_remove);

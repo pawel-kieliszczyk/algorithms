@@ -171,7 +171,7 @@ TEST_F(binary_search_tree_tester, tests_max_element_in_non_empty_tree)
 }
 
 
-TEST_F(binary_search_tree_tester, test_removing_left_child_leaf)
+TEST_F(binary_search_tree_tester, tests_removing_left_child_leaf)
 {
     // given
     const int elem1 = 11;
@@ -191,7 +191,7 @@ TEST_F(binary_search_tree_tester, test_removing_left_child_leaf)
 }
 
 
-TEST_F(binary_search_tree_tester, test_removing_right_child_leaf)
+TEST_F(binary_search_tree_tester, tests_removing_right_child_leaf)
 {
     // given
     const int elem1 = 11;
@@ -211,7 +211,7 @@ TEST_F(binary_search_tree_tester, test_removing_right_child_leaf)
 }
 
 
-TEST_F(binary_search_tree_tester, test_removing_root_leaf)
+TEST_F(binary_search_tree_tester, tests_removing_root_leaf)
 {
     // given
     const int elem = 42;
@@ -224,6 +224,182 @@ TEST_F(binary_search_tree_tester, test_removing_root_leaf)
     // then
     EXPECT_EQ(0, bst.size());
     ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem));
+}
+
+
+/**
+ * Removes 22 from:
+ *     (33)
+ *     /
+ *   (22)
+ *   /
+ * (11)
+ */
+TEST_F(binary_search_tree_tester, tests_removing_left_child_with_left_child)
+{
+    // given
+    const int elem1 = 33;
+    const int elem2 = 22;
+    const int elem3 = 11;
+
+    bst.insert(elem1);
+    bst.insert(elem2);
+    bst.insert(elem3);
+
+    // when
+    bst.remove(elem2);
+
+    // then
+    EXPECT_EQ(2, bst.size());
+
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem1));
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem2));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem3));
+}
+
+
+/**
+ * Removes 11 from:
+ *   (33)
+ *   /
+ * (11)
+ *   \
+ *   (22)
+ */
+TEST_F(binary_search_tree_tester, tests_removing_left_child_with_right_child)
+{
+    // given
+    const int elem1 = 33;
+    const int elem2 = 11;
+    const int elem3 = 22;
+
+    bst.insert(elem1);
+    bst.insert(elem2);
+    bst.insert(elem3);
+
+    // when
+    bst.remove(elem2);
+
+    // then
+    EXPECT_EQ(2, bst.size());
+
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem1));
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem2));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem3));
+}
+
+
+/**
+ * Removes 33 from:
+ * (11)
+ *   \
+ *   (33)
+ *   /
+ * (22)
+ */
+TEST_F(binary_search_tree_tester, tests_removing_right_child_with_left_child)
+{
+    // given
+    const int elem1 = 11;
+    const int elem2 = 33;
+    const int elem3 = 22;
+
+    bst.insert(elem1);
+    bst.insert(elem2);
+    bst.insert(elem3);
+
+    // when
+    bst.remove(elem2);
+
+    // then
+    EXPECT_EQ(2, bst.size());
+
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem1));
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem2));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem3));
+}
+
+
+/**
+ * Removes 11 from:
+ * (11)
+ *   \
+ *   (22)
+ *     \
+ *     (33)
+ */
+TEST_F(binary_search_tree_tester, tests_removing_right_child_with_right_child)
+{
+    // given
+    const int elem1 = 11;
+    const int elem2 = 22;
+    const int elem3 = 33;
+
+    bst.insert(elem1);
+    bst.insert(elem2);
+    bst.insert(elem3);
+
+    // when
+    bst.remove(elem2);
+
+    // then
+    EXPECT_EQ(2, bst.size());
+
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem1));
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem2));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem3));
+}
+
+
+/**
+ * Removes 22 from:
+ *   (22)
+ *   /
+ * (11)
+ */
+TEST_F(binary_search_tree_tester, tests_removing_root_with_left_child)
+{
+    // given
+    const int elem1 = 22;
+    const int elem2 = 11;
+
+    bst.insert(elem1);
+    bst.insert(elem2);
+
+    // when
+    bst.remove(elem1);
+
+    // then
+    EXPECT_EQ(1, bst.size());
+
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem1));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem2));
+}
+
+
+/**
+ * Removes 11 from:
+ * (11)
+ *   \
+ *   (22)
+ */
+TEST_F(binary_search_tree_tester, tests_removing_root_with_right_child)
+{
+    // given
+    const int elem1 = 11;
+    const int elem2 = 22;
+
+    bst.insert(elem1);
+    bst.insert(elem2);
+
+    // when
+    bst.remove(elem1);
+
+    // then
+    EXPECT_EQ(1, bst.size());
+
+    ASSERT_EQ(reinterpret_cast<const int*>(0), bst.search(elem1));
+    ASSERT_NE(reinterpret_cast<const int*>(0), bst.search(elem2));
 }
 
 
