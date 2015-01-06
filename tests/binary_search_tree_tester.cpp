@@ -21,6 +21,26 @@ struct binary_search_tree_tester : public gt::Test
 };
 
 
+TEST_F(binary_search_tree_tester, tests_emptyness_of_empty_tree)
+{
+    // when and then
+    EXPECT_TRUE(bst.empty());
+}
+
+
+TEST_F(binary_search_tree_tester, tests_emptyness_of_non_empty_tree)
+{
+    // given
+    const int elem = 11;
+
+    // when
+    bst.insert(elem);
+
+    // then
+    EXPECT_FALSE(bst.empty());
+}
+
+
 TEST_F(binary_search_tree_tester, tests_size_of_empty_tree)
 {
     // when and then

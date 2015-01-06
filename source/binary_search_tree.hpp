@@ -105,6 +105,10 @@ public:
         return sz;
     }
 
+    bool empty() const
+    {
+        return (sz == 0);
+    }
 private:
     struct node
     {
