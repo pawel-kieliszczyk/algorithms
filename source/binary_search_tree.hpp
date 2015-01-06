@@ -109,6 +109,7 @@ public:
     {
         return (sz == 0);
     }
+
 private:
     struct node
     {
