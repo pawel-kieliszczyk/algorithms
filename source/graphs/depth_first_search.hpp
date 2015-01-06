@@ -1,17 +1,20 @@
-#ifndef PK_BREADTHFIRSTSEARCH_HPP
-#define PK_BREADTHFIRSTSEARCH_HPP
+#ifndef PK_GRAPHS_DEPTHFIRSTSEARCH_HPP
+#define PK_GRAPHS_DEPTHFIRSTSEARCH_HPP
 
 
 #include <algorithm>
 
-#include "queue.hpp"
+#include "stack.hpp"
 #include "vector.hpp"
+
 
 namespace pk
 {
+namespace graphs
+{
 
 
-class breadth_first_search
+class depth_first_search
 {
 public:
     template<
@@ -22,36 +25,39 @@ public:
             const int starting_vertex_id,
             visitor_type& visitor)
     {
-        pk::queue<int, graph_type::num_of_vertices> q;
+        pk::stack<int, graph_type::max_num_of_edges> s;
         pk::vector<bool, graph_type::num_of_vertices> visited(false);
 
-        q.push(starting_vertex_id);
-        visited[starting_vertex_id] = true;
+        s.push(starting_vertex_id);
 
-        while(!q.empty())
+        while(!s.empty())
         {
-            const int v = q.front();
-            q.pop();
+            const int v = s.top();
+            s.pop();
+
+            if(visited[v])
+                continue;
 
             visitor.visit(v);
+            visited[v] = true;
 
             const typename graph_type::adjacency_list& adj_v = g.get_adjacency_list(v);
-            for(int i = 0; i < adj_v.size(); ++i)
+            for(int i = adj_v.size() - 1; i >= 0; --i)
             {
                 const int u = adj_v[i].to;
 
                 if(visited[u])
                     continue;
 
-                q.push(u);
-                visited[u] = true;
+                s.push(u);
             }
         }
     }
 };
 
 
+} // namespace graphs
 } // namespace pk
 
 
-#endif // PK_BREADTHFIRSTSEARCH_HPP
+#endif // PK_GRAPHS_DEPTHFIRSTSEARCH_HPP

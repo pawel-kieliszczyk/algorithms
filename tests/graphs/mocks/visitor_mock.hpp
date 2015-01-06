@@ -1,11 +1,13 @@
-#ifndef PK_TESTING_VISITORMOCK_HPP
-#define PK_TESTING_VISITORMOCK_HPP
+#ifndef PK_GRAPHS_TESTING_VISITORMOCK_HPP
+#define PK_GRAPHS_TESTING_VISITORMOCK_HPP
 
 
 #include <gmock/gmock.h>
 
 
 namespace pk
+{
+namespace graphs
 {
 namespace testing
 {
@@ -19,7 +21,8 @@ public:
 
 
 } // namespace testing
+} // namespace graphs
 } // namespace pk
 
 
-#endif // PK_TESTING_VISITORMOCK_HPP
+#endif // PK_GRAPHS_TESTING_VISITORMOCK_HPP

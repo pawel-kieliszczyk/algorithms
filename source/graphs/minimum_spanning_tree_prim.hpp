@@ -1,5 +1,5 @@
-#ifndef PK_MINIMUMSPANNINGTREEPRIM_HPP
-#define PK_MINIMUMSPANNINGTREEPRIM_HPP
+#ifndef PK_GRAPHS_MINIMUMSPANNINGTREEPRIM_HPP
+#define PK_GRAPHS_MINIMUMSPANNINGTREEPRIM_HPP
 
 
 #include <algorithm>
@@ -10,6 +10,8 @@
 
 
 namespace pk
+{
+namespace graphs
 {
 
 
@@ -74,7 +76,8 @@ private:
 };
 
 
+} // namespace graphs
 } // namespace pk
 
 
-#endif // PK_MINIMUMSPANNINGTREEPRIM_HPP
+#endif // PK_GRAPHS_MINIMUMSPANNINGTREEPRIM_HPP

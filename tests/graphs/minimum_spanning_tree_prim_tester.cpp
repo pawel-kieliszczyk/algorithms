@@ -1,9 +1,9 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "edge_types.hpp"
-#include "graph.hpp"
-#include "minimum_spanning_tree_kruskal.hpp"
+#include "graphs/edge_types.hpp"
+#include "graphs/graph.hpp"
+#include "graphs/minimum_spanning_tree_prim.hpp"
 
 
 namespace gt = testing;
@@ -11,11 +11,13 @@ namespace gt = testing;
 
 namespace pk
 {
+namespace graphs
+{
 namespace testing
 {
 
 
-struct minimum_spanning_tree_kruskal_tester : public gt::Test
+struct minimum_spanning_tree_prim_tester : public gt::Test
 {
     static const int V = 6;
     static const int E = 14;
@@ -34,7 +36,7 @@ namespace
 
 struct callback_mock
 {
-    MOCK_METHOD1(notify, void(const minimum_spanning_tree_kruskal_tester::weighted_edge_type&));
+    MOCK_METHOD1(notify, void(const minimum_spanning_tree_prim_tester::weighted_edge_type&));
 };
 
 } // namespace anonymous
@@ -50,7 +52,7 @@ struct callback_mock
  * (3)---(4)---(5)
  *     5     1
  */
-TEST_F(minimum_spanning_tree_kruskal_tester, tests_sample_graph)
+TEST_F(minimum_spanning_tree_prim_tester, tests_sample_graph)
 {
     // given
     factory.add_not_directed_edge(weighted_edge_type(0/*from*/, 1/*to*/, 6/*weight*/));
@@ -66,16 +68,17 @@ TEST_F(minimum_spanning_tree_kruskal_tester, tests_sample_graph)
 
     // expect
     gt::InSequence seq;
-    EXPECT_CALL(cm, notify(weighted_edge_type(4/*from*/, 5/*to*/, 1/*weight*/)));
-    EXPECT_CALL(cm, notify(weighted_edge_type(2, 5, 3)));
-    EXPECT_CALL(cm, notify(weighted_edge_type(0, 3, 4)));
-    EXPECT_CALL(cm, notify(weighted_edge_type(1, 4, 4)));
-    EXPECT_CALL(cm, notify(weighted_edge_type(4, 3, 5)));
+    EXPECT_CALL(cm, notify(weighted_edge_type(0/*from*/, 3/*to*/, 4/*weight*/)));
+    EXPECT_CALL(cm, notify(weighted_edge_type(3, 4, 5)));
+    EXPECT_CALL(cm, notify(weighted_edge_type(4, 5, 1)));
+    EXPECT_CALL(cm, notify(weighted_edge_type(5, 2, 3)));
+    EXPECT_CALL(cm, notify(weighted_edge_type(4, 1, 4)));
 
     // when and then
-    minimum_spanning_tree_kruskal::run(g, cm);
+    minimum_spanning_tree_prim::run(g, 0/*starting vertex*/, cm);
 }
 
 
 } // namespace testing
+} // namespace graphs
 } // namespace pk

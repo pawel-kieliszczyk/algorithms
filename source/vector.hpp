@@ -36,7 +36,7 @@ public:
     T* end() { return (data + sz); }
     const T* cend() const { return (data + sz); }
 
-    void reset() { sz = 0; }
+    void clear() { sz = 0; }
 
     bool empty() const { return (sz == 0); }
     int size() const { return sz; }

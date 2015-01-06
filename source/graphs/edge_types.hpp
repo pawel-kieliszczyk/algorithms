@@ -1,8 +1,10 @@
-#ifndef PK_EDGETYPES_HPP
-#define PK_EDGETYPES_HPP
+#ifndef PK_GRAPHS_EDGETYPES_HPP
+#define PK_GRAPHS_EDGETYPES_HPP
 
 
 namespace pk
+{
+namespace graphs
 {
 
 
@@ -35,7 +37,8 @@ inline bool operator==(const weighted_edge<weight_type>& left, const weighted_ed
 }
 
 
+} // namespace graphs
 } // namespace pk
 
 
-#endif // PK_EDGETYPES_HPP
+#endif // PK_GRAPHS_EDGETYPES_HPP

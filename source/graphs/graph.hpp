@@ -1,5 +1,5 @@
-#ifndef PK_GRAPH_HPP
-#define PK_GRAPH_HPP
+#ifndef PK_GRAPHS_GRAPH_HPP
+#define PK_GRAPHS_GRAPH_HPP
 
 
 #include <algorithm>
@@ -8,6 +8,8 @@
 
 
 namespace pk
+{
+namespace graphs
 {
 namespace detail
 {
@@ -23,6 +25,8 @@ public:
     const edge_type& operator[](const int edge_index) const { return edges[edge_index]; }
 
     int size() const { return sz; }
+
+    void reset() { sz = 0; }
 
 private:
     const edge_type* edges;
@@ -59,7 +63,16 @@ public:
         }
     }
 
-    const adjacency_list& get_adjacency_list(const int vertex_id) const { return adjacency_lists[vertex_id]; }
+    const adjacency_list& get_adjacency_list(const int vertex_id) const
+    {
+        return adjacency_lists[vertex_id];
+    }
+
+    void reset()
+    {
+        for(int i = 0; i < num_of_vertices; ++i)
+            adjacency_lists[i].reset();
+    }
 
 private:
     graph(const graph&);
@@ -99,7 +112,11 @@ public:
         return g;
     }
 
-    void reset() { edges.reset(); }
+    void reset()
+    {
+        g.reset();
+        edges.clear();
+    }
 
 private:
     struct edges_sorter
@@ -112,7 +129,8 @@ private:
 };
 
 
+} // namespace graphs
 } // namespace pk
 
 
-#endif // PK_GRAPH_HPP
+#endif // PK_GRAPHS_GRAPH_HPP

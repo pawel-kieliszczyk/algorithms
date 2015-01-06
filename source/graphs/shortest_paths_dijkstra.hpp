@@ -1,5 +1,5 @@
-#ifndef PK_SHORTESTPATHSDIJKSTRA_HPP
-#define PK_SHORTESTPATHSDIJKSTRA_HPP
+#ifndef PK_GRAPHS_SHORTESTPATHSDIJKSTRA_HPP
+#define PK_GRAPHS_SHORTESTPATHSDIJKSTRA_HPP
 
 
 #include <algorithm>
@@ -9,6 +9,8 @@
 
 
 namespace pk
+{
+namespace graphs
 {
 
 
@@ -154,7 +156,8 @@ private:
 };
 
 
+} // namespace graphs
 } // namespace pk
 
 
-#endif // PK_SHORTESTPATHSDIJKSTRA_HPP
+#endif // PK_GRAPHS_SHORTESTPATHSDIJKSTRA_HPP

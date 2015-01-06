@@ -1,5 +1,5 @@
-#ifndef PK_MINIMUMSPANNINGTREEKRUSKAL_HPP
-#define PK_MINIMUMSPANNINGTREEKRUSKAL_HPP
+#ifndef PK_GRAPHS_MINIMUMSPANNINGTREEKRUSKAL_HPP
+#define PK_GRAPHS_MINIMUMSPANNINGTREEKRUSKAL_HPP
 
 
 #include "disjoint_sets.hpp"
@@ -7,6 +7,8 @@
 
 
 namespace pk
+{
+namespace graphs
 {
 
 
@@ -61,7 +63,8 @@ private:
 };
 
 
+} // namespace graphs
 } // namespace pk
 
 
-#endif // PK_MINIMUMSPANNINGTREEKRUSKAL_HPP
+#endif // PK_GRAPHS_MINIMUMSPANNINGTREEKRUSKAL_HPP

@@ -181,13 +181,13 @@ TEST_F(vector_tester, tests_cbegin_and_cend)
 }
 
 
-TEST_F(vector_tester, tests_reset)
+TEST_F(vector_tester, tests_clear)
 {
     // given
     vec.push_back(element1);
 
     // when
-    vec.reset();
+    vec.clear();
 
     // then
     EXPECT_TRUE(vec.empty());
