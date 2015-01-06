@@ -131,7 +131,6 @@ TEST_F(graph_tester, tests_reset_after_creation)
 {
     // given
     factory.add_not_directed_edge(edge(0/*from*/, 1/*to*/));
-//    factory.add_not_directed_edge(edge(0, 2));
     factory.add_not_directed_edge(edge(1, 2));
 
     factory.create();
