@@ -101,7 +101,7 @@ public:
         return g;
     }
 
-    void reset() { edges.reset(); }
+    void reset() { edges.clear(); }
 
 private:
     struct edges_sorter
