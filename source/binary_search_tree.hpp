@@ -72,38 +72,32 @@ public:
         remove(to_remove, parent);
     }
 
-    const value_type* search(const value_type& elem) const
+    bool exists(const value_type& elem) const
     {
         node* result = root;
 
         while((result != 0) && (result->value != elem))
             result = (elem < result->value) ? result->left : result->right;
 
-        return (result != 0) ? &result->value : 0;
+        return (result != 0);
     }
 
-    const value_type* min() const
+    const value_type& min() const
     {
-        if(root == 0)
-            return 0;
-
         node* result = root;
         while(result->left != 0)
             result = result->left;
 
-        return &result->value;
+        return result->value;
     }
 
-    const value_type* max() const
+    const value_type& max() const
     {
-        if(root == 0)
-            return 0;
-
         node* result = root;
         while(result->right != 0)
             result = result->right;
 
-        return &result->value;
+        return result->value;
     }
 
     int size() const
