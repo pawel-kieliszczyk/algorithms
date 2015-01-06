@@ -109,7 +109,7 @@ TEST_F(graph_tester, tests_full_graph)
 }
 
 
-TEST_F(graph_tester, tests_reset)
+TEST_F(graph_tester, tests_reset_before_creation)
 {
     // given
     factory.add_not_directed_edge(edge(0/*from*/, 1/*to*/));
@@ -124,6 +124,27 @@ TEST_F(graph_tester, tests_reset)
     EXPECT_EQ(0, g.get_adjacency_list(0).size());
     EXPECT_EQ(0, g.get_adjacency_list(1).size());
     EXPECT_EQ(0, g.get_adjacency_list(2).size());
+}
+
+
+TEST_F(graph_tester, tests_reset_after_creation)
+{
+    // given
+    factory.add_not_directed_edge(edge(0/*from*/, 1/*to*/));
+    factory.add_not_directed_edge(edge(1, 2));
+
+    factory.create();
+
+    // when
+    factory.reset();
+    factory.add_not_directed_edge(edge(0, 2));
+
+    const graph_type& g = factory.create();
+
+    // then
+    EXPECT_EQ(1, g.get_adjacency_list(0).size());
+    EXPECT_EQ(0, g.get_adjacency_list(1).size());
+    EXPECT_EQ(1, g.get_adjacency_list(2).size());
 }
 
 
