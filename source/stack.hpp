@@ -22,6 +22,8 @@ public:
     bool empty() const { return (sz == 0); }
     int size() const { return sz; }
 
+    void clear() { sz = 0; }
+
 private:
     stack(const stack&);
     stack& operator=(const stack&);

@@ -21,8 +21,8 @@ before_install:
   - sudo pip install cpp-coveralls
 
 script:
-  - if [ "$CXX" == "g++" ]; then scons compiler=`which $CXX` enable_gcov=True ; fi
-  - if [ "$CXX" == "clang++" ]; then scons compiler=`which $CXX` ; fi
+  - if [ "$CXX" == "g++" ]; then scons -j 4 compiler=`which $CXX` enable_gcov=True ; fi
+  - if [ "$CXX" == "clang++" ]; then scons -j 4 compiler=`which $CXX` ; fi
   - bin/test --gtest_shuffle
 
 after_success:

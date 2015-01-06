@@ -72,6 +72,13 @@ All containers have fixed but custom maximum capacity. No memory reallocations o
 | binary_indexed_tree_3d::increase         | O(log(n))       | O(1)             |                                                  |
 | binary_indexed_tree_3d::count_less_equal | O(log(n))       | O(1)             |                                                  |
 | binary_indexed_tree_3d::count_in_range   | O(log(n))       | O(1)             |                                                  |
+| binary_search_tree::insert               | O(n)            | O(1)             |                                                  |
+| binary_search_tree::remove               | O(n)            | O(1)             |                                                  |
+| binary_search_tree::exists               | O(n)            | O(1)             |                                                  |
+| binary_search_tree::min                  | O(n)            | O(1)             |                                                  |
+| binary_search_tree::max                  | O(n)            | O(1)             |                                                  |
+| binary_search_tree::empty                | O(1)            | O(1)             |                                                  |
+| binary_search_tree::size                 | O(1)            | O(1)             |                                                  |
 
 
 ###Algorithms

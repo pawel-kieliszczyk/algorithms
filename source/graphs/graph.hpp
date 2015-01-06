@@ -1,5 +1,5 @@
-#ifndef PK_GRAPH_HPP
-#define PK_GRAPH_HPP
+#ifndef PK_GRAPHS_GRAPH_HPP
+#define PK_GRAPHS_GRAPH_HPP
 
 
 #include <algorithm>
@@ -118,4 +118,4 @@ private:
 } // namespace pk
 
 
-#endif // PK_GRAPH_HPP
+#endif // PK_GRAPHS_GRAPH_HPP
