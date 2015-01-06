@@ -26,6 +26,8 @@ public:
 
     int size() const { return sz; }
 
+    void reset() { sz = 0; }
+
 private:
     const edge_type* edges;
     int sz;
@@ -61,7 +63,16 @@ public:
         }
     }
 
-    const adjacency_list& get_adjacency_list(const int vertex_id) const { return adjacency_lists[vertex_id]; }
+    const adjacency_list& get_adjacency_list(const int vertex_id) const
+    {
+        return adjacency_lists[vertex_id];
+    }
+
+    void reset()
+    {
+        for(int i = 0; i < num_of_vertices; ++i)
+            adjacency_lists[i].reset();
+    }
 
 private:
     graph(const graph&);
@@ -101,7 +112,11 @@ public:
         return g;
     }
 
-    void reset() { edges.clear(); }
+    void reset()
+    {
+        g.reset();
+        edges.clear();
+    }
 
 private:
     struct edges_sorter
