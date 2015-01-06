@@ -75,6 +75,20 @@ TEST_F(stack_tester, tests_size_of_nonempty_stack)
 }
 
 
+TEST_F(stack_tester, tests_size_of_cleared_stack)
+{
+    // given
+    s.push(element1);
+    s.push(element2);
+
+    // when
+    s.clear();
+
+    // then
+    EXPECT_EQ(0, s.size());
+}
+
+
 TEST_F(stack_tester, tests_top)
 {
     // when and then
