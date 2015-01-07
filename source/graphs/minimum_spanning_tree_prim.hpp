@@ -31,7 +31,7 @@ public:
                 graph_type::max_num_of_edges,
                 edge_type_greater_comparator<edge_type> > q;
 
-        pk::vector<bool, graph_type::num_of_vertices> visited(false);
+        pk::vector<bool, graph_type::max_num_of_vertices> visited(false, g.get_num_of_vertices());
 
         visited[starting_vertex] = true;
         add_not_visited_neighbours_to_queue(g, q, starting_vertex, visited.cbegin());

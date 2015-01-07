@@ -34,7 +34,7 @@ struct breadth_first_search_tester : public gt::Test
 TEST_F(breadth_first_search_tester, tests_empty_graph)
 {
     // given
-    const graph_type& g = factory.create();
+    const graph_type& g = factory.create(V);
 
     const int starting_vertex = 0;
     gt::StrictMock<visitor_mock> vm;
@@ -64,7 +64,7 @@ TEST_F(breadth_first_search_tester, tests_custom_graph)
     factory.add_not_directed_edge(edge(3, 4));
     factory.add_not_directed_edge(edge(4, 5));
 
-    const graph_type& g = factory.create();
+    const graph_type& g = factory.create(V);
 
     const int starting_vertex = 0;
     gt::StrictMock<visitor_mock> vm;

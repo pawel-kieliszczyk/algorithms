@@ -26,16 +26,18 @@ public:
                 graph_type::max_num_of_edges,
                 edge_type_greater_comparator<edge_type> > q;
 
-        pk::disjoint_sets sets(graph_type::num_of_vertices - 1);
+        const int num_of_vertices = g.get_num_of_vertices();
 
-        for(int vertex_id = 0; vertex_id < graph_type::num_of_vertices; ++vertex_id)
+        pk::disjoint_sets sets(num_of_vertices);
+
+        for(int vertex_id = 0; vertex_id < num_of_vertices; ++vertex_id)
         {
             const typename graph_type::adjacency_list& adj_list = g.get_adjacency_list(vertex_id);
             for(int i = 0; i < adj_list.size(); ++i)
                 q.push(&adj_list[i]);
         }
 
-        for(int i = 1; i < graph_type::num_of_vertices; ++i)
+        for(int i = 1; i < num_of_vertices; ++i)
         {
             edge_type_pointer e = q.top();
             q.pop();

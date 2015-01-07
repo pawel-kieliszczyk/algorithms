@@ -23,14 +23,16 @@ public:
         typedef typename graph_type::edge_type::weight_type weight_type;
         const weight_type infinity = std::numeric_limits<weight_type>::max();
 
-        pk::vector<bool, graph_type::num_of_vertices> processed_vertices(false);
-        pk::vector<weight_type, graph_type::num_of_vertices> path_lengths(infinity);
+        const int num_of_vertices = g.get_num_of_vertices();
 
-        dijkstra_heap<graph_type::num_of_vertices, weight_type> h(starting_vertex, path_lengths.cbegin());
+        pk::vector<bool, graph_type::max_num_of_vertices> processed_vertices(false, num_of_vertices);
+        pk::vector<weight_type, graph_type::max_num_of_vertices> path_lengths(infinity, num_of_vertices);
+
+        dijkstra_heap<graph_type::max_num_of_vertices, weight_type> h(num_of_vertices, starting_vertex, path_lengths.cbegin());
 
         path_lengths[starting_vertex] = weight_type();
 
-        for(int i = 0; i < graph_type::num_of_vertices; ++i)
+        for(int i = 0; i < num_of_vertices; ++i)
         {
             const int u = h.get_root();
 
@@ -59,11 +61,14 @@ public:
     }
 
 private:
-    template<int heap_size, class weight_type>
+    template<int max_heap_size, class weight_type>
     class dijkstra_heap
     {
     public:
-        dijkstra_heap(const int starting_vertex, const weight_type* path_lengths_) : size(heap_size), path_lengths(path_lengths_)
+        dijkstra_heap(const int real_heap_size_, const int starting_vertex, const weight_type* path_lengths_)
+            : real_heap_size(real_heap_size_),
+              size(real_heap_size_),
+              path_lengths(path_lengths_)
         {
             prepare_heap();
             fix_heap_with_starting_vertex(starting_vertex);
@@ -133,7 +138,7 @@ private:
     private:
         void prepare_heap()
         {
-            for(int i = 0; i < heap_size; ++i)
+            for(int i = 0; i < real_heap_size; ++i)
             {
                 heap_array[i] = i;
                 heap_array_index[i] = i;
@@ -147,9 +152,10 @@ private:
             heap_array_index[0] = starting_vertex;
         }
 
+        const int real_heap_size; ///< equals initial size of the heap
         int size; ///< current number of elements in the heap
-        int heap_array[heap_size]; ///< contains vertex ids organized by path lengths
-        int heap_array_index[heap_size]; ///< heap_array_index[u] contains the index of u in heap_array
+        int heap_array[max_heap_size]; ///< contains vertex ids organized by path lengths
+        int heap_array_index[max_heap_size]; ///< heap_array_index[u] contains the index of u in heap_array
 
         const weight_type* path_lengths; ///< pointer to lengths of all already calculated paths
     };

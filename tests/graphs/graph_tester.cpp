@@ -31,7 +31,7 @@ struct graph_tester : public gt::Test
 TEST_F(graph_tester, tests_empty_graph)
 {
     // when
-    const graph_type& g = factory.create();
+    const graph_type& g = factory.create(V);
 
     // then
     EXPECT_EQ(0, g.get_adjacency_list(0).size());
@@ -45,7 +45,7 @@ TEST_F(graph_tester, tests_adding_directed_edge)
     // when
     factory.add_directed_edge(edge(1/*from*/, 2/*to*/));
 
-    const graph_type& g = factory.create();
+    const graph_type& g = factory.create(V);
 
     // then
     const graph_type::adjacency_list& adj0 = g.get_adjacency_list(0);
@@ -65,7 +65,7 @@ TEST_F(graph_tester, test_adding_not_directed_edge)
     // when
     factory.add_not_directed_edge(edge(1/*from*/, 2/*to*/));
 
-    const graph_type& g = factory.create();
+    const graph_type& g = factory.create(V);
 
     // then
     const graph_type::adjacency_list& adj0 = g.get_adjacency_list(0);
@@ -89,7 +89,7 @@ TEST_F(graph_tester, tests_full_graph)
     factory.add_not_directed_edge(edge(0, 2));
     factory.add_not_directed_edge(edge(1, 2));
 
-    const graph_type& g = factory.create();
+    const graph_type& g = factory.create(V);
 
     // then
     const graph_type::adjacency_list& adj0 = g.get_adjacency_list(0);
@@ -118,7 +118,7 @@ TEST_F(graph_tester, tests_reset_before_creation)
 
     // when
     factory.reset();
-    const graph_type& g = factory.create();
+    const graph_type& g = factory.create(V);
 
     // then
     EXPECT_EQ(0, g.get_adjacency_list(0).size());
@@ -133,13 +133,13 @@ TEST_F(graph_tester, tests_reset_after_creation)
     factory.add_not_directed_edge(edge(0/*from*/, 1/*to*/));
     factory.add_not_directed_edge(edge(1, 2));
 
-    factory.create();
+    factory.create(V);
 
     // when
     factory.reset();
     factory.add_not_directed_edge(edge(0, 2));
 
-    const graph_type& g = factory.create();
+    const graph_type& g = factory.create(V);
 
     // then
     EXPECT_EQ(1, g.get_adjacency_list(0).size());
