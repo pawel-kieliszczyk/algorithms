@@ -90,6 +90,8 @@ All containers have fixed but custom maximum capacity. No memory reallocations o
 | longest_monotonic_subsequence::weakly_decreasing   | O(n*log(n))     | O(n)             |       |
 | longest_monotonic_subsequence::weakly_increasing   | O(n*log(n))     | O(n)             |       |
 | nth_fibonacci_number                               | O(log(n))       | O(1)             |       |
+| prefix_function::run                               | O(n)            | O(1)             |       |
+| prefix_function::get_prefix_suffix_table           | O(1)            | O(1)             |       |
 
 
 ###Graphs
