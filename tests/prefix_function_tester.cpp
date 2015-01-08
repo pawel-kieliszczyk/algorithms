@@ -124,13 +124,13 @@ TEST_F(prefix_function_tester, tests_pattern_searching_in_text)
     EXPECT_EQ(3u, std::count(prefix_suffix_table, prefix_suffix_table + s.size(), pattern.size()));
 
     const int first_occurance = pattern.size() + 1 + 10;
-    EXPECT_EQ(pattern.size(), prefix_suffix_table[first_occurance]);
+    EXPECT_EQ(4, prefix_suffix_table[first_occurance]);
 
     const int second_occurance = pattern.size() + 1 + 16;
-    EXPECT_EQ(pattern.size(), prefix_suffix_table[second_occurance]);
+    EXPECT_EQ(4, prefix_suffix_table[second_occurance]);
 
     const int third_occurance = pattern.size() + 1 + 19;
-    EXPECT_EQ(pattern.size(), prefix_suffix_table[third_occurance]);
+    EXPECT_EQ(4, prefix_suffix_table[third_occurance]);
 }
 
 
