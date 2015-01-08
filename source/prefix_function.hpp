@@ -39,7 +39,7 @@ public:
     }
 
     /**
-     * Return a prefix-suffix table for a text computed by run() function,
+     * Returns a prefix-suffix table for a text computed by run() function,
      * where i'th element of the table is the longest (but shorter that i+1)
      * prefix-suffix of a substring text[0,..,i].
      */
