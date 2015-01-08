@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <string>
 
 #include <gtest/gtest.h>
@@ -120,7 +121,7 @@ TEST_F(prefix_function_tester, tests_pattern_searching_in_text)
     // then
     const int* prefix_suffix_table = pf.get_prefix_suffix_table();
 
-    EXPECT_EQ(3, std::count(prefix_suffix_table, prefix_suffix_table + s.size(), pattern.size()));
+    EXPECT_EQ(3u, std::count(prefix_suffix_table, prefix_suffix_table + s.size(), pattern.size()));
 
     const int first_occurance = pattern.size() + 1 + 10;
     EXPECT_EQ(pattern.size(), prefix_suffix_table[first_occurance]);
