@@ -106,5 +106,32 @@ TEST_F(prefix_function_tester, tests_abcdabcaba)
 }
 
 
+TEST_F(prefix_function_tester, tests_pattern_searching_in_text)
+{
+    // given
+    const std::string pattern = "abca";
+    const std::string text = "abaabcdabcabdabcabcad";
+    // pattern ends at:                 ^     ^  ^
+
+    // when
+    std::string s = pattern + "#" + text;
+    pf.run(s.c_str(), s.size());
+
+    // then
+    const int* prefix_suffix_table = pf.get_prefix_suffix_table();
+
+    EXPECT_EQ(3, std::count(prefix_suffix_table, prefix_suffix_table + s.size(), pattern.size()));
+
+    const int first_occurance = pattern.size() + 1 + 10;
+    EXPECT_EQ(pattern.size(), prefix_suffix_table[first_occurance]);
+
+    const int second_occurance = pattern.size() + 1 + 16;
+    EXPECT_EQ(pattern.size(), prefix_suffix_table[second_occurance]);
+
+    const int third_occurance = pattern.size() + 1 + 19;
+    EXPECT_EQ(pattern.size(), prefix_suffix_table[third_occurance]);
+}
+
+
 } // namespace testing
 } // namespace pk
