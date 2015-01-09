@@ -42,6 +42,22 @@ public:
                 shortest_paths[v][u] = adj_v[i].weight;
             }
         }
+
+        for(int k = 0; k < num_of_vertices; ++k)
+        {
+            for(int i = 0; i < num_of_vertices; ++i)
+            {
+                for(int j = 0; j < num_of_vertices; ++j)
+                {
+                    if((shortest_paths[i][k] == infinity) || (shortest_paths[k][j] == infinity))
+                        continue;
+
+                    const weight_type w = shortest_paths[i][k] + shortest_paths[k][j];
+                    if(w < shortest_paths[i][j])
+                        shortest_paths[i][j] = w;
+                }
+            }
+        }
     }
 
     shortest_paths_matrix get_shortest_paths_matrix() const

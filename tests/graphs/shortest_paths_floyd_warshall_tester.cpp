@@ -90,6 +90,41 @@ TEST_F(shortest_paths_floyd_warshall_tester, tests_graph_with_one_not_directed_e
 }
 
 
+/**
+ * Tested graph:
+ *
+ *      5       7
+ * (0)-----(1)-----(2)
+ */
+TEST_F(shortest_paths_floyd_warshall_tester, tests_graph_with_two_not_directed_edges)
+{
+    // given
+    const int real_number_of_vertices = 3;
+
+    gf.add_not_directed_edge(edge_type(0/*from*/, 1/*to*/, 5/*weight*/));
+    gf.add_not_directed_edge(edge_type(1/*from*/, 2/*to*/, 7/*weight*/));
+    const graph_type& g = gf.create(real_number_of_vertices);
+
+    // when
+    fw.run(g);
+
+    // then
+    floyd_warshall::shortest_paths_matrix m = fw.get_shortest_paths_matrix();
+
+    EXPECT_EQ(0,  m[0][0]);
+    EXPECT_EQ(5,  m[0][1]);
+    EXPECT_EQ(12, m[0][2]);
+
+    EXPECT_EQ(5, m[1][0]);
+    EXPECT_EQ(0, m[1][1]);
+    EXPECT_EQ(7, m[1][2]);
+
+    EXPECT_EQ(12, m[2][0]);
+    EXPECT_EQ(7,  m[2][1]);
+    EXPECT_EQ(0,  m[2][2]);
+}
+
+
 } // namespace testing
 } // namespace graphs
 } // namespace pk
