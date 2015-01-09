@@ -23,8 +23,23 @@ public:
     template<class graph_type>
     void run(const graph_type& g)
     {
-        const int num_of_vertices = g.get_num_of_vertices();
+        num_of_vertices = g.get_num_of_vertices();
 
+        initialize_all_paths_to_infinity_and_each_vertex_to_zero();
+        set_initial_paths_to_neighbours(g);
+        compute_shortest_paths();
+    }
+
+    shortest_paths_matrix get_shortest_paths_matrix() const
+    {
+        return shortest_paths;
+    }
+
+    const weight_type infinity;
+
+private:
+    void initialize_all_paths_to_infinity_and_each_vertex_to_zero()
+    {
         for(int i = 0; i < num_of_vertices; ++i)
         {
             for(int j = 0; j < num_of_vertices; ++j)
@@ -32,7 +47,11 @@ public:
 
             shortest_paths[i][i] = weight_type(0);
         }
+    }
 
+    template<class graph_type>
+    void set_initial_paths_to_neighbours(const graph_type& g)
+    {
         for(int v = 0; v < num_of_vertices; ++v)
         {
             const typename graph_type::adjacency_list& adj_v = g.get_adjacency_list(v);
@@ -42,7 +61,10 @@ public:
                 shortest_paths[v][u] = adj_v[i].weight;
             }
         }
+    }
 
+    void compute_shortest_paths()
+    {
         for(int k = 0; k < num_of_vertices; ++k)
         {
             for(int i = 0; i < num_of_vertices; ++i)
@@ -60,15 +82,8 @@ public:
         }
     }
 
-    shortest_paths_matrix get_shortest_paths_matrix() const
-    {
-        return shortest_paths;
-    }
-
-    const weight_type infinity;
-
-private:
     weight_type shortest_paths[V][V];
+    int num_of_vertices;
 };
 
 
