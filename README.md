@@ -92,6 +92,7 @@ All containers have fixed but custom maximum capacity. No memory reallocations o
 | nth_fibonacci_number                               | O(log(n))       | O(1)             |       |
 | prefix_function::run                               | O(n)            | O(1)             |       |
 | prefix_function::get_prefix_suffix_table           | O(1)            | O(1)             |       |
+| shortest_text_template::run                        | O(n)            | O(1)             |       |
 
 
 ###Graphs
@@ -110,4 +111,4 @@ Graph class has fixed but custom maximum amount of vertices and maximum vertex d
 | minimum_spanning_tree_kruskal::run | O(E*log(V))     | O(V+E)           |                       |
 | minimum_spanning_tree_prim::run    | O(E*log(V))     | O(V+E)           | Will be improved soon |
 | shortest_paths_dijkstra::run       | O(E*log(V))     | O(V)             |                       |
-| shortest_paths_floyd_warshall::run | O(V^3)          | O(V^2)           |                       |
+| shortest_paths_floyd_warshall::run | O(V^3)          | O(1)             |                       |
