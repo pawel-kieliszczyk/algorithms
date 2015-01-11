@@ -52,7 +52,6 @@ TEST_F(sieve_of_eratosthenes_tester, tests_sieve_array)
 
 TEST_F(sieve_of_eratosthenes_tester, tests_checking_prime_numbers)
 {
-
     // when and then
     EXPECT_FALSE(sieve.is_prime(0));
     EXPECT_FALSE(sieve.is_prime(1));
