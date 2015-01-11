@@ -14,6 +14,7 @@ C++ library of algorithms and data structures focused on high performance. Might
 
 ##Features
 
+ + popular algorithms and data structures
  + STL-like containers
  + graph library
 
