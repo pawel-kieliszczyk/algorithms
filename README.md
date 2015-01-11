@@ -12,29 +12,19 @@ C++ library of algorithms and data structures focused on easy use and very high 
 [![Coverage Status](https://img.shields.io/coveralls/pawel-kieliszczyk/algorithms.svg)](https://coveralls.io/r/pawel-kieliszczyk/algorithms?branch=master)
 
 
-##Features
-
- + popular algorithms and data structures
- + STL-like containers
- + graph library
-
-
 ##Performance
 
 The library focuses on high performance both minimizing computational complexity of all algorithms and maximizing possibility of efficient CPU caching. All data structures have fixed but custom maximum capacity and perform no memory reallocations once constructed.
 
 
-###Algorithms
+##Features
 
- + longest monotonic subsequence (all 4 versions)
- + fast Fibonacci numbers calculator
- + Knuth's prefix function
- + shortest text template
- + sieve of Eratosthenes
- + prime numbers generator
+ + STL-like containers
+ + popular algorithms and data structures
+ + graph library
 
 
-###Data structures
+####Data structures
 
  + vector
  + stack
@@ -47,7 +37,17 @@ The library focuses on high performance both minimizing computational complexity
  + binary search tree
 
 
-###Graphs
+####Algorithms
+
+ + longest monotonic subsequence (all 4 versions)
+ + fast Fibonacci numbers calculator
+ + Knuth's prefix function
+ + shortest text template
+ + sieve of Eratosthenes
+ + prime numbers generator
+
+
+####Graphs
 
  + graph class
  + depth first search
