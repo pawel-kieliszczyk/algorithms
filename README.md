@@ -22,6 +22,7 @@ The library focuses on high performance both minimizing computational complexity
  + STL-like containers
  + popular algorithms and data structures
  + graph library
+ + Compile-time algorithms
 
 
 ####Data structures
@@ -39,6 +40,8 @@ The library focuses on high performance both minimizing computational complexity
 
 ####Algorithms
 
+ + greatest common divisor
+ + least common multiple
  + longest monotonic subsequence (all 4 versions)
  + fast Fibonacci numbers calculator
  + Knuth's prefix function
@@ -56,3 +59,8 @@ The library focuses on high performance both minimizing computational complexity
  + Prim's minimum spanning tree algorithm (incoming improvements)
  + Dijkstra's algorithm for finding shortest paths
  + Floyd-Warshall algorithm for finding shortest paths
+
+
+####Compile-time algorithms
+
+ + greatest common divisor
