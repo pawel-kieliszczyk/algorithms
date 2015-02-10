@@ -171,5 +171,36 @@ TEST_F(majority_element_tester, tests_existing_majority_element_in_five_element_
 }
 
 
+TEST_F(majority_element_tester, tests_nonexisting_majority_element_in_two_noninteger_element_sequence)
+{
+    // given
+    std::vector<double> numbers;
+    numbers.push_back(12.3);
+    numbers.push_back(-45.6);
+
+    // when
+    std::vector<double>::iterator elem = majority_element(numbers.begin(), numbers.end());
+
+    // then
+    ASSERT_EQ(numbers.end(), elem);
+}
+
+
+TEST_F(majority_element_tester, tests_existing_majority_element_in_two_noninteger_element_sequence)
+{
+    // given
+    std::vector<double> numbers;
+    numbers.push_back(12.3);
+    numbers.push_back(12.3);
+
+    // when
+    std::vector<double>::iterator elem = majority_element(numbers.begin(), numbers.end());
+
+    // then
+    ASSERT_NE(numbers.end(), elem);
+    ASSERT_EQ(12.3, *elem);
+}
+
+
 } // namespace testing
 } // namespace pk
