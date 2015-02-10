@@ -16,14 +16,13 @@ namespace testing
 
 struct majority_element_tester : public gt::Test
 {
-    //
+    std::vector<int> numbers;
 };
 
 
 TEST_F(majority_element_tester, tests_existing_majority_element_in_one_element_sequence)
 {
     // given
-    std::vector<int> numbers;
     numbers.push_back(42);
 
     // when
@@ -38,7 +37,6 @@ TEST_F(majority_element_tester, tests_existing_majority_element_in_one_element_s
 TEST_F(majority_element_tester, tests_nonexisting_majority_element_in_two_element_sequence)
 {
     // given
-    std::vector<int> numbers;
     numbers.push_back(11);
     numbers.push_back(22);
 
@@ -53,7 +51,6 @@ TEST_F(majority_element_tester, tests_nonexisting_majority_element_in_two_elemen
 TEST_F(majority_element_tester, tests_existing_majority_element_in_two_element_sequence)
 {
     // given
-    std::vector<int> numbers;
     numbers.push_back(11);
     numbers.push_back(11);
 
@@ -69,7 +66,6 @@ TEST_F(majority_element_tester, tests_existing_majority_element_in_two_element_s
 TEST_F(majority_element_tester, tests_nonexisting_majority_element_in_three_element_sequence)
 {
     // given
-    std::vector<int> numbers;
     numbers.push_back(11);
     numbers.push_back(22);
     numbers.push_back(33);
@@ -85,7 +81,6 @@ TEST_F(majority_element_tester, tests_nonexisting_majority_element_in_three_elem
 TEST_F(majority_element_tester, tests_existing_majority_element_in_three_element_sequence)
 {
     // given
-    std::vector<int> numbers;
     numbers.push_back(11);
     numbers.push_back(22);
     numbers.push_back(22);
@@ -102,7 +97,6 @@ TEST_F(majority_element_tester, tests_existing_majority_element_in_three_element
 TEST_F(majority_element_tester, tests_nonexisting_majority_element_in_four_element_sequence)
 {
     // given
-    std::vector<int> numbers;
     numbers.push_back(11);
     numbers.push_back(11);
     numbers.push_back(22);
@@ -119,7 +113,6 @@ TEST_F(majority_element_tester, tests_nonexisting_majority_element_in_four_eleme
 TEST_F(majority_element_tester, tests_existing_majority_element_in_four_element_sequence)
 {
     // given
-    std::vector<int> numbers;
     numbers.push_back(42);
     numbers.push_back(42);
     numbers.push_back(42);
@@ -137,7 +130,6 @@ TEST_F(majority_element_tester, tests_existing_majority_element_in_four_element_
 TEST_F(majority_element_tester, tests_nonexisting_majority_element_in_five_element_sequence)
 {
     // given
-    std::vector<int> numbers;
     numbers.push_back(11);
     numbers.push_back(11);
     numbers.push_back(22);
@@ -155,7 +147,6 @@ TEST_F(majority_element_tester, tests_nonexisting_majority_element_in_five_eleme
 TEST_F(majority_element_tester, tests_existing_majority_element_in_five_element_sequence)
 {
     // given
-    std::vector<int> numbers;
     numbers.push_back(11);
     numbers.push_back(11);
     numbers.push_back(22);
@@ -174,30 +165,30 @@ TEST_F(majority_element_tester, tests_existing_majority_element_in_five_element_
 TEST_F(majority_element_tester, tests_nonexisting_majority_element_in_two_noninteger_element_sequence)
 {
     // given
-    std::vector<double> numbers;
-    numbers.push_back(12.3);
-    numbers.push_back(-45.6);
+    std::vector<double> seq;
+    seq.push_back(12.3);
+    seq.push_back(-45.6);
 
     // when
-    std::vector<double>::iterator elem = majority_element(numbers.begin(), numbers.end());
+    std::vector<double>::iterator elem = majority_element(seq.begin(), seq.end());
 
     // then
-    ASSERT_EQ(numbers.end(), elem);
+    ASSERT_EQ(seq.end(), elem);
 }
 
 
 TEST_F(majority_element_tester, tests_existing_majority_element_in_two_noninteger_element_sequence)
 {
     // given
-    std::vector<double> numbers;
-    numbers.push_back(12.3);
-    numbers.push_back(12.3);
+    std::vector<double> seq;
+    seq.push_back(12.3);
+    seq.push_back(12.3);
 
     // when
-    std::vector<double>::iterator elem = majority_element(numbers.begin(), numbers.end());
+    std::vector<double>::iterator elem = majority_element(seq.begin(), seq.end());
 
     // then
-    ASSERT_NE(numbers.end(), elem);
+    ASSERT_NE(seq.end(), elem);
     ASSERT_EQ(12.3, *elem);
 }
 
