@@ -22,7 +22,7 @@ The library focuses on high performance both minimizing computational complexity
  + STL-like containers
  + popular algorithms and data structures
  + graph library
- + Compile-time algorithms
+ + compile-time algorithms
 
 
 ####Data structures
@@ -48,6 +48,7 @@ The library focuses on high performance both minimizing computational complexity
  + shortest text template
  + sieve of Eratosthenes
  + prime numbers generator
+ + majority element
 
 
 ####Graphs
