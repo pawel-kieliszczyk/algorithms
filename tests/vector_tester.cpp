@@ -199,14 +199,15 @@ TEST_F(vector_tester, tests_fill_constructor_of_vector)
     // given
     const int fill_value = 42;
     const int SIZE = 5;
+    const int initial_size = SIZE - 2;
 
     // when
-    pk::vector<int, SIZE> v(fill_value);
+    pk::vector<int, SIZE> v(fill_value, initial_size);
 
     // then
-    ASSERT_EQ(SIZE, v.size());
+    ASSERT_EQ(initial_size, v.size());
 
-    for(int i = 0; i < SIZE; ++i)
+    for(int i = 0; i < initial_size; ++i)
         EXPECT_EQ(v[i], fill_value);
 }
 

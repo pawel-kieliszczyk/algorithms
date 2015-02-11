@@ -63,7 +63,7 @@ TEST_F(minimum_spanning_tree_prim_tester, tests_sample_graph)
     factory.add_not_directed_edge(weighted_edge_type(3, 4, 5));
     factory.add_not_directed_edge(weighted_edge_type(4, 5, 1));
 
-    const graph_type& g = factory.create();
+    const graph_type& g = factory.create(V);
     gt::StrictMock<callback_mock> cm;
 
     // expect

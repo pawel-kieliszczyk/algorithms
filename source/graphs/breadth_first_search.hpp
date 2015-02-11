@@ -25,8 +25,8 @@ public:
             const int starting_vertex_id,
             visitor_type& visitor)
     {
-        pk::queue<int, graph_type::num_of_vertices> q;
-        pk::vector<bool, graph_type::num_of_vertices> visited(false);
+        pk::queue<int, graph_type::max_num_of_vertices> q;
+        pk::vector<bool, graph_type::max_num_of_vertices> visited(false, g.get_num_of_vertices());
 
         q.push(starting_vertex_id);
         visited[starting_vertex_id] = true;

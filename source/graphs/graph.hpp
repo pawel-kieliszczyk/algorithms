@@ -38,21 +38,33 @@ template<int V, int E, class edge_t>
 class graph
 {
 public:
-    static const int num_of_vertices = V;
+    static const int max_num_of_vertices = V;
     static const int max_num_of_edges = E;
 
     typedef edge_t edge_type;
     typedef detail::graph_adjacency_list<edge_type> adjacency_list;
 
-    graph() { adjacency_lists = new adjacency_list[num_of_vertices]; }
-    ~graph() { delete[] adjacency_lists; }
-
-    void set_edges(const edge_type* edges, const int num_of_edges)
+    graph()
     {
-        for(int first = 0; first < num_of_edges; )
+        adjacency_lists = new adjacency_list[max_num_of_vertices];
+    }
+
+    ~graph()
+    {
+        delete[] adjacency_lists;
+    }
+
+    void initialize(const int new_real_num_of_vertices, const edge_type* edges, const int new_real_num_of_edges)
+    {
+        real_num_of_vertices = new_real_num_of_vertices;
+        real_num_of_edges = new_real_num_of_edges;
+
+        reset_adjacency_lists();
+
+        for(int first = 0; first < real_num_of_edges; )
         {
             int last = first;
-            while(++last < num_of_edges)
+            while(++last < real_num_of_edges)
             {
                 if(edges[last].from != edges[first].from)
                     break;
@@ -63,20 +75,33 @@ public:
         }
     }
 
+    int get_num_of_vertices() const
+    {
+        return real_num_of_vertices;
+    }
+
+    int get_num_of_edges() const
+    {
+        return real_num_of_vertices;
+    }
+
     const adjacency_list& get_adjacency_list(const int vertex_id) const
     {
         return adjacency_lists[vertex_id];
     }
 
-    void reset()
+private:
+    void reset_adjacency_lists()
     {
-        for(int i = 0; i < num_of_vertices; ++i)
+        for(int i = 0; i < real_num_of_vertices; ++i)
             adjacency_lists[i].reset();
     }
 
-private:
     graph(const graph&);
     graph& operator=(const graph&);
+
+    int real_num_of_vertices;
+    int real_num_of_edges;
 
     adjacency_list* adjacency_lists;
 };
@@ -104,17 +129,16 @@ public:
         std::swap(edges.back().from, edges.back().to);
     }
 
-    const graph_type& create()
+    const graph_type& create(const int real_num_of_vertices)
     {
         std::sort(edges.begin(), edges.end(), edges_sorter());
-        g.set_edges(edges.begin(), edges.size());
+        g.initialize(real_num_of_vertices, edges.begin(), edges.size());
 
         return g;
     }
 
     void reset()
     {
-        g.reset();
         edges.clear();
     }
 
