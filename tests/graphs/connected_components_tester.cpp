@@ -116,7 +116,7 @@ TEST_F(connected_components_tester, tests_raw_data_component_ids_in_one_componen
  *   \   /     |
  *    (2)     (4)
  */
-TEST_F(connected_components_tester, tests_number_of_components_in_two_component_graphs)
+TEST_F(connected_components_tester, tests_number_of_components_in_two_component_graph)
 {
     // given
     const int num_of_vertices = 5;
@@ -142,7 +142,7 @@ TEST_F(connected_components_tester, tests_number_of_components_in_two_component_
  *   \   /     |
  *    (2)     (4)
  */
-TEST_F(connected_components_tester, tests_component_ids_in_two_component_graphs)
+TEST_F(connected_components_tester, tests_component_ids_in_two_component_graph)
 {
     // given
     const int num_of_vertices = 5;
@@ -173,7 +173,7 @@ TEST_F(connected_components_tester, tests_component_ids_in_two_component_graphs)
  *   \   /     |
  *    (2)     (4)
  */
-TEST_F(connected_components_tester, tests_raw_data_component_ids_in_two_component_graphs)
+TEST_F(connected_components_tester, tests_raw_data_component_ids_in_two_component_graph)
 {
     // given
     const int num_of_vertices = 5;
