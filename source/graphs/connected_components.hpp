@@ -43,6 +43,11 @@ public:
         return component_ids[vertex_id];
     }
 
+    const int* get_raw_component_ids() const
+    {
+        return component_ids;
+    }
+
 private:
     template<class Sequence>
     void visit_next_component(const graph_type& g, const int starting_vertex_id, Sequence& visited)

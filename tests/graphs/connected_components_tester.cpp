@@ -84,6 +84,33 @@ TEST_F(connected_components_tester, tests_component_ids_in_one_component_graph)
 
 
 /**
+ * Tests one-component graph:
+ * (0)---(1)
+ *   \   /
+ *    (2)
+ */
+TEST_F(connected_components_tester, tests_raw_data_component_ids_in_one_component_graph)
+{
+    // given
+    const int num_of_vertices = 3;
+
+    gf.add_not_directed_edge(edge_type(0, 1));
+    gf.add_not_directed_edge(edge_type(0, 2));
+    gf.add_not_directed_edge(edge_type(1, 2));
+
+    const graph_type& g = gf.create(num_of_vertices);
+
+    // when
+    cc.find_components(g);
+    const int* component_ids = cc.get_raw_component_ids();
+
+    // then
+    EXPECT_EQ(component_ids[0], component_ids[1]);
+    EXPECT_EQ(component_ids[1], component_ids[2]);
+}
+
+
+/**
  * Tests two-component graph:
  * (0)---(1)  (3)
  *   \   /     |
@@ -137,6 +164,38 @@ TEST_F(connected_components_tester, tests_component_ids_in_two_component_graphs)
     EXPECT_NE(cc.get_component_id(0), cc.get_component_id(3));
 
     EXPECT_EQ(cc.get_component_id(3), cc.get_component_id(4));
+}
+
+
+/**
+ * Tests two-component graph:
+ * (0)---(1)  (3)
+ *   \   /     |
+ *    (2)     (4)
+ */
+TEST_F(connected_components_tester, tests_raw_data_component_ids_in_two_component_graphs)
+{
+    // given
+    const int num_of_vertices = 5;
+
+    gf.add_not_directed_edge(edge_type(0, 1));
+    gf.add_not_directed_edge(edge_type(0, 2));
+    gf.add_not_directed_edge(edge_type(1, 2));
+    gf.add_not_directed_edge(edge_type(3, 4));
+
+    const graph_type& g = gf.create(num_of_vertices);
+
+    // when
+    cc.find_components(g);
+    const int* component_ids = cc.get_raw_component_ids();
+
+    // then
+    EXPECT_EQ(component_ids[0], component_ids[1]);
+    EXPECT_EQ(component_ids[1], component_ids[2]);
+
+    EXPECT_NE(component_ids[0], component_ids[3]);
+
+    EXPECT_EQ(component_ids[3], component_ids[4]);
 }
 
 
