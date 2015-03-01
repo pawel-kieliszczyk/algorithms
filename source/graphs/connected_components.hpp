@@ -18,6 +18,9 @@ class connected_components
 public:
     typedef Graph graph_type;
 
+    connected_components() : component_ids(new int[graph_type::max_num_of_vertices]) {}
+    ~connected_components() { delete[] component_ids; }
+
     void find_components(const graph_type& g)
     {
         number_of_components = 0;
@@ -49,6 +52,9 @@ public:
     }
 
 private:
+    connected_components(const connected_components&);
+    connected_components& operator=(const connected_components&);
+
     template<class Sequence>
     void visit_next_component(const graph_type& g, const int starting_vertex_id, Sequence& visited)
     {
@@ -78,7 +84,7 @@ private:
         }
     }
 
-    int component_ids[graph_type::max_num_of_vertices];
+    int* component_ids;
     int number_of_components;
 };
 
