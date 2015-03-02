@@ -30,6 +30,12 @@ struct weighted_edge : public edge
 };
 
 
+inline bool operator==(const edge& left, const edge& right)
+{
+    return ((left.from == right.from) && (left.to == right.to));
+}
+
+
 template<class weight_type>
 inline bool operator==(const weighted_edge<weight_type>& left, const weighted_edge<weight_type>& right)
 {
