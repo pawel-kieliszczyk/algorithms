@@ -32,9 +32,7 @@ public:
         for(int u = 0; u < dist.size(); ++u)
         {
             if(dist[u] == 0)
-            {
                 find_bridges_in_component(graph, u, callback, dist, time);
-            }
         }
     }
 
@@ -50,7 +48,7 @@ private:
             dist_sequence_type& dist,
             int& time)
     {
-        int low = dist[v] = time++;
+        dist[v] = ++time;
 
         const typename graph_type::adjacency_list& adj_v = graph.get_adjacency_list(v);
         for(int i = 0; i < adj_v.size(); ++i)
@@ -58,14 +56,7 @@ private:
             const int u = adj_v[i].to;
 
             if(dist[u] == 0)
-            {
-                const int temp = find_bridges_in_component(graph, adj_v[i], callback, dist, time);
-                low = std::min(low, temp);
-            }
-            else
-            {
-                low = std::min(low, dist[u]);
-            }
+                find_bridges_in_component(graph, adj_v[i], callback, dist, time);
         }
     }
 
@@ -80,31 +71,29 @@ private:
             dist_sequence_type& dist,
             int& time)
     {
-        int low = dist[edge.to] = time++;
+        int low = dist[edge.to] = ++time;
 
         const typename graph_type::adjacency_list& adj_to = graph.get_adjacency_list(edge.to);
         for(int i = 0; i < adj_to.size(); ++i)
         {
             const int u = adj_to[i].to;
 
-            if(u != edge.from)
+            if(u == edge.from)
+                continue;
+
+            if(dist[u] == 0)
             {
-                if(dist[u] == 0)
-                {
-                    const int temp = find_bridges_in_component(graph, adj_to[i], callback, dist, time);
-                    low = std::min(low, temp);
-                }
-                else
-                {
-                    low = std::min(low, dist[u]);
-                }
+                const int temp = find_bridges_in_component(graph, adj_to[i], callback, dist, time);
+                low = std::min(low, temp);
+            }
+            else
+            {
+                low = std::min(low, dist[u]);
             }
         }
 
         if(low == dist[edge.to])
-        {
             callback.notify(edge);
-        }
 
         return low;
     }
