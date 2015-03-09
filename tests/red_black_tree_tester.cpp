@@ -189,9 +189,9 @@ TEST_F(red_black_tree_tester, tests_existance_of_removed_element)
 TEST_F(red_black_tree_tester, tests_existance_of_mixed_inserted_and_removed_elements)
 {
     // given
-    const int elem1 = 11;
+    const int elem1 = 33;
     const int elem2 = 22;
-    const int elem3 = 33;
+    const int elem3 = 11;
 
     // when
     rbt.insert(elem1);

@@ -343,7 +343,6 @@ private:
         return result;
     }
 
-
     void transplant(node* u, node* v)
     {
         if(u->parent == &null_node)
