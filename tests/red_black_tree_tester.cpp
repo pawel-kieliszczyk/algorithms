@@ -222,5 +222,35 @@ TEST_F(red_black_tree_tester, tests_existance_of_mixed_inserted_and_removed_elem
 }
 
 
+TEST_F(red_black_tree_tester, tests_minimum_element)
+{
+    // given
+    const int num_of_elements = 7;
+    const int elements[num_of_elements] = {55, 22, 66, -44, 0, -20, 33};
+
+    // when
+    for(int i = 0; i < num_of_elements; ++i)
+        rbt.insert(elements[i]);
+
+    // then
+    EXPECT_EQ(-44, rbt.min());
+}
+
+
+TEST_F(red_black_tree_tester, tests_maximum_element)
+{
+    // given
+    const int num_of_elements = 7;
+    const int elements[num_of_elements] = {55, 22, 66, -44, 0, -20, 33};
+
+    // when
+    for(int i = 0; i < num_of_elements; ++i)
+        rbt.insert(elements[i]);
+
+    // then
+    EXPECT_EQ(66, rbt.max());
+}
+
+
 } // namespace testing
 } // namespace pk

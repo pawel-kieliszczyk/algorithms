@@ -53,6 +53,18 @@ public:
         return (result != &null_node);
     }
 
+    const value_type& min() const
+    {
+        const node* m = node_in_subtree_with_minimum_value(root);
+        return m->value;
+    }
+
+    const value_type& max() const
+    {
+        const node* m = node_in_subtree_with_maximum_value(root);
+        return m->value;
+    }
+
     int size() const
     {
         return sz;
@@ -344,10 +356,18 @@ private:
         v->parent = u->parent;
     }
 
-    node* node_in_subtree_with_minimum_value(node* x)
+    node* node_in_subtree_with_minimum_value(node* x) const
     {
         while(x->left != &null_node)
             x = x->left;
+
+        return x;
+    }
+
+    node* node_in_subtree_with_maximum_value(node* x) const
+    {
+        while(x->right != &null_node)
+            x = x->right;
 
         return x;
     }
