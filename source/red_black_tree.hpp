@@ -21,6 +21,7 @@ public:
     red_black_tree() : root(&null_node), sz(0)
     {
         null_node.color = node::color_black;
+        null_node.subtree_size = 0;
     }
 
     void insert(const value_type& elem)
@@ -65,6 +66,12 @@ public:
         return m->value;
     }
 
+    int rank(const value_type& elem) const
+    {
+        const node* x = node_with_value(elem);
+        return rank(x);
+    }
+
     int size() const
     {
         return sz;
@@ -82,6 +89,7 @@ private:
 
         value_type value;
         ecolor color;
+        int subtree_size;
 
         node* parent;
         node* left;
@@ -95,6 +103,8 @@ private:
 
         while(x != &null_node)
         {
+            x->subtree_size += 1;
+
             y = x;
             x = (new_node->value < x->value) ? x->left : x->right;
         }
@@ -110,6 +120,7 @@ private:
         new_node->left = &null_node;
         new_node->right = &null_node;
         new_node->color = node::color_red;
+        new_node->subtree_size = 1;
 
         fix_up_after_insert(new_node);
     }
@@ -120,6 +131,7 @@ private:
         typename node::ecolor y_original_color = y->color;
 
         node* x;
+        node* node_with_broken_subtree_size = z->parent;
         if(z->left == &null_node)
         {
             x = z->right;
@@ -153,10 +165,27 @@ private:
             y->left = z->left;
             y->left->parent = y;
             y->color = z->color;
+
+            node_with_broken_subtree_size = x->parent;
         }
+
+        fix_up_subtree_sizes_after_remove(node_with_broken_subtree_size);
 
         if(y_original_color == node::color_black)
             fix_up_after_remove(x);
+    }
+
+    int rank(const node* x) const
+    {
+        int result = x->left->subtree_size;
+
+        for(const node* y = x; y != root; y = y->parent)
+        {
+            if(y == y->parent->right)
+                result += y->parent->left->subtree_size + 1;
+        }
+
+        return result;
     }
 
     void fix_up_after_insert(node* z)
@@ -291,6 +320,15 @@ private:
         x->color = node::color_black;
     }
 
+    void fix_up_subtree_sizes_after_remove(node* x)
+    {
+        while(x != &null_node)
+        {
+            x->subtree_size = x->left->subtree_size + x->right->subtree_size + 1;
+            x = x->parent;
+        }
+    }
+
     void rotate_left(node* x)
     {
         node* y = x->right;
@@ -310,6 +348,9 @@ private:
 
         y->left = x;
         x->parent = y;
+
+        x->subtree_size = x->left->subtree_size + x->right->subtree_size + 1;
+        y->subtree_size = x->subtree_size + y->right->subtree_size + 1;
     }
 
     void rotate_right(node* x)
@@ -331,9 +372,12 @@ private:
 
         y->right = x;
         x->parent = y;
+
+        x->subtree_size = x->left->subtree_size + x->right->subtree_size + 1;
+        y->subtree_size = x->subtree_size + y->left->subtree_size + 1;
     }
 
-    node* node_with_value(const value_type& value)
+    node* node_with_value(const value_type& value) const
     {
         node* result = root;
 

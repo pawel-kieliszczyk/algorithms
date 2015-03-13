@@ -252,5 +252,53 @@ TEST_F(red_black_tree_tester, tests_maximum_element)
 }
 
 
+TEST_F(red_black_tree_tester, tests_ranks_after_insertions)
+{
+    // given
+    const int num_of_elements = 10;
+    const int elements[num_of_elements] = {55, 22, 66, -44, 0, -22, 33, 11, 44, -33};
+
+    // when
+    for(int i = 0; i < num_of_elements; ++i)
+        rbt.insert(elements[i]);
+
+    // then
+    EXPECT_EQ(0, rbt.rank(-44));
+    EXPECT_EQ(1, rbt.rank(-33));
+    EXPECT_EQ(2, rbt.rank(-22));
+    EXPECT_EQ(3, rbt.rank(0));
+    EXPECT_EQ(4, rbt.rank(11));
+    EXPECT_EQ(5, rbt.rank(22));
+    EXPECT_EQ(6, rbt.rank(33));
+    EXPECT_EQ(7, rbt.rank(44));
+    EXPECT_EQ(8, rbt.rank(55));
+    EXPECT_EQ(9, rbt.rank(66));
+}
+
+
+TEST_F(red_black_tree_tester, tests_ranks_after_removals)
+{
+    // given
+    const int num_of_elements_to_insert = 10;
+    const int num_of_elements_to_remove = 5;
+    const int elements_to_insert[num_of_elements_to_insert] = {55, 22, 66, -44, 0, -22, 33, 11, 44, -33};
+    const int elements_to_remove[num_of_elements_to_remove] = {55,     66,      0,      33,     44     };
+
+    for(int i = 0; i < num_of_elements_to_insert; ++i)
+        rbt.insert(elements_to_insert[i]);
+
+    // when
+    for(int i = 0; i < num_of_elements_to_remove; ++i)
+        rbt.remove(elements_to_remove[i]);
+
+    // then
+    EXPECT_EQ(0, rbt.rank(-44));
+    EXPECT_EQ(1, rbt.rank(-33));
+    EXPECT_EQ(2, rbt.rank(-22));
+    EXPECT_EQ(3, rbt.rank(11));
+    EXPECT_EQ(4, rbt.rank(22));
+}
+
+
 } // namespace testing
 } // namespace pk
