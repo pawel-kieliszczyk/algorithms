@@ -175,8 +175,10 @@ TEST_F(red_black_tree_tester, tests_existance_of_inserted_element)
 TEST_F(red_black_tree_tester, tests_existance_of_many_inserted_elements)
 {
     // given
-    const int num_of_elements = 10;
-    const int elements[num_of_elements] = {55, 22, 66, -44, 0, -22, 33, 11, 44, -33};
+    const int num_of_elements = 100;
+    int elements[num_of_elements];
+    for(int i = 0; i < num_of_elements; ++i)
+        elements[i] = i; // sample values
 
     // when
     for(int i = 0; i < num_of_elements; ++i)
@@ -205,8 +207,10 @@ TEST_F(red_black_tree_tester, tests_existance_of_removed_element)
 TEST_F(red_black_tree_tester, tests_existance_of_many_removed_elements)
 {
     // given
-    const int num_of_elements = 10;
-    const int elements[num_of_elements] = {55, 22, 66, -44, 0, -22, 33, 11, 44, -33};
+    const int num_of_elements = 100;
+    int elements[num_of_elements];
+    for(int i = 0; i < num_of_elements; ++i)
+        elements[i] = 200 - i; // sample values
 
     for(int i = 0; i < num_of_elements; ++i)
         rbt.insert(elements[i]);
