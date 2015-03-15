@@ -212,7 +212,7 @@ TEST_F(red_black_tree_tester, tests_existance_of_many_removed_elements)
         rbt.insert(elements[i]);
 
     // when
-    for(int i = 0; i < num_of_elements; ++i)
+    for(int i = num_of_elements - 1; i >= 0; --i)
         rbt.remove(elements[i]);
 
     // then
