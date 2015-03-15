@@ -172,6 +172,22 @@ TEST_F(red_black_tree_tester, tests_existance_of_inserted_element)
 }
 
 
+TEST_F(red_black_tree_tester, tests_existance_of_many_inserted_elements)
+{
+    // given
+    const int num_of_elements = 10;
+    const int elements[num_of_elements] = {55, 22, 66, -44, 0, -22, 33, 11, 44, -33};
+
+    // when
+    for(int i = 0; i < num_of_elements; ++i)
+        rbt.insert(elements[i]);
+
+    // then
+    for(int i = 0; i < num_of_elements; ++i)
+        EXPECT_TRUE(rbt.exists(elements[i]));
+}
+
+
 TEST_F(red_black_tree_tester, tests_existance_of_removed_element)
 {
     // given
@@ -183,6 +199,25 @@ TEST_F(red_black_tree_tester, tests_existance_of_removed_element)
 
     // then
     EXPECT_FALSE(rbt.exists(elem));
+}
+
+
+TEST_F(red_black_tree_tester, tests_existance_of_many_removed_elements)
+{
+    // given
+    const int num_of_elements = 10;
+    const int elements[num_of_elements] = {55, 22, 66, -44, 0, -22, 33, 11, 44, -33};
+
+    for(int i = 0; i < num_of_elements; ++i)
+        rbt.insert(elements[i]);
+
+    // when
+    for(int i = 0; i < num_of_elements; ++i)
+        rbt.remove(elements[i]);
+
+    // then
+    for(int i = 0; i < num_of_elements; ++i)
+        EXPECT_FALSE(rbt.exists(elements[i]));
 }
 
 
