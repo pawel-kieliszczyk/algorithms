@@ -210,13 +210,13 @@ TEST_F(red_black_tree_tester, tests_existance_of_many_removed_elements)
     const int num_of_elements = 100;
     int elements[num_of_elements];
     for(int i = 0; i < num_of_elements; ++i)
-        elements[i] = 200 - i; // sample values
+        elements[i] = i; // sample values
 
     for(int i = 0; i < num_of_elements; ++i)
         rbt.insert(elements[i]);
 
     // when
-    for(int i = num_of_elements - 1; i >= 0; --i)
+    for(int i = 0; i < num_of_elements; ++i)
         rbt.remove(elements[i]);
 
     // then
