@@ -2,8 +2,6 @@
 #define PK_GRAPHS_DEPTHFIRSTSEARCH_HPP
 
 
-#include <algorithm>
-
 #include "stack.hpp"
 #include "vector.hpp"
 

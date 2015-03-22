@@ -36,6 +36,7 @@ The library focuses on high performance both minimizing computational complexity
  + interval tree (1D, 2D, 3D and 4D)
  + binary indexed tree (1D, 2D and 3D)
  + binary search tree
+ + red-black tree
 
 
 ####Algorithms
@@ -56,6 +57,8 @@ The library focuses on high performance both minimizing computational complexity
  + graph class
  + depth first search
  + breadth first search
+ + topological sort
+ + finding connected components
  + Kurskal's minimum spanning tree algorithm
  + Prim's minimum spanning tree algorithm (incoming improvements)
  + Dijkstra's algorithm for finding shortest paths
