@@ -57,6 +57,7 @@ The library focuses on high performance both minimizing computational complexity
  + graph class
  + depth first search
  + breadth first search
+ + topological sort
  + finding connected components
  + Kurskal's minimum spanning tree algorithm
  + Prim's minimum spanning tree algorithm (incoming improvements)
