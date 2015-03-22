@@ -95,7 +95,7 @@ TEST_F(topological_sort_tester, tests_lexicographical_order_of_sorted_vertices)
  * Tested graph:
  *        (0)           (8)--->(7)
  *         ^             |      |
- *         |             |      |
+ *  (2)    |             |      |
  *         |\____        |      |
  *         |     \       V      V
  * (1)<---(4)--->(3)<---(5)--->(6)
