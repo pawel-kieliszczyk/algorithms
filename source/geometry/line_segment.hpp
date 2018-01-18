@@ -1,5 +1,5 @@
-#ifndef PK_GEOMETRY_SEGMENT_HPP
-#define PK_GEOMETRY_SEGMENT_HPP
+#ifndef PK_GEOMETRY_LINE_SEGMENT_HPP
+#define PK_GEOMETRY_LINE_SEGMENT_HPP
 
 
 namespace pk
@@ -9,13 +9,13 @@ namespace geometry
 
 
 template<class Point>
-class segment
+class line_segment
 {
 public:
     typedef Point point_type;
 
-    segment() {}
-    segment(const Point& p1_, const Point& p2_) : p1(p1_), p2(p2_) {}
+    line_segment() {}
+    line_segment(const Point& p1_, const Point& p2_) : p1(p1_), p2(p2_) {}
 
     void set_p1(const Point& p1_) { p1 = p1_; }
     void set_p2(const Point& p2_) { p2 = p2_; }
@@ -32,4 +32,4 @@ private:
 } // namespace pk
 
 
-#endif // PK_GEOMETRY_SEGMENT_HPP
+#endif // PK_GEOMETRY_LINE_SEGMENT_HPP
