@@ -46,6 +46,14 @@ public:
 
 
 template<>
+class value_comparators<long long>
+{
+public:
+    typedef exact_value_comparator<long long> comparator_type;
+};
+
+
+template<>
 class value_comparators<double>
 {
 public:
