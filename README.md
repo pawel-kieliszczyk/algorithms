@@ -1,7 +1,7 @@
 # Algorithms and data structures
 
 
-##Overview
+## Overview
 
 C++ library of algorithms and data structures focused on easy use and very high performance. Might be useful in algorithmic competitions such as TopCoder or Sphere Online Judge. This is a header only library compatible with C++03 standard.
 
@@ -50,10 +50,10 @@ The library focuses on high performance both minimizing computational complexity
  + sieve of Eratosthenes
  + prime numbers generator
  + majority element
-
-
-#### Graphs
-
+ 
+ 
+ #### Graphs
+ 
  + graph class
  + depth first search
  + breadth first search
@@ -63,6 +63,16 @@ The library focuses on high performance both minimizing computational complexity
  + Prim's minimum spanning tree algorithm (incoming improvements)
  + Dijkstra's algorithm for finding shortest paths
  + Floyd-Warshall algorithm for finding shortest paths
+ 
+ 
+ #### Geometry
+ 
+ + point class
+ + line segment class
+ + distance between two points
+ + checking if 3 points are collinear
+ + detecting if a point is on a line segment
+ + detecting intersection of line segments
 
 
 #### Compile-time algorithms
