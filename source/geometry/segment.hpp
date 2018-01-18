@@ -12,6 +12,8 @@ template<class Point>
 class segment
 {
 public:
+    typedef Point point_type;
+
     segment() {}
     segment(const Point& p1_, const Point& p2_) : p1(p1_), p2(p2_) {}
 
