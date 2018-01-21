@@ -64,7 +64,12 @@ private:
             if(left->weight < right->weight)
                 return false;
 
-            return (left->from > right->from);
+            if(left->from > right->from)
+                return true;
+            if(left->from < right->from)
+                return false;
+
+            return (left->to > right->to);
         }
     };
 };
