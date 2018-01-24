@@ -59,7 +59,17 @@ private:
     {
         bool operator()(const edge_type* left, const edge_type* right)
         {
-            return (left->weight > right->weight);
+            if(left->weight > right->weight)
+                return true;
+            if(left->weight < right->weight)
+                return false;
+
+            if(left->from > right->from)
+                return true;
+            if(left->from < right->from)
+                return false;
+
+            return (left->to > right->to);
         }
     };
 };

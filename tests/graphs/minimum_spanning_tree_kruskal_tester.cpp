@@ -72,7 +72,7 @@ TEST_F(minimum_spanning_tree_kruskal_tester, tests_sample_graph)
     EXPECT_CALL(cm, notify(weighted_edge_type(2, 5, 3)));
     EXPECT_CALL(cm, notify(weighted_edge_type(0, 3, 4)));
     EXPECT_CALL(cm, notify(weighted_edge_type(1, 4, 4)));
-    EXPECT_CALL(cm, notify(weighted_edge_type(4, 3, 5)));
+    EXPECT_CALL(cm, notify(weighted_edge_type(3, 4, 5)));
 
     // when and then
     minimum_spanning_tree_kruskal::run(g, cm);

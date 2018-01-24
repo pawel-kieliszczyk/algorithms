@@ -1,23 +1,23 @@
 # Algorithms and data structures
 
 
-##Overview
+## Overview
 
 C++ library of algorithms and data structures focused on easy use and very high performance. Might be useful in algorithmic competitions such as TopCoder or Sphere Online Judge. This is a header only library compatible with C++03 standard.
 
 
-##Continuous integration status
+## Continuous integration status
 
 [![Build Status](https://travis-ci.org/pawel-kieliszczyk/algorithms.svg)](https://travis-ci.org/pawel-kieliszczyk/algorithms)
 [![Coverage Status](https://img.shields.io/coveralls/pawel-kieliszczyk/algorithms.svg)](https://coveralls.io/r/pawel-kieliszczyk/algorithms?branch=master)
 
 
-##Performance
+## Performance
 
 The library focuses on high performance both minimizing computational complexity of all algorithms and maximizing possibility of efficient CPU caching. All data structures have fixed but custom maximum capacity and perform no memory reallocations once constructed.
 
 
-##Features
+## Features
 
  + STL-like containers
  + popular algorithms and data structures
@@ -25,7 +25,7 @@ The library focuses on high performance both minimizing computational complexity
  + compile-time algorithms
 
 
-####Data structures
+#### Data structures
 
  + vector
  + stack
@@ -39,7 +39,7 @@ The library focuses on high performance both minimizing computational complexity
  + red-black tree
 
 
-####Algorithms
+#### Algorithms
 
  + greatest common divisor
  + least common multiple
@@ -50,10 +50,10 @@ The library focuses on high performance both minimizing computational complexity
  + sieve of Eratosthenes
  + prime numbers generator
  + majority element
-
-
-####Graphs
-
+ 
+ 
+ #### Graphs
+ 
  + graph class
  + depth first search
  + breadth first search
@@ -63,8 +63,18 @@ The library focuses on high performance both minimizing computational complexity
  + Prim's minimum spanning tree algorithm (incoming improvements)
  + Dijkstra's algorithm for finding shortest paths
  + Floyd-Warshall algorithm for finding shortest paths
+ 
+ 
+ #### Geometry
+ 
+ + point class
+ + line segment class
+ + distance between two points
+ + checking if 3 points are collinear
+ + detecting if a point is on a line segment
+ + detecting intersection of line segments
 
 
-####Compile-time algorithms
+#### Compile-time algorithms
 
  + greatest common divisor
