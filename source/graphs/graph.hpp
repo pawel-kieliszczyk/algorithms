@@ -135,6 +135,17 @@ public:
         std::swap(edges.back().from, edges.back().to);
     }
 
+    void add_residual_edge(const edge_type& e)
+    {
+        edges.push_back(e);
+
+        edge_type reverse_edge = e;
+        std::swap(reverse_edge.from, reverse_edge.to);
+        reverse_edge.capacity = typename edge_type::capacity_type();
+
+        edges.push_back(reverse_edge);
+    }
+
     graph_type& create(const int real_num_of_vertices)
     {
         std::sort(edges.begin(), edges.end(), edges_sorter());

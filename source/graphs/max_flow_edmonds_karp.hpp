@@ -19,9 +19,7 @@ namespace graphs
  * WARNING:
  * It will modify edges of the graph!
  *
- * edge->capacity  - It will be decreased for each edge by a flow
- *                   in this edge and can be treated as a "left" capacity.
- * edge->flow - It will be equal to the flow in this edge.
+ * edge->flow - It will set to the flow in this edge.
  *
  * To get maximum flow, sum up flows in all edges starting from the source
  * or flows in all edged ending in the sink.
@@ -35,12 +33,13 @@ public:
         initialize_flows_to_zeros(g);
 
         typename graph_type::edge_type* edge_from_pred[graph_type::max_num_of_vertices];
+
         while(find_path_to_sink(g, source_id, sink_id, edge_from_pred))
         {
             typename graph_type::edge_type::capacity_type min_capacity =
-                    find_min_capacity<graph_type>(source_id, sink_id, edge_from_pred);
+                    find_available_flow<graph_type>(source_id, sink_id, edge_from_pred);
 
-            update_flow<graph_type>(source_id, sink_id, edge_from_pred, min_capacity);
+            update_flow<graph_type>(g, source_id, sink_id, edge_from_pred, min_capacity);
         }
     }
 
@@ -76,8 +75,10 @@ private:
             typename graph_type::adjacency_list& adj_v = g.get_adjacency_list(v);
             for(int i = 0; i < adj_v.size(); ++i)
             {
-                const typename graph_type::edge_type::capacity_type& capacity = adj_v[i].capacity;
-                if(capacity == typename graph_type::edge_type::capacity_type())
+                const typename graph_type::edge_type::capacity_type& residual_capacity =
+                        adj_v[i].capacity - adj_v[i].flow;
+
+                if(!residual_capacity)
                     continue;
 
                 const int u = adj_v[i].to;
@@ -101,7 +102,7 @@ private:
     }
 
     template<class graph_type>
-    static typename graph_type::edge_type::capacity_type find_min_capacity(
+    static typename graph_type::edge_type::capacity_type find_available_flow(
             const int source_id,
             const int sink_id,
             typename graph_type::edge_type** edge_from_pred)
@@ -112,16 +113,17 @@ private:
         typename graph_type::edge_type* edge = edge_from_pred[sink_id];
         while(edge->from != source_id)
         {
-            min_capacity = std::min(min_capacity, edge->capacity);
+            min_capacity = std::min(min_capacity, edge->capacity - edge->flow);
             edge = edge_from_pred[edge->from];
         }
-        min_capacity = std::min(min_capacity, edge->capacity);
+        min_capacity = std::min(min_capacity, edge->capacity - edge->flow);
 
         return min_capacity;
     }
 
     template<class graph_type>
     static void update_flow(
+            graph_type& g,
             const int source_id,
             const int sink_id,
             typename graph_type::edge_type** edge_from_pred,
@@ -130,12 +132,32 @@ private:
         typename graph_type::edge_type* edge = edge_from_pred[sink_id];
         while(edge->from != source_id)
         {
-            edge->capacity -= min_capacity;
             edge->flow += min_capacity;
+
+            typename graph_type::adjacency_list& adj_to = g.get_adjacency_list(edge->to);
+            for(int i = 0; i < adj_to.size(); ++i)
+            {
+                if(adj_to[i].to == edge->from)
+                {
+                    adj_to[i].flow -= min_capacity;
+                    break;
+                }
+            }
+
             edge = edge_from_pred[edge->from];
         }
-        edge->capacity -= min_capacity;
+
         edge->flow += min_capacity;
+
+        typename graph_type::adjacency_list& adj_to = g.get_adjacency_list(edge->to);
+        for(int i = 0; i < adj_to.size(); ++i)
+        {
+            if(adj_to[i].to == edge->from)
+            {
+                adj_to[i].flow -= min_capacity;
+                break;
+            }
+        }
     }
 };
 
