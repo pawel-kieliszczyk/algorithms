@@ -63,6 +63,7 @@ The library focuses on high performance both minimizing computational complexity
  + Prim's minimum spanning tree algorithm (incoming improvements)
  + Dijkstra's algorithm for finding shortest paths
  + Floyd-Warshall algorithm for finding shortest paths
+ + Edmonds-Karp algorithm for finding maximum flow
  
  
  #### Geometry
