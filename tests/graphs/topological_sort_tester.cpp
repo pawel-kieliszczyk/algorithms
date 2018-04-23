@@ -37,11 +37,11 @@ TEST_F(topological_sort_tester, tests_sorting_two_not_connected_vertices)
 
     // when
     int order[num_of_vertices];
-    topological_sort::run(g, order);
+    EXPECT_TRUE(topological_sort::run(g, order));
 
     // then
-    EXPECT_EQ(0, order[0]);
-    EXPECT_EQ(1, order[1]);
+    EXPECT_EQ(1, order[0]);
+    EXPECT_EQ(0, order[1]);
 }
 
 
@@ -56,7 +56,7 @@ TEST_F(topological_sort_tester, tests_sorting_two_connected_vertices)
 
     // when
     int order[num_of_vertices];
-    topological_sort::run(g, order);
+    EXPECT_TRUE(topological_sort::run(g, order));
 
     // then
     EXPECT_EQ(1, order[0]);
@@ -70,7 +70,7 @@ TEST_F(topological_sort_tester, tests_sorting_two_connected_vertices)
  *
  * (1)<---(2)
  */
-TEST_F(topological_sort_tester, tests_lexicographical_order_of_sorted_vertices)
+TEST_F(topological_sort_tester, tests_sorting_small_graph)
 {
     // given
     const int num_of_vertices = 4;
@@ -81,13 +81,43 @@ TEST_F(topological_sort_tester, tests_lexicographical_order_of_sorted_vertices)
 
     // when
     int order[num_of_vertices];
-    topological_sort::run(g, order);
+    EXPECT_TRUE(topological_sort::run(g, order));
 
     // then
-    EXPECT_EQ(0, order[0]);
+    EXPECT_EQ(3, order[0]);
     EXPECT_EQ(2, order[1]);
     EXPECT_EQ(1, order[2]);
-    EXPECT_EQ(3, order[3]);
+    EXPECT_EQ(0, order[3]);
+}
+
+
+/**
+ * Tested graph:
+ * (2)--->(0)
+ *  |      ^
+ *  |      |
+ *  v     /
+ * (1)---'
+ */
+TEST_F(topological_sort_tester, tests_sorting_bigger_graph)
+{
+    // given
+    const int num_of_vertices = 3;
+
+    gf.add_directed_edge(edge_type(1/*from*/, 0/*to*/));
+    gf.add_directed_edge(edge_type(2, 0));
+    gf.add_directed_edge(edge_type(2, 1));
+
+    const graph_type& g = gf.create(num_of_vertices);
+
+    // when
+    int order[num_of_vertices];
+    EXPECT_TRUE(topological_sort::run(g, order));
+
+    // then
+    EXPECT_EQ(2, order[0]);
+    EXPECT_EQ(1, order[1]);
+    EXPECT_EQ(0, order[2]);
 }
 
 
@@ -100,7 +130,7 @@ TEST_F(topological_sort_tester, tests_lexicographical_order_of_sorted_vertices)
  *         |     \       V      V
  * (1)<---(4)--->(3)<---(5)--->(6)
  */
-TEST_F(topological_sort_tester, tests_sorting_bigger_graph)
+TEST_F(topological_sort_tester, tests_sorting_biggest_graph)
 {
     // given
     const int num_of_vertices = 9;
@@ -119,18 +149,18 @@ TEST_F(topological_sort_tester, tests_sorting_bigger_graph)
 
     // when
     int order[num_of_vertices];
-    topological_sort::run(g, order);
+    EXPECT_TRUE(topological_sort::run(g, order));
 
     // then
-    EXPECT_EQ(2, order[0]);
-    EXPECT_EQ(4, order[1]);
-    EXPECT_EQ(1, order[2]);
-    EXPECT_EQ(8, order[3]);
-    EXPECT_EQ(5, order[4]);
+    EXPECT_EQ(8, order[0]);
+    EXPECT_EQ(7, order[1]);
+    EXPECT_EQ(5, order[2]);
+    EXPECT_EQ(6, order[3]);
+    EXPECT_EQ(4, order[4]);
     EXPECT_EQ(3, order[5]);
-    EXPECT_EQ(0, order[6]);
-    EXPECT_EQ(7, order[7]);
-    EXPECT_EQ(6, order[8]);
+    EXPECT_EQ(2, order[6]);
+    EXPECT_EQ(1, order[7]);
+    EXPECT_EQ(0, order[8]);
 }
 
 
