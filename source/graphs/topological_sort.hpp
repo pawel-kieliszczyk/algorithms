@@ -18,56 +18,57 @@ class topological_sort
 {
 public:
     template<class graph_type, class output_iterator>
-    static output_iterator run(const graph_type& graph, const output_iterator output_first)
+    static bool run(const graph_type& graph, output_iterator output)
     {
-        const int num_of_vertices = graph.get_num_of_vertices();
-        output_iterator output_last = output_first;
+        pk::vector<int, graph_type::max_num_of_vertices> colors(0, graph.get_num_of_vertices());
+        pk::stack<int, graph_type::max_num_of_vertices> s;
 
-        pk::vector<bool, graph_type::max_num_of_vertices> visited(false, num_of_vertices);
-        pk::stack<stack_entry, graph_type::max_num_of_edges> s;
-
-        for(int i = num_of_vertices - 1; i >= 0; --i)
+        for(int v = 0; v < graph.get_num_of_vertices(); ++v)
         {
-            if(!visited[i])
-                s.push(stack_entry(false, i));
+            if(colors[v] != 0)
+                continue;
 
-            while(!s.empty())
-            {
-                const stack_entry e = s.top();
-                s.pop();
-
-                if(e.is_parent)
-                {
-                    *output_last++ = e.vertex_id;
-                    continue;
-                }
-
-                visited[e.vertex_id] = true;
-                s.push(stack_entry(true, e.vertex_id));
-
-                const typename graph_type::adjacency_list& adjacent_edges = graph.get_adjacency_list(e.vertex_id);
-                for(int i = 0; i < adjacent_edges.size(); ++i)
-                {
-                    const int v = adjacent_edges[i].to;
-                    if(!visited[v])
-                        s.push(stack_entry(false, v));
-                }
-            }
+            if(!dfs(graph, v, colors, s))
+                return false;
         }
 
-        std::reverse(output_first, output_last);
-        return output_last;
+        while(!s.empty())
+        {
+            *output++ = s.top();
+            s.pop();
+        }
+
+        return true;
     }
 
 private:
-    struct stack_entry
+    template<class graph_type>
+    static bool dfs(
+            const graph_type& graph,
+            const int vertex_id,
+            pk::vector<int, graph_type::max_num_of_vertices>& colors,
+            pk::stack<int, graph_type::max_num_of_vertices>& s)
     {
-        stack_entry() {}
-        stack_entry(bool is_parent_, int vertex_id_) : is_parent(is_parent_), vertex_id(vertex_id_) {}
+        if(colors[vertex_id] == 1)
+            return false;
 
-        bool is_parent;
-        int vertex_id;
-    };
+        if(colors[vertex_id] == 2)
+            return true;
+
+        colors[vertex_id] = 1;
+
+        const typename graph_type::adjacency_list& adjacent_edges = graph.get_adjacency_list(vertex_id);
+        for(int i = 0; i < adjacent_edges.size(); ++i)
+        {
+            if(!dfs(graph, adjacent_edges[i].to, colors, s))
+                return false;
+        }
+
+        colors[vertex_id] = 2;
+        s.push(vertex_id);
+
+        return true;
+    }
 };
 
 

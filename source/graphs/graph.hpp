@@ -20,8 +20,9 @@ class graph_adjacency_list
 {
 public:
     graph_adjacency_list() : sz(0) {}
-    void set_edges(const edge_type* edges_, const int sz_) { edges = edges_; sz = sz_; }
+    void set_edges(edge_type* edges_, const int sz_) { edges = edges_; sz = sz_; }
 
+    edge_type& operator[](const int edge_index) { return edges[edge_index]; }
     const edge_type& operator[](const int edge_index) const { return edges[edge_index]; }
 
     int size() const { return sz; }
@@ -29,7 +30,7 @@ public:
     void reset() { sz = 0; }
 
 private:
-    const edge_type* edges;
+    edge_type* edges;
     int sz;
 };
 
@@ -54,7 +55,7 @@ public:
         delete[] adjacency_lists;
     }
 
-    void initialize(const int new_real_num_of_vertices, const edge_type* edges, const int new_real_num_of_edges)
+    void initialize(const int new_real_num_of_vertices, edge_type* edges, const int new_real_num_of_edges)
     {
         real_num_of_vertices = new_real_num_of_vertices;
         real_num_of_edges = new_real_num_of_edges;
@@ -83,6 +84,11 @@ public:
     int get_num_of_edges() const
     {
         return real_num_of_vertices;
+    }
+
+    adjacency_list& get_adjacency_list(const int vertex_id)
+    {
+        return adjacency_lists[vertex_id];
     }
 
     const adjacency_list& get_adjacency_list(const int vertex_id) const
@@ -129,7 +135,18 @@ public:
         std::swap(edges.back().from, edges.back().to);
     }
 
-    const graph_type& create(const int real_num_of_vertices)
+    void add_residual_edge(const edge_type& e)
+    {
+        edges.push_back(e);
+
+        edge_type reverse_edge = e;
+        std::swap(reverse_edge.from, reverse_edge.to);
+        reverse_edge.capacity = typename edge_type::capacity_type();
+
+        edges.push_back(reverse_edge);
+    }
+
+    graph_type& create(const int real_num_of_vertices)
     {
         std::sort(edges.begin(), edges.end(), edges_sorter());
         g.initialize(real_num_of_vertices, edges.begin(), edges.size());
