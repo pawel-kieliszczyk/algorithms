@@ -30,6 +30,19 @@ struct weighted_edge : public edge
 };
 
 
+template<class capacity_t>
+struct max_flow_edge : public edge
+{
+    typedef capacity_t capacity_type;
+
+    max_flow_edge() {}
+    max_flow_edge(const int from_, const int to_, const capacity_type capacity_) : edge(from_, to_), capacity(capacity_) {}
+
+    capacity_type capacity;
+    capacity_type flow;
+};
+
+
 template<class weight_type>
 inline bool operator==(const weighted_edge<weight_type>& left, const weighted_edge<weight_type>& right)
 {
