@@ -164,6 +164,36 @@ TEST_F(topological_sort_tester, tests_sorting_biggest_graph)
 }
 
 
+/**
+ * Tested graph:
+ * (0)--->(1)
+ *  ^      |
+ *  |      |
+ *  |     /
+ * (2)<--'
+ */
+TEST_F(topological_sort_tester, tests_graph_with_cycle)
+{
+    // given
+    const int num_of_vertices = 3;
+
+    gf.add_directed_edge(edge_type(0/*from*/, 1/*to*/));
+    gf.add_directed_edge(edge_type(1, 2));
+    gf.add_directed_edge(edge_type(2, 0));
+
+    const graph_type& g = gf.create(num_of_vertices);
+
+    // when & then
+    int order[num_of_vertices];
+    EXPECT_FALSE(topological_sort::run(g, order));
+
+    // then
+//    EXPECT_EQ(2, order[0]);
+//    EXPECT_EQ(1, order[1]);
+//    EXPECT_EQ(0, order[2]);
+}
+
+
 } // namespace testing
 } // namespace graphs
 } // namespace pk

@@ -20,12 +20,10 @@ public:
     template<class graph_type, class output_iterator>
     static bool run(const graph_type& graph, output_iterator output)
     {
-        const int num_of_vertices = graph.get_num_of_vertices();
-
-        pk::vector<int, graph_type::max_num_of_vertices> colors(0, num_of_vertices);
+        pk::vector<int, graph_type::max_num_of_vertices> colors(0, graph.get_num_of_vertices());
         pk::stack<int, graph_type::max_num_of_vertices> s;
 
-        for(int v = 0; v < num_of_vertices; ++v)
+        for(int v = 0; v < graph.get_num_of_vertices(); ++v)
         {
             if(colors[v] != 0)
                 continue;
@@ -56,6 +54,8 @@ private:
 
         if(colors[vertex_id] == 2)
             return true;
+
+        colors[vertex_id] = 1;
 
         const typename graph_type::adjacency_list& adjacent_edges = graph.get_adjacency_list(vertex_id);
         for(int i = 0; i < adjacent_edges.size(); ++i)
