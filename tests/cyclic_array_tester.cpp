@@ -32,7 +32,7 @@ struct cyclic_array_tester : public gt::Test
 };
 
 
-TEST_F(cyclic_array_tester, tests_shift_Left_by_zero)
+TEST_F(cyclic_array_tester, tests_shift_left_by_zero)
 {
     // when
     ca.shift_left(0);

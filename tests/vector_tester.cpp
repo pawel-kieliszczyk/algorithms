@@ -181,13 +181,13 @@ TEST_F(vector_tester, tests_cbegin_and_cend)
 }
 
 
-TEST_F(vector_tester, tests_reset)
+TEST_F(vector_tester, tests_clear)
 {
     // given
     vec.push_back(element1);
 
     // when
-    vec.reset();
+    vec.clear();
 
     // then
     EXPECT_TRUE(vec.empty());
@@ -199,14 +199,15 @@ TEST_F(vector_tester, tests_fill_constructor_of_vector)
     // given
     const int fill_value = 42;
     const int SIZE = 5;
+    const int initial_size = SIZE - 2;
 
     // when
-    pk::vector<int, SIZE> v(fill_value);
+    pk::vector<int, SIZE> v(fill_value, initial_size);
 
     // then
-    ASSERT_EQ(SIZE, v.size());
+    ASSERT_EQ(initial_size, v.size());
 
-    for(int i = 0; i < SIZE; ++i)
+    for(int i = 0; i < initial_size; ++i)
         EXPECT_EQ(v[i], fill_value);
 }
 

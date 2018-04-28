@@ -14,7 +14,7 @@ class vector
 {
 public:
     vector() : sz(0) { data = new T[MAX_SIZE]; }
-    vector(const T& fill_value) : sz(MAX_SIZE) { data = new T[MAX_SIZE]; std::fill(data, data + sz, fill_value); }
+    vector(const T& fill_value, const int sz_) : sz(sz_) { data = new T[MAX_SIZE]; std::fill(data, data + sz, fill_value); }
 
     ~vector() { delete[] data; }
 
@@ -36,7 +36,7 @@ public:
     T* end() { return (data + sz); }
     const T* cend() const { return (data + sz); }
 
-    void reset() { sz = 0; }
+    void clear() { sz = 0; }
 
     bool empty() const { return (sz == 0); }
     int size() const { return sz; }

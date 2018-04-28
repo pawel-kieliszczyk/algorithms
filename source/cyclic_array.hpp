@@ -13,7 +13,7 @@ public:
     typedef T value_type;
     static const int size = SIZE;
 
-    cyclic_array() : first_index(0) { data = new T[SIZE]; }
+    cyclic_array() : first_index(0) {}
 
     value_type& operator[](const int i) { return data[(first_index + i) % SIZE]; }
     const value_type& operator[](const int i) const { return data[(first_index + i) % SIZE]; }
@@ -25,7 +25,7 @@ private:
     cyclic_array(const cyclic_array&);
     cyclic_array& operator=(const cyclic_array&);
 
-    value_type* data;
+    value_type data[SIZE];
     int first_index;
 };
 
