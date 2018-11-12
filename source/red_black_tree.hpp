@@ -10,7 +10,7 @@ namespace pk
 
 
 /**
- * Red-black tree which keeps distinct elements (no duplications allowed).
+ * Red-black tree which stores distinct elements (no duplications allowed).
  */
 template<class T, int MaxElements, template<class, int> class Allocator = allocator>
 class red_black_tree
@@ -63,6 +63,26 @@ public:
     const value_type& max() const
     {
         const node* m = node_in_subtree_with_maximum_value(root);
+        return m->value;
+    }
+
+    const value_type& nth(int n)
+    {
+        const node* m = root;
+        while(true)
+        {
+            if(m->left->subtree_size == n)
+                break;
+
+            if(n < m->left->subtree_size)
+                m = m->left;
+            else
+            {
+                n -= m->left->subtree_size + 1;
+                m = m->right;
+            }
+        }
+
         return m->value;
     }
 
