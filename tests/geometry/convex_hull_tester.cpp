@@ -45,6 +45,30 @@ TEST_F(convex_hull_tester, tests_three_points)
 }
 
 
+TEST_F(convex_hull_tester, tests_five_points_four_in_the_convex_hull)
+{
+    // given
+    std::vector<point_type> points;
+    points.push_back(point_type(-1, 0));
+    points.push_back(point_type(0, -1));
+    points.push_back(point_type(0, 1));
+    points.push_back(point_type(1, 0));
+    points.push_back(point_type(0, 0));
+
+    // when
+    point_type output[10];
+    point_type* output_last = convex_hull(points.begin(), points.end(), output);
+
+    // then
+    EXPECT_EQ(4, std::distance(output, output_last));
+
+    EXPECT_EQ(point_type(-1, 0), output[0]);
+    EXPECT_EQ(point_type(0, 1), output[1]);
+    EXPECT_EQ(point_type(1, 0), output[2]);
+    EXPECT_EQ(point_type(0, -1), output[3]);
+}
+
+
 TEST_F(convex_hull_tester, tests_many_points)
 {
     // given

@@ -34,8 +34,11 @@ struct sorting_op
 
 
 /**
- * WARNING #1: This function is going to modify (sort) input sequence.
+ * WARNING #1: This function is going to modify (sort) input sequence
  * WARNING #2: Reserve few extra slots for output ie. distance(first, last) + 5
+ *
+ * Output sequence will NOT contain any collinear points
+ * First points of the output sequence is NOT repeated at the end.
  */
 template<class InputIterator, class OutputIterator>
 OutputIterator convex_hull(InputIterator first, InputIterator last, OutputIterator output)
