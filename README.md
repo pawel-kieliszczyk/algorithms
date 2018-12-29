@@ -43,6 +43,7 @@ The library focuses on high performance both minimizing computational complexity
 
  + greatest common divisor
  + least common multiple
+ + multiplication of integer numbers without overflow
  + longest monotonic subsequence (all 4 versions)
  + fast Fibonacci numbers calculator
  + Knuth's prefix function
@@ -74,6 +75,7 @@ The library focuses on high performance both minimizing computational complexity
  + checking if 3 points are collinear
  + detecting if a point is on a line segment
  + detecting intersection of line segments
+ + convex hull
 
 
 #### Compile-time algorithms
