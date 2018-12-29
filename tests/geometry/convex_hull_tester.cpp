@@ -84,7 +84,7 @@ TEST_F(convex_hull_tester, tests_many_points)
     points.push_back(point_type(3, 3));
 
     // when
-    point_type output[9];
+    point_type output[20];
     point_type* output_last = convex_hull(points.begin(), points.end(), output);
 
     // then
