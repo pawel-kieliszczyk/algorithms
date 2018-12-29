@@ -339,5 +339,29 @@ TEST_F(red_black_tree_tester, tests_ranks_after_removals)
 }
 
 
+TEST_F(red_black_tree_tester, tests_nth_element)
+{
+    // given
+    const int num_of_elements = 10;
+    const int elements[num_of_elements] = {55, 22, 66, -44, 0, -22, 33, 11, 44, -33};
+
+    // when
+    for(int i = 0; i < num_of_elements; ++i)
+        rbt.insert(elements[i]);
+
+    // then
+    EXPECT_EQ(-44, rbt.nth(0));
+    EXPECT_EQ(-33, rbt.nth(1));
+    EXPECT_EQ(-22, rbt.nth(2));
+    EXPECT_EQ(0, rbt.nth(3));
+    EXPECT_EQ(11, rbt.nth(4));
+    EXPECT_EQ(22, rbt.nth(5));
+    EXPECT_EQ(33, rbt.nth(6));
+    EXPECT_EQ(44, rbt.nth(7));
+    EXPECT_EQ(55, rbt.nth(8));
+    EXPECT_EQ(66, rbt.nth(9));
+}
+
+
 } // namespace testing
 } // namespace pk
