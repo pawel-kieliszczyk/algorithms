@@ -29,6 +29,13 @@ private:
 };
 
 
+template<class T>
+bool operator==(const point<T>& left, const point<T>& right)
+{
+    return ((left.get_x() == right.get_x()) && (left.get_y() == right.get_y()));
+}
+
+
 } // namespace geometry
 } // namespace pk
 
