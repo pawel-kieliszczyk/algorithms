@@ -47,6 +47,7 @@ The library focuses on high performance both minimizing computational complexity
  + longest monotonic subsequence (all 4 versions)
  + fast Fibonacci numbers calculator
  + Knuth's prefix function
+ + Manacher's algorithm for finding palindromic substrings
  + shortest text template
  + sieve of Eratosthenes
  + prime numbers generator
