@@ -47,6 +47,7 @@ public:
            i += k;
         }
     }
+
     /**
      * WARNING: text_size parameter should count "guards" as well
      */
@@ -78,7 +79,11 @@ public:
     }
 
     /**
+     * After calling find_even():
      * table[i] = k means that substring text[i-k+1,..,i+k] is a palindrome (of length 2*k)
+     *
+     * After calling find_odd():
+     * table[i] = k means that substring text[i-k+1,..,i+k-1] is a palindrome (of length 2*k-1)
      */
     const int* get_palindromic_substrings_table() const
     {
