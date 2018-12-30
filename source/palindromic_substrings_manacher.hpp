@@ -21,9 +21,12 @@ public:
     /**
      * WARNING: text_size parameter should count "guards" as well
      */
-    void find_even(const char* text, const int text_size)
+    void find_even(const char* text, int text_size)
     {
         palindromic_substrings_table[0] = 0;
+        --text_size;
+        palindromic_substrings_table[text_size] = 0;
+
         int i = 1;
         int t = 0;
         while(i < text_size)
@@ -47,9 +50,12 @@ public:
     /**
      * WARNING: text_size parameter should count "guards" as well
      */
-    void find_odd(const char* text, const int text_size)
+    void find_odd(const char* text, int text_size)
     {
         palindromic_substrings_table[0] = 0;
+        --text_size;
+        palindromic_substrings_table[text_size] = 0;
+
         int i = 1;
         int t = 1;
         while(i < text_size)
@@ -60,7 +66,7 @@ public:
            palindromic_substrings_table[i] = t;
 
            int k = 1;
-           while((k <= t) && (palindromic_substrings_table[i-k] != palindromic_substrings_table[i]-k))
+           while((k < t) && (palindromic_substrings_table[i-k] != palindromic_substrings_table[i]-k))
            {
                palindromic_substrings_table[i+k] = std::min(palindromic_substrings_table[i-k], palindromic_substrings_table[i]-k);
               ++k;

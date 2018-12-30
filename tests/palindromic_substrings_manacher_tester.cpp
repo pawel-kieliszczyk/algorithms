@@ -24,7 +24,7 @@ struct palindromic_substrings_manacher_tester : public gt::Test
 };
 
 
-TEST_F(palindromic_substrings_manacher_tester, tests_ab)
+TEST_F(palindromic_substrings_manacher_tester, tests_even_palindromes_in_ab)
 {
     // given
     const std::string text = "#ab$";
@@ -42,7 +42,7 @@ TEST_F(palindromic_substrings_manacher_tester, tests_ab)
 }
 
 
-TEST_F(palindromic_substrings_manacher_tester, tests_aa)
+TEST_F(palindromic_substrings_manacher_tester, tests_even_palindromes_in_aa)
 {
     // given
     const std::string text = "#aa$";
@@ -60,7 +60,7 @@ TEST_F(palindromic_substrings_manacher_tester, tests_aa)
 }
 
 
-TEST_F(palindromic_substrings_manacher_tester, tests_aaaa)
+TEST_F(palindromic_substrings_manacher_tester, tests_even_palindromes_in_aaaa)
 {
     // given
     const std::string text = "#aaaa$";
@@ -80,7 +80,7 @@ TEST_F(palindromic_substrings_manacher_tester, tests_aaaa)
 }
 
 
-TEST_F(palindromic_substrings_manacher_tester, tests_abbabb)
+TEST_F(palindromic_substrings_manacher_tester, tests_even_palindromes_in_abbabb)
 {
     // given
     const std::string text = "#abbabb$";
@@ -102,7 +102,7 @@ TEST_F(palindromic_substrings_manacher_tester, tests_abbabb)
 }
 
 
-TEST_F(palindromic_substrings_manacher_tester, tests_beeppeeb)
+TEST_F(palindromic_substrings_manacher_tester, tests_even_palindromes_in_beeppeeb)
 {
     // given
     const std::string text = "#beeppeeb$";
@@ -126,7 +126,7 @@ TEST_F(palindromic_substrings_manacher_tester, tests_beeppeeb)
 }
 
 
-TEST_F(palindromic_substrings_manacher_tester, tests_abcbabbabcba)
+TEST_F(palindromic_substrings_manacher_tester, tests_even_palindromes_in_abcbabbabcba)
 {
     // given
     const std::string text = "#abcbabbabcba$";
@@ -151,6 +151,85 @@ TEST_F(palindromic_substrings_manacher_tester, tests_abcbabbabcba)
     EXPECT_EQ(0, palindromic_substrings_table[11]);
     EXPECT_EQ(0, palindromic_substrings_table[12]);
     EXPECT_EQ(0, palindromic_substrings_table[13]);
+}
+
+
+TEST_F(palindromic_substrings_manacher_tester, tests_odd_palindromes_in_a)
+{
+    // given
+    const std::string text = "#a$";
+
+    // when
+    ps.find_odd(text.c_str(), text.size());
+
+    // then
+    const int* palindromic_substrings_table = ps.get_palindromic_substrings_table();
+
+    EXPECT_EQ(0, palindromic_substrings_table[0]);
+    EXPECT_EQ(1, palindromic_substrings_table[1]);
+    EXPECT_EQ(0, palindromic_substrings_table[2]);
+}
+
+
+TEST_F(palindromic_substrings_manacher_tester, tests_odd_palindromes_in_ab)
+{
+    // given
+    const std::string text = "#ab$";
+
+    // when
+    ps.find_odd(text.c_str(), text.size());
+
+    // then
+    const int* palindromic_substrings_table = ps.get_palindromic_substrings_table();
+
+    EXPECT_EQ(0, palindromic_substrings_table[0]);
+    EXPECT_EQ(1, palindromic_substrings_table[1]);
+    EXPECT_EQ(1, palindromic_substrings_table[2]);
+    EXPECT_EQ(0, palindromic_substrings_table[3]);
+}
+
+
+TEST_F(palindromic_substrings_manacher_tester, tests_odd_palindromes_in_aba)
+{
+    // given
+    const std::string text = "#aba$";
+
+    // when
+    ps.find_odd(text.c_str(), text.size());
+
+    // then
+    const int* palindromic_substrings_table = ps.get_palindromic_substrings_table();
+
+    EXPECT_EQ(0, palindromic_substrings_table[0]);
+    EXPECT_EQ(1, palindromic_substrings_table[1]);
+    EXPECT_EQ(2, palindromic_substrings_table[2]);
+    EXPECT_EQ(1, palindromic_substrings_table[3]);
+    EXPECT_EQ(0, palindromic_substrings_table[4]);
+}
+
+
+TEST_F(palindromic_substrings_manacher_tester, tests_odd_palindromes_in_abaacaaba)
+{
+    // given
+    const std::string text = "#abaacaaba$";
+
+    // when
+    ps.find_odd(text.c_str(), text.size());
+
+    // then
+    const int* palindromic_substrings_table = ps.get_palindromic_substrings_table();
+
+    EXPECT_EQ(0, palindromic_substrings_table[0]);
+    EXPECT_EQ(1, palindromic_substrings_table[1]);
+    EXPECT_EQ(2, palindromic_substrings_table[2]);
+    EXPECT_EQ(1, palindromic_substrings_table[3]);
+    EXPECT_EQ(1, palindromic_substrings_table[4]);
+    EXPECT_EQ(5, palindromic_substrings_table[5]);
+    EXPECT_EQ(1, palindromic_substrings_table[6]);
+    EXPECT_EQ(1, palindromic_substrings_table[7]);
+    EXPECT_EQ(2, palindromic_substrings_table[8]);
+    EXPECT_EQ(1, palindromic_substrings_table[9]);
+    EXPECT_EQ(0, palindromic_substrings_table[10]);
 }
 
 
