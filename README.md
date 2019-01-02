@@ -44,6 +44,7 @@ The library focuses on high performance both minimizing computational complexity
  + greatest common divisor
  + least common multiple
  + multiplication of integer numbers without overflow
+ + modular multiplicative inverse
  + longest monotonic subsequence (all 4 versions)
  + fast Fibonacci numbers calculator
  + Knuth's prefix function
