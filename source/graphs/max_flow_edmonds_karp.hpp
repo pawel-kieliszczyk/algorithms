@@ -24,28 +24,25 @@ namespace graphs
  * To get maximum flow, sum up flows in all edges starting from the source
  * or flows in all edged ending in the sink.
  */
+template<class graph_type>
 class max_flow_edmonds_karp
 {
 public:
-    template<class graph_type>
-    static void run(graph_type& g, const int source_id, const int sink_id)
+    void run(graph_type& g, const int source_id, const int sink_id)
     {
         initialize_flows_to_zeros(g);
 
-        typename graph_type::edge_type* edge_from_pred[graph_type::max_num_of_vertices];
-
-        while(find_path_to_sink(g, source_id, sink_id, edge_from_pred))
+        while(find_path_to_sink(g, source_id, sink_id))
         {
             typename graph_type::edge_type::capacity_type min_capacity =
-                    find_available_flow<graph_type>(source_id, sink_id, edge_from_pred);
+                    find_available_flow(source_id, sink_id);
 
-            update_flow<graph_type>(g, source_id, sink_id, edge_from_pred, min_capacity);
+            update_flow(g, source_id, sink_id, min_capacity);
         }
     }
 
 private:
-    template<class graph_type>
-    static void initialize_flows_to_zeros(graph_type& g)
+    void initialize_flows_to_zeros(graph_type& g)
     {
         for(int v = 0; v < g.get_num_of_vertices(); ++v)
         {
@@ -55,12 +52,10 @@ private:
         }
     }
 
-    template<class graph_type>
-    static bool find_path_to_sink(
+    bool find_path_to_sink(
             graph_type& g,
             const int source_id,
-            const int sink_id,
-            typename graph_type::edge_type** edge_from_pred)
+            const int sink_id)
     {
         pk::queue<int, graph_type::max_num_of_vertices> q;
         std::fill(edge_from_pred, edge_from_pred + g.get_num_of_vertices(), (typename graph_type::edge_type*)0);
@@ -101,11 +96,9 @@ private:
         return false;
     }
 
-    template<class graph_type>
-    static typename graph_type::edge_type::capacity_type find_available_flow(
+    typename graph_type::edge_type::capacity_type find_available_flow(
             const int source_id,
-            const int sink_id,
-            typename graph_type::edge_type** edge_from_pred)
+            const int sink_id)
     {
         typename graph_type::edge_type::capacity_type min_capacity =
                 std::numeric_limits<typename graph_type::edge_type::capacity_type>::max();
@@ -121,12 +114,10 @@ private:
         return min_capacity;
     }
 
-    template<class graph_type>
-    static void update_flow(
+    void update_flow(
             graph_type& g,
             const int source_id,
             const int sink_id,
-            typename graph_type::edge_type** edge_from_pred,
             const typename graph_type::edge_type::capacity_type& min_capacity)
     {
         typename graph_type::edge_type* edge = edge_from_pred[sink_id];
@@ -159,6 +150,8 @@ private:
             }
         }
     }
+
+    typename graph_type::edge_type* edge_from_pred[graph_type::max_num_of_vertices];
 };
 
 

@@ -2,6 +2,10 @@
 #define PK_MODULARINVERSE_HPP
 
 
+namespace pk
+{
+
+
 /**
  * Returns x such that a*x == 1 (mod p)
  */
@@ -32,6 +36,9 @@ T modular_inverse(const T a, const T p)
 
     return x;
 }
+
+
+} // namespace pk
 
 
 #endif // PK_MODULARINVERSE_HPP
