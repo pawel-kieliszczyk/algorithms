@@ -75,7 +75,8 @@ TEST_F(max_flow_edmonds_karp_tester, tests_custom_small_graph)
     graph_type& g = factory.create(V);
 
     // when
-    pk::graphs::max_flow_edmonds_karp::run(g, 0, 5);
+    pk::graphs::max_flow_edmonds_karp<graph_type> edmonds_karp;
+    edmonds_karp.run(g, 0, 5);
 
     // then
     verify_flow(g, 0/*from*/, 1/*to*/, 1/*expected flow*/);
@@ -119,7 +120,8 @@ TEST_F(max_flow_edmonds_karp_tester, tests_custom_bigger_graph)
     graph_type& g = factory.create(V);
 
     // when
-    pk::graphs::max_flow_edmonds_karp::run(g, 0, 6);
+    pk::graphs::max_flow_edmonds_karp<graph_type> edmonds_karp;
+    edmonds_karp.run(g, 0, 6);
 
     // then
     verify_flow(g, 0/*from*/, 1/*to*/, 9/*expected flow*/);

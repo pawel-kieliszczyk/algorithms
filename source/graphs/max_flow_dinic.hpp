@@ -13,15 +13,12 @@ namespace graphs
 
 /**
  * Usage:
- * Use run() method.
+ * Use run() method. It returns the maximum flow.
  *
  * WARNING:
  * It will modify edges of the graph!
  *
  * edge->flow - It will set to the flow in this edge.
- *
- * To get maximum flow, sum up flows in all edges starting from the source
- * or flows in all edged ending in the sink.
  */
 template<class graph_type>
 class max_flow_dinic
