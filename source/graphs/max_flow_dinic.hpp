@@ -41,7 +41,7 @@ public:
             res += dfs(g, source_id, sink_id, INF);
         }
 
-        copy_c_to_edges(g);
+        set_flow_in_edges(g);
 
         return res;
     }
@@ -125,7 +125,7 @@ private:
         return res;
     }
 
-    void copy_c_to_edges(graph_type& g)
+    void set_flow_in_edges(graph_type& g)
     {
         for(int i = 0; i < g.get_num_of_vertices(); ++i)
         {

@@ -32,14 +32,12 @@ public:
     {
         initialize_flows_to_zeros(g);
 
-        typename graph_type::edge_type* edge_from_pred[graph_type::max_num_of_vertices];
-
-        while(find_path_to_sink(g, source_id, sink_id, edge_from_pred))
+        while(find_path_to_sink(g, source_id, sink_id))
         {
             typename graph_type::edge_type::capacity_type min_capacity =
-                    find_available_flow(source_id, sink_id, edge_from_pred);
+                    find_available_flow(source_id, sink_id);
 
-            update_flow(g, source_id, sink_id, edge_from_pred, min_capacity);
+            update_flow(g, source_id, sink_id, min_capacity);
         }
     }
 
@@ -57,8 +55,7 @@ private:
     bool find_path_to_sink(
             graph_type& g,
             const int source_id,
-            const int sink_id,
-            typename graph_type::edge_type** edge_from_pred)
+            const int sink_id)
     {
         pk::queue<int, graph_type::max_num_of_vertices> q;
         std::fill(edge_from_pred, edge_from_pred + g.get_num_of_vertices(), (typename graph_type::edge_type*)0);
@@ -101,8 +98,7 @@ private:
 
     typename graph_type::edge_type::capacity_type find_available_flow(
             const int source_id,
-            const int sink_id,
-            typename graph_type::edge_type** edge_from_pred)
+            const int sink_id)
     {
         typename graph_type::edge_type::capacity_type min_capacity =
                 std::numeric_limits<typename graph_type::edge_type::capacity_type>::max();
@@ -122,7 +118,6 @@ private:
             graph_type& g,
             const int source_id,
             const int sink_id,
-            typename graph_type::edge_type** edge_from_pred,
             const typename graph_type::edge_type::capacity_type& min_capacity)
     {
         typename graph_type::edge_type* edge = edge_from_pred[sink_id];
@@ -155,6 +150,8 @@ private:
             }
         }
     }
+
+    typename graph_type::edge_type* edge_from_pred[graph_type::max_num_of_vertices];
 };
 
 
