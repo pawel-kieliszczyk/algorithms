@@ -67,6 +67,7 @@ The library focuses on high performance both minimizing computational complexity
  + Dijkstra's algorithm for finding shortest paths
  + Floyd-Warshall algorithm for finding shortest paths
  + Edmonds-Karp algorithm for finding maximum flow
+ + Dinic's algorithm for finding maximum flow
  
  
  #### Geometry

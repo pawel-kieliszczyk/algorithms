@@ -3,7 +3,7 @@
 
 #include "graphs/edge_types.hpp"
 #include "graphs/graph.hpp"
-#include "graphs/max_flow_edmonds_karp.hpp"
+#include "graphs/max_flow_dinic.hpp"
 
 
 namespace gt = testing;
@@ -17,7 +17,7 @@ namespace testing
 {
 
 
-struct max_flow_edmonds_karp_tester : public gt::Test
+struct max_flow_dinic_tester : public gt::Test
 {
     static const int V = 7;
     static const int E = 22;
@@ -61,7 +61,7 @@ struct max_flow_edmonds_karp_tester : public gt::Test
  *           v        v
  *          (4)--1-->(5)
  */
-TEST_F(max_flow_edmonds_karp_tester, tests_custom_small_graph)
+TEST_F(max_flow_dinic_tester, tests_custom_small_graph)
 {
     // given
     factory.add_residual_edge(max_flow_edge_type(0/*from*/, 1/*to*/, 1/*capacity*/));
@@ -75,8 +75,8 @@ TEST_F(max_flow_edmonds_karp_tester, tests_custom_small_graph)
     graph_type& g = factory.create(V);
 
     // when
-    pk::graphs::max_flow_edmonds_karp<graph_type> edmonds_karp;
-    edmonds_karp.run(g, 0, 5);
+    pk::graphs::max_flow_dinic<graph_type> dinic;
+    EXPECT_EQ(2, dinic.run(g, 0, 5));
 
     // then
     verify_flow(g, 0/*from*/, 1/*to*/, 1/*expected flow*/);
@@ -102,7 +102,7 @@ TEST_F(max_flow_edmonds_karp_tester, tests_custom_small_graph)
  *     (4)---->(5)
  *          6
  */
-TEST_F(max_flow_edmonds_karp_tester, tests_custom_bigger_graph)
+TEST_F(max_flow_dinic_tester, tests_custom_bigger_graph)
 {
     // given
     factory.add_residual_edge(max_flow_edge_type(0/*from*/, 1/*to*/, 9/*capacity*/));
@@ -120,8 +120,8 @@ TEST_F(max_flow_edmonds_karp_tester, tests_custom_bigger_graph)
     graph_type& g = factory.create(V);
 
     // when
-    pk::graphs::max_flow_edmonds_karp<graph_type> edmonds_karp;
-    edmonds_karp.run(g, 0, 6);
+    pk::graphs::max_flow_dinic<graph_type> dinic;
+    EXPECT_EQ(18, dinic.run(g, 0, 6));
 
     // then
     verify_flow(g, 0/*from*/, 1/*to*/, 9/*expected flow*/);
