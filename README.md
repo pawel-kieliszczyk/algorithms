@@ -58,6 +58,7 @@ The library focuses on high performance both minimizing computational complexity
  #### Graphs
  
  + graph class
+ + bipartite graph class
  + depth first search
  + breadth first search
  + topological sort
@@ -68,6 +69,7 @@ The library focuses on high performance both minimizing computational complexity
  + Floyd-Warshall algorithm for finding shortest paths
  + Edmonds-Karp algorithm for finding maximum flow
  + Dinic's algorithm for finding maximum flow
+ + Hopcroft-Karp algorithm for finding maximum matching in bipartite graphs
  
  
  #### Geometry
