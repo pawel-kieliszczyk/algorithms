@@ -37,6 +37,9 @@ TEST_F(graph_tester, tests_empty_graph)
     EXPECT_EQ(0, g.get_adjacency_list(0).size());
     EXPECT_EQ(0, g.get_adjacency_list(1).size());
     EXPECT_EQ(0, g.get_adjacency_list(2).size());
+
+    EXPECT_EQ(3, g.get_num_of_vertices());
+    EXPECT_EQ(0, g.get_num_of_edges());
 }
 
 
@@ -57,6 +60,9 @@ TEST_F(graph_tester, tests_adding_directed_edge)
 
     const graph_type::adjacency_list& adj2 = g.get_adjacency_list(2);
     EXPECT_EQ(0, adj2.size());
+
+    EXPECT_EQ(3, g.get_num_of_vertices());
+    EXPECT_EQ(1, g.get_num_of_edges());
 }
 
 
@@ -78,6 +84,9 @@ TEST_F(graph_tester, test_adding_not_directed_edge)
     const graph_type::adjacency_list& adj2 = g.get_adjacency_list(2);
     EXPECT_EQ(1, adj2.size());
     EXPECT_EQ(1, adj2[0].to);
+
+    EXPECT_EQ(3, g.get_num_of_vertices());
+    EXPECT_EQ(2, g.get_num_of_edges());
 }
 
 
@@ -106,6 +115,9 @@ TEST_F(graph_tester, tests_full_graph)
     ASSERT_EQ(2, adj2.size());
     EXPECT_EQ(0, adj2[0].to);
     EXPECT_EQ(1, adj2[1].to);
+
+    EXPECT_EQ(3, g.get_num_of_vertices());
+    EXPECT_EQ(6, g.get_num_of_edges());
 }
 
 

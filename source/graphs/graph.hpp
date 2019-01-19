@@ -83,7 +83,7 @@ public:
 
     int get_num_of_edges() const
     {
-        return real_num_of_vertices;
+        return real_num_of_edges;
     }
 
     adjacency_list& get_adjacency_list(const int vertex_id)
