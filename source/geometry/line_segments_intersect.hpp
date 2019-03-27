@@ -13,26 +13,26 @@ namespace geometry
 
 
 template<class LineSegment>
-double line_segments_intersect(const LineSegment& ls1, const LineSegment& ls2)
+bool line_segments_intersect(const LineSegment& ls1, const LineSegment& ls2)
 {
-    if(point_on_line_segment(ls1.get_p1(), ls2) || point_on_line_segment(ls1.get_p2(), ls2))
+    if(point_on_line_segment(ls1.p1, ls2) || point_on_line_segment(ls1.p2, ls2))
         return true;
 
-    if(point_on_line_segment(ls2.get_p1(), ls1) || point_on_line_segment(ls2.get_p2(), ls1))
+    if(point_on_line_segment(ls2.p1, ls1) || point_on_line_segment(ls2.p2, ls1))
         return true;
 
     typedef typename LineSegment::point_type::value_type value_type;
 
-    value_type d1 = det(ls1.get_p1(), ls1.get_p2(), ls2.get_p1());
-    value_type d2 = det(ls1.get_p1(), ls1.get_p2(), ls2.get_p2());
+    value_type d1 = det(ls1.p1, ls1.p2, ls2.p1);
+    value_type d2 = det(ls1.p1, ls1.p2, ls2.p2);
 
     if((d1 < value_type(0)) && (d2 < value_type(0)))
         return false;
     if((d1 > value_type(0)) && (d2 > value_type(0)))
         return false;
 
-    d1 = det(ls2.get_p1(), ls2.get_p2(), ls1.get_p1());
-    d2 = det(ls2.get_p1(), ls2.get_p2(), ls1.get_p2());
+    d1 = det(ls2.p1, ls2.p2, ls1.p1);
+    d2 = det(ls2.p1, ls2.p2, ls1.p2);
 
     if((d1 < value_type(0)) && (d2 < value_type(0)))
         return false;

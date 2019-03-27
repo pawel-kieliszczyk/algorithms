@@ -9,21 +9,13 @@ namespace geometry
 
 
 template<class T>
-class point
+struct point
 {
-public:
     typedef T value_type;
 
     point() {}
     point(const T& xx, const T& yy) : x(xx), y(yy) {}
 
-    void set_x(const T& xx) { x = xx; }
-    void set_y(const T& yy) { y = yy; }
-
-    const T& get_x() const { return x; }
-    const T& get_y() const { return y; }
-
-private:
     T x;
     T y;
 };
@@ -32,7 +24,7 @@ private:
 template<class T>
 bool operator==(const point<T>& left, const point<T>& right)
 {
-    return ((left.get_x() == right.get_x()) && (left.get_y() == right.get_y()));
+    return ((left.x == right.x) && (left.y == right.y));
 }
 
 
