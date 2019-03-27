@@ -37,8 +37,8 @@ TEST_F(point_tester, create_point_nondefault_constructor)
     point<int> p(x, y);
 
     // then
-    EXPECT_EQ(x, p.get_x());
-    EXPECT_EQ(y, p.get_y());
+    EXPECT_EQ(x, p.x);
+    EXPECT_EQ(y, p.y);
 }
 
 
@@ -52,11 +52,11 @@ TEST_F(point_tester, modify_x_and_verify)
 
     // when
     const int new_x = 99;
-    p.set_x(new_x);
+    p.x = new_x;
 
     // then
-    EXPECT_EQ(new_x, p.get_x());
-    EXPECT_EQ(y, p.get_y());
+    EXPECT_EQ(new_x, p.x);
+    EXPECT_EQ(y, p.y);
 }
 
 
@@ -70,11 +70,11 @@ TEST_F(point_tester, modify_y_and_verify)
 
     // when
     const int new_y = 99;
-    p.set_y(new_y);
+    p.y = new_y;
 
     // then
-    EXPECT_EQ(x, p.get_x());
-    EXPECT_EQ(new_y, p.get_y());
+    EXPECT_EQ(x, p.x);
+    EXPECT_EQ(new_y, p.y);
 }
 
 
@@ -89,12 +89,12 @@ TEST_F(point_tester, modify_x_and_y_and_verify)
     // when
     const int new_x = 99;
     const int new_y = 123;
-    p.set_x(new_x);
-    p.set_y(new_y);
+    p.x = new_x;
+    p.y = new_y;
 
     // then
-    EXPECT_EQ(new_x, p.get_x());
-    EXPECT_EQ(new_y, p.get_y());
+    EXPECT_EQ(new_x, p.x);
+    EXPECT_EQ(new_y, p.y);
 }
 
 

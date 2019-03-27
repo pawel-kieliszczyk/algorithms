@@ -20,12 +20,12 @@ struct sorting_op
     template<class point_type>
     bool operator()(const point_type& left, const point_type& right) const
     {
-        if(left.get_x() < right.get_x())
+        if(left.x < right.x)
             return true;
-        if(left.get_x() > right.get_x())
+        if(left.x > right.x)
             return false;
 
-        return (left.get_y() < right.get_y());
+        return (left.y < right.y);
     }
 };
 
