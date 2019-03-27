@@ -63,6 +63,7 @@ The library focuses on high performance both minimizing computational complexity
  + breadth first search
  + topological sort
  + finding connected components
+ + finding strongly connected components (Tarjan's algorithm)
  + Kurskal's minimum spanning tree algorithm
  + Prim's minimum spanning tree algorithm (incoming improvements)
  + Dijkstra's algorithm for finding shortest paths
