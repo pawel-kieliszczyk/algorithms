@@ -17,7 +17,7 @@ class exact_point_comparator
 public:
     bool is_same_point(const Point& p1, const Point& p2)
     {
-        return ((p1.get_x() == p2.get_x()) && (p1.get_y() == p2.get_y()));
+        return ((p1.x == p2.x) && (p1.y == p2.y));
     }
 };
 
@@ -28,9 +28,9 @@ class epsilon_point_comparator
 public:
     bool is_same_point(const Point& p1, const Point& p2, const typename Point::value_type& epsilon = 0.00001)
     {
-        if(fabs(p1.get_x() - p2.get_x()) > epsilon)
+        if(fabs(p1.x - p2.x) > epsilon)
             return false;
-        if(fabs(p1.get_y() - p2.get_y()) > epsilon)
+        if(fabs(p1.y - p2.y) > epsilon)
             return false;
 
         return true;

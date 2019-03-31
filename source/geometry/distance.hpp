@@ -18,8 +18,8 @@ namespace geometry
 template<class Point>
 double distance(const Point& p1, const Point& p2)
 {
-    const typename Point::value_type dx = p1.get_x() - p2.get_x();
-    const typename Point::value_type dy = p1.get_y() - p2.get_y();
+    const typename Point::value_type dx = p1.x - p2.x;
+    const typename Point::value_type dy = p1.y - p2.y;
 
     return sqrt(static_cast<double>(dx*dx + dy*dy));
 }

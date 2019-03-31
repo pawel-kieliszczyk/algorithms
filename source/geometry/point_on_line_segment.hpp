@@ -22,17 +22,17 @@ namespace geometry
 template<class Point, class LineSegment>
 bool point_on_line_segment(const Point& p, const LineSegment& ls)
 {
-    if(!points_collinear(p, ls.get_p1(), ls.get_p2()))
+    if(!points_collinear(p, ls.p1, ls.p2))
         return false;
 
-    if(std::min(ls.get_p1().get_x(), ls.get_p2().get_x()) > p.get_x())
+    if(std::min(ls.p1.x, ls.p2.x) > p.x)
         return false;
-    if(std::max(ls.get_p1().get_x(), ls.get_p2().get_x()) < p.get_x())
+    if(std::max(ls.p1.x, ls.p2.x) < p.x)
         return false;
 
-    if(std::min(ls.get_p1().get_y(), ls.get_p2().get_y()) > p.get_y())
+    if(std::min(ls.p1.y, ls.p2.y) > p.y)
         return false;
-    if(std::max(ls.get_p1().get_y(), ls.get_p2().get_y()) < p.get_y())
+    if(std::max(ls.p1.y, ls.p2.y) < p.y)
         return false;
 
     return true;
