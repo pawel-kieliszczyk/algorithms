@@ -135,7 +135,7 @@ private:
         }
     }
 
-    int c[graph_type::max_num_of_vertices][graph_type::max_num_of_vertices];
+    typename graph_type::edge_type::capacity_type c[graph_type::max_num_of_vertices][graph_type::max_num_of_vertices];
     int dist[graph_type::max_num_of_vertices];
     int q[graph_type::max_num_of_vertices];
     int begin_at[graph_type::max_num_of_vertices];
