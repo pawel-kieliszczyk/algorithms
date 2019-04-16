@@ -51,6 +51,65 @@ struct max_flow_dinic_tester : public gt::Test
 
 
 /**
+ * (0)--1-->(1)
+ */
+TEST_F(max_flow_dinic_tester, tests_graph_with_one_edge_capacity_one)
+{
+    // given
+    factory.add_residual_edge(max_flow_edge_type(0/*from*/, 1/*to*/, 1/*capacity*/));
+
+    graph_type& g = factory.create(V);
+
+    // when
+    pk::graphs::max_flow_dinic<graph_type> dinic;
+    EXPECT_EQ(1, dinic.run(g, 0, 1));
+
+    // then
+    verify_flow(g, 0/*from*/, 1/*to*/, 1/*expected flow*/);
+}
+
+
+/**
+ * (0)--29-->(1)
+ */
+TEST_F(max_flow_dinic_tester, tests_graph_with_one_edge_capacity_twenty_nine)
+{
+    // given
+    factory.add_residual_edge(max_flow_edge_type(0/*from*/, 1/*to*/, 29/*capacity*/));
+
+    graph_type& g = factory.create(V);
+
+    // when
+    pk::graphs::max_flow_dinic<graph_type> dinic;
+    EXPECT_EQ(29, dinic.run(g, 0, 1));
+
+    // then
+    verify_flow(g, 0/*from*/, 1/*to*/, 29/*expected flow*/);
+}
+
+
+/**
+ * (0)<--3-->(1)
+ */
+TEST_F(max_flow_dinic_tester, tests_graph_with_cycle)
+{
+    // given
+    factory.add_directed_edge(max_flow_edge_type(0/*from*/, 1/*to*/, 3/*capacity*/));
+    factory.add_directed_edge(max_flow_edge_type(1, 0, 3));
+
+    graph_type& g = factory.create(V);
+
+    // when
+    pk::graphs::max_flow_dinic<graph_type> dinic;
+    EXPECT_EQ(3, dinic.run(g, 0, 1));
+
+    // then
+    verify_flow(g, 0/*from*/, 1/*to*/, 3/*expected flow*/);
+    verify_flow(g, 1, 0,-3);
+}
+
+
+/**
  *         (3)
  *         ^ \__1___
  *    _1__/         \

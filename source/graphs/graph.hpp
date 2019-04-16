@@ -135,6 +135,11 @@ public:
         std::swap(edges.back().from, edges.back().to);
     }
 
+    /**
+     * WARNING: use only for DAGs with no double edges (eg u->v twice).
+     * If above is not true pre-process the edges first and use
+     * add_directed_edge() instead.
+     */
     void add_residual_edge(const edge_type& e)
     {
         edges.push_back(e);
