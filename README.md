@@ -34,6 +34,7 @@ The library focuses on high performance both minimizing computational complexity
  + cyclic array
  + disjoint sets
  + interval tree (1D, 2D, 3D and 4D)
+ + segment tree (1D)
  + binary indexed tree (1D, 2D and 3D)
  + binary search tree
  + red-black tree

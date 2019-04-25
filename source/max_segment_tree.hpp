@@ -28,17 +28,26 @@ public:
         std::fill(maxval, maxval + INTERNAL_SIZE, value_type(0));
     }
 
+    /**
+     * Adds the given value to the range [from, to]
+     */
     void update(const int from, const int to, const value_type& value)
     {
         update(from, to + 1, value, 1, 0, RangeLimit);
     }
 
+    /**
+     * Finds maximum value in range [from, to]
+     */
     value_type get_max(const int from, const int to) const
     {
         return get_max(from, to + 1, 1, 0, RangeLimit);
     }
 
 private:
+    /**
+     * Adds the given value to the range [from, to)
+     */
     void update(
             const int from,
             const int to,
@@ -67,6 +76,9 @@ private:
             maxval[node_idx] = val[node_idx] + std::max(maxval[node_idx + node_idx], maxval[node_idx + node_idx + 1]);
     }
 
+    /**
+     * Finds maximum value in range [from, to)
+     */
     value_type get_max(
             const int from,
             const int to,
